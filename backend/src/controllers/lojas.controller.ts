@@ -1,6 +1,6 @@
 import { type Request, type Response } from 'express';
 import pool from '../database';
-import { lojas } from '../models/lojas';
+import { Loja as lojas } from '../models/types';
 
 // Listar todas as lojas
 export async function getLojas(req: Request, res: Response): Promise<void> {

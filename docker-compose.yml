@@ -1,0 +1,17 @@
+services:
+  database:
+    image: postgres:15.3-alpine
+    container_name: postec-database
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postec_user
+      POSTGRES_PASSWORD: postec_password
+      POSTGRES_DB: postec_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./backend/database/db.sql:/docker-entrypoint-initdb.d/init.sql
+
+volumes:
+  pgdata:

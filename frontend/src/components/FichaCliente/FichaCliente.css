@@ -1,0 +1,8 @@
+.ficha-grande {
+  flex: 1 1 160px;
+}
+
+.ficha-data {
+  font-size: 12px;
+  color: var(--ink-soft);
+}

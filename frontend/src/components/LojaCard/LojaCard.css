@@ -1,0 +1,41 @@
+.loja-ativa {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--green-soft);
+  color: var(--green);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.loja-nome {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.loja-plano {
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+
+.loja-portal {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: var(--bg);
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+
+.loja-portal strong {
+  color: var(--ink);
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+
+.loja-acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}

@@ -1,0 +1,54 @@
+/* estilos de campo compartilhados por Input, Select e Textarea */
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.campo-label {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.campo-obrigatorio {
+  color: var(--action);
+}
+
+.campo-input {
+  width: 100%;
+  min-height: 44px;
+  padding: 11px 14px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--white);
+  font-size: 16px;
+}
+
+.campo-input::placeholder {
+  color: #767f8c;
+}
+
+.campo-input:focus {
+  outline: none;
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px var(--brand-soft);
+}
+
+.campo-invalido {
+  border-color: var(--red);
+}
+
+.campo-dica {
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+
+.campo-erro {
+  font-size: 12px;
+  color: var(--red);
+  font-weight: 500;
+}
+
+.campo-contador {
+  align-self: flex-end;
+}

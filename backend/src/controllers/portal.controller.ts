@@ -13,7 +13,7 @@ export async function consultarPedido(req: Request, res: Response): Promise<void
       return;
     }
 
-    // Normaliza CPF removendo pontuações
+    // formata o cpf pra tirar qualquer caractere que nao seja numero
     const cpfLimpo = cpf.toString().replace(/\D/g, '');
 
     const query = `

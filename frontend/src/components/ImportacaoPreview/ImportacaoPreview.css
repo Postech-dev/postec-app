@@ -1,0 +1,101 @@
+.previa {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.previa-contadores {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+}
+
+.previa-contador {
+  display: flex;
+  flex-direction: column;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--white);
+}
+
+.previa-contador strong {
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.previa-contador span {
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+
+.previa-novos strong {
+  color: var(--green);
+}
+
+.previa-atualizados strong {
+  color: var(--blue);
+}
+
+.previa-erros strong {
+  color: var(--red);
+}
+
+.previa-rolagem {
+  overflow-x: auto;
+}
+
+.previa table {
+  width: 100%;
+  min-width: 680px;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.previa th {
+  padding: 8px 10px;
+  text-align: left;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--ink-soft);
+  background: var(--bg);
+}
+
+.previa td {
+  padding: 8px 10px;
+  border-top: 1px solid var(--line);
+}
+
+.previa-situacao {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.previa-novo {
+  background: var(--green-soft);
+  color: var(--green);
+}
+
+.previa-atualizar {
+  background: var(--blue-soft);
+  color: var(--blue);
+}
+
+.previa-ajuda {
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+
+.previa-lista-erros {
+  margin: 0;
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
+  color: var(--red);
+}

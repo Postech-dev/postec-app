@@ -1,0 +1,43 @@
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 32px;
+  background: var(--white);
+  border-bottom: 1px solid var(--line);
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+
+.topbar-caminho strong {
+  color: var(--ink);
+}
+
+.topbar-data {
+  margin-left: auto;
+}
+
+.topbar-iniciais {
+  font-weight: 700;
+  color: var(--action);
+}
+
+.topbar-menu {
+  display: none;
+  min-width: 44px;
+  min-height: 44px;
+  border: 0;
+  background: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+@media (max-width: 860px) {
+  .topbar {
+    padding-inline: 16px;
+  }
+
+  .topbar-menu {
+    display: block;
+  }
+}

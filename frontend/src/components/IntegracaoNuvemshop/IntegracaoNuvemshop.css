@@ -1,0 +1,48 @@
+.integracao {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+}
+
+.integracao-nome {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: var(--blue);
+  color: var(--white);
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.integracao-dados {
+  flex: 1 1 240px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.integracao-dados p {
+  color: var(--ink-soft);
+  font-size: 13px;
+}
+
+.integracao-status {
+  align-self: flex-start;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+.integracao-ligada {
+  background: var(--green-soft);
+  border-color: var(--green-soft);
+  color: var(--green);
+}

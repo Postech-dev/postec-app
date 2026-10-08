@@ -1,0 +1,14 @@
+.ocorrencias-filtros {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+.ocorrencias-busca {
+  flex: 1 1 240px;
+}
+
+.ocorrencias-status {
+  flex: 0 1 220px;
+}

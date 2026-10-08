@@ -1,0 +1,44 @@
+.status-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.status-novo {
+  background: var(--blue-soft);
+  color: var(--blue);
+}
+
+.status-triagem {
+  background: var(--brand-soft);
+  color: var(--action);
+}
+
+.status-devolucao {
+  background: #fff4cc;
+  color: #8a6100;
+}
+
+.status-reenvio {
+  background: #e0f2f1;
+  color: #00695c;
+}
+
+.status-estorno {
+  background: var(--red-soft);
+  color: var(--red);
+}
+
+.status-concluido {
+  background: var(--green-soft);
+  color: var(--green);
+}
+
+/* os textos do cliente são frases; podem quebrar linha no celular */
+.status-badge-cliente {
+  white-space: normal;
+  text-align: left;
+}

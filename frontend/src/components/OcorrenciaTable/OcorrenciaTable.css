@@ -1,0 +1,96 @@
+.otabela {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.otabela-rolagem {
+  overflow-x: auto;
+}
+
+.otabela table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 860px;
+}
+
+.otabela th {
+  padding: 12px 16px;
+  text-align: left;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--ink-soft);
+  background: var(--bg);
+}
+
+.otabela td {
+  padding: 14px 16px;
+  border-top: 1px solid var(--line);
+}
+
+.otabela tbody tr {
+  cursor: pointer;
+}
+
+.otabela tbody tr:hover {
+  background: var(--bg);
+}
+
+.otabela-protocolo {
+  font-weight: 700;
+  color: var(--action);
+}
+
+.otabela-vazio {
+  text-align: center;
+  color: var(--ink-soft);
+  cursor: default;
+}
+
+.otabela-rodape {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 12px 16px;
+  border-top: 1px solid var(--line);
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+
+.otabela-paginas {
+  display: flex;
+  gap: 8px;
+}
+
+.otabela-paginas button {
+  padding: 6px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--white);
+  cursor: pointer;
+}
+
+.otabela-paginas button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.otabela-tempo {
+  display: block;
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+
+.otabela-protocolo {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 32px;
+}
+
+.otabela-paginas button {
+  min-height: 44px;
+}

@@ -1,0 +1,19 @@
+.copiar {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  align-self: flex-start;
+  min-height: 44px;
+  padding: 8px 14px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--white);
+  color: var(--action);
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.copiar:hover {
+  border-color: var(--action);
+}

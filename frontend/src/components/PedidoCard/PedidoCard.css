@@ -1,0 +1,29 @@
+.pedido {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.pedido hr {
+  width: 100%;
+  margin: 10px 0;
+  border: 0;
+  border-top: 1px solid var(--line);
+}
+
+.pedido-numero {
+  color: var(--action);
+}
+
+.pedido-produto {
+  font-weight: 600;
+}
+
+.pedido-valor {
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+
+.pedido-preco {
+  font-size: 20px;
+}

@@ -1,0 +1,79 @@
+.upload {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.upload-botao {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  align-items: center;
+  padding: 16px;
+  border: 1.5px dashed var(--brand-border);
+  border-radius: 10px;
+  background: var(--brand-soft);
+  color: var(--action);
+  cursor: pointer;
+}
+
+.upload-botao span {
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+
+.upload-invalido {
+  border-color: var(--red);
+}
+
+.upload-arquivo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--white);
+}
+
+.upload-nome {
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.upload-tamanho {
+  color: var(--ink-soft);
+  font-size: 12px;
+}
+
+.upload-remover {
+  margin-left: auto;
+  border: 0;
+  background: none;
+  color: var(--red);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.upload-previa {
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.upload-dados {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.upload-botao {
+  min-height: 44px;
+}
+
+.upload-remover {
+  min-height: 44px;
+  padding-inline: 8px;
+}

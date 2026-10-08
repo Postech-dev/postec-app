@@ -1,0 +1,23 @@
+.view-toggle {
+  display: inline-flex;
+  padding: 3px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--white);
+}
+
+.view-toggle a {
+  padding: 6px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+.view-toggle a:hover {
+  text-decoration: none;
+}
+
+.view-toggle .view-ativo {
+  background: var(--action);
+  color: var(--white);
+}

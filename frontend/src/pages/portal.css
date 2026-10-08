@@ -1,0 +1,94 @@
+/* layout compartilhado pelas telas do portal do cliente */
+.portal-bloco {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.portal-botoes {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.portal-nota {
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+
+.portal-titulo {
+  font-size: 26px;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.portal-lista {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.portal-lista dt {
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+
+.portal-lista dd {
+  margin: 0;
+  font-weight: 600;
+}
+
+.portal-dica {
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: var(--brand-soft);
+  color: var(--action);
+  font-size: 13px;
+}
+
+/* aviso de destaque no topo (ex.: orientações de devolução) */
+.portal-destaque {
+  border: 2px solid var(--action);
+  background: var(--brand-soft);
+}
+
+.portal-erro-consulta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 14px;
+  border: 1px solid #f0c5c1;
+  border-radius: 10px;
+  background: var(--red-soft);
+  color: var(--red);
+  font-size: 13px;
+}
+
+.portal-erro-consulta span {
+  color: var(--ink-soft);
+}
+
+/* selo de ação necessária ao lado do status */
+.portal-acao {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--action);
+  color: var(--white);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.portal-agora {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.portal-selos {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}

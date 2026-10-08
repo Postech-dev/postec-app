@@ -1,0 +1,84 @@
+.kanban {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(200px, 1fr));
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+
+.kanban-coluna {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px;
+  border-radius: var(--radius);
+  background: #eef0f4;
+}
+
+.kanban-cabecalho {
+  display: flex;
+  flex-direction: column;
+  font-size: 13px;
+}
+
+.kanban-cabecalho span {
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+
+.kanban-cartao {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--white);
+  font-size: 13px;
+}
+
+.kanban-protocolo {
+  color: var(--action);
+}
+
+.kanban-cliente {
+  font-weight: 600;
+}
+
+.kanban-meta {
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+
+.kanban-ver {
+  margin-top: 8px;
+  padding: 6px 10px;
+  border: 1px solid var(--brand-border);
+  border-radius: 8px;
+  background: var(--brand-soft);
+  text-align: center;
+  font-weight: 600;
+}
+
+.kanban-ver:hover {
+  text-decoration: none;
+  background: var(--brand-border);
+}
+
+.kanban-protocolo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.kanban-vazio {
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+
+.kanban-ver {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+}

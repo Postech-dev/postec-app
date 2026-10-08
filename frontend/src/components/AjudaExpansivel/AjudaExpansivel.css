@@ -1,0 +1,15 @@
+.ajuda summary {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--action);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.ajuda-texto {
+  padding: 4px 0 8px;
+  font-size: 13px;
+  color: var(--ink-soft);
+}

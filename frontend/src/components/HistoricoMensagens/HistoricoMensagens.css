@@ -1,0 +1,26 @@
+.historico {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.historico-item {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.historico-dia {
+  align-self: center;
+  padding: 2px 12px;
+  border-radius: 999px;
+  background: var(--bg);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+.historico-vazio {
+  color: var(--ink-soft);
+  text-align: center;
+}

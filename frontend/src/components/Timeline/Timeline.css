@@ -1,0 +1,58 @@
+.timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.timeline li {
+  display: flex;
+  gap: 12px;
+  font-size: 14px;
+}
+
+.timeline-marca {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 2px solid var(--line);
+  font-size: 11px;
+  color: var(--ink-soft);
+}
+
+.timeline-texto {
+  display: flex;
+  flex-direction: column;
+}
+
+.timeline-detalhe {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--ink-soft);
+}
+
+.timeline-feito .timeline-marca {
+  background: var(--green);
+  border-color: var(--green);
+  color: var(--white);
+}
+
+.timeline-atual .timeline-marca {
+  background: var(--action);
+  border-color: var(--action);
+  color: var(--white);
+}
+
+.timeline-atual strong {
+  color: var(--action);
+}
+
+.timeline-futuro {
+  color: var(--ink-soft);
+}

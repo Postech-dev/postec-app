@@ -1,0 +1,47 @@
+.dropzone-bloco {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.dropzone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 32px 16px;
+  border: 2px dashed var(--brand-border);
+  border-radius: var(--radius);
+  background: var(--brand-soft);
+  text-align: center;
+  color: var(--action);
+}
+
+.dropzone small {
+  color: var(--ink-soft);
+}
+
+.dropzone-sobre {
+  border-color: var(--action);
+  background: #ffe6c9;
+}
+
+.dropzone-erro {
+  border-color: var(--red);
+}
+
+.dropzone-botao {
+  min-height: 44px;
+  padding: 8px 18px;
+  border: 1px solid var(--action);
+  border-radius: 10px;
+  background: var(--white);
+  color: var(--action);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.dropzone-botao:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

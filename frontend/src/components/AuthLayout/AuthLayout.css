@@ -1,0 +1,155 @@
+.auth {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 42% 1fr;
+  background: var(--white);
+}
+
+.auth-painel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 24px;
+  background: var(--brand);
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 32px 28px;
+  border-radius: 32px;
+  background: var(--white);
+}
+
+.auth-cabecalho {
+  text-align: center;
+}
+
+.auth-titulo {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--action);
+}
+
+.auth-sub {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--action);
+}
+
+/* campos em pílula cinza; o rótulo fica só para leitores de tela */
+.auth-card .campo-label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+.auth-card .campo-input {
+  padding: 9px 16px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: #dcdcdc;
+  font-size: 14px;
+}
+
+.auth-card .campo-input:focus {
+  background: var(--white);
+  border-color: var(--brand);
+}
+
+.auth-card .campo-invalido {
+  border-color: var(--red);
+}
+
+.auth-card .btn {
+  border-radius: 999px;
+  padding: 8px 18px;
+  font-size: 13px;
+}
+
+.auth-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.auth-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  color: var(--action);
+}
+
+.auth-marca {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 32px 24px;
+  text-align: center;
+}
+
+.auth-icone {
+  width: 88px;
+  height: 88px;
+  object-fit: contain;
+}
+
+.auth-nome {
+  font-size: clamp(56px, 9vw, 96px);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: 0.04em;
+  color: var(--brand);
+}
+
+.auth-nome span {
+  margin-left: 4px;
+  padding: 0 10px;
+  border-radius: 6px;
+  background: var(--brand);
+  color: var(--white);
+}
+
+.auth-slogan {
+  font-size: clamp(13px, 1.8vw, 20px);
+  font-weight: 400;
+  color: var(--action);
+}
+
+@media (max-width: 860px) {
+  .auth-card .campo-input {
+    font-size: 16px;
+  }
+
+  .auth {
+    grid-template-columns: 1fr;
+  }
+
+  .auth-marca {
+    order: -1;
+    padding-block: 24px 8px;
+  }
+
+  .auth-icone {
+    width: 56px;
+    height: 56px;
+  }
+
+  .auth-nome {
+    font-size: 48px;
+  }
+
+  .auth-painel {
+    padding-block: 24px 40px;
+  }
+}

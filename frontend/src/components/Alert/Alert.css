@@ -1,0 +1,19 @@
+.alert {
+  display: block;
+  padding: 12px 16px;
+  border: 1px solid var(--brand-border);
+  border-radius: 10px;
+  background: var(--brand-soft);
+  color: var(--action);
+  font-size: 13px;
+}
+
+.alert-link {
+  min-height: 44px;
+  font-weight: 600;
+}
+
+.alert-link:hover {
+  text-decoration: none;
+  border-color: var(--action);
+}

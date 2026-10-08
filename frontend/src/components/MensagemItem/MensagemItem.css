@@ -1,0 +1,47 @@
+.msg {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-width: 85%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+}
+
+.msg-meu {
+  align-self: flex-end;
+  background: var(--brand-soft);
+  border-color: var(--brand-border);
+}
+
+.msg-autor {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+.msg-anexo {
+  align-self: flex-start;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: var(--white);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--action);
+}
+
+.msg-sistema {
+  text-align: center;
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+
+.msg-nota {
+  background: #fff8e1;
+  border: 1px dashed #d9b84a;
+}
+
+.msg-nota-rotulo {
+  color: #7a5a00;
+}

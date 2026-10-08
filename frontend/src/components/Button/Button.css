@@ -1,0 +1,72 @@
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 10px 18px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.btn:hover {
+  text-decoration: none;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-bloco {
+  width: 100%;
+}
+
+/* texto branco só sobre o tom escuro (#AA4800), que passa no contraste */
+.btn-primario {
+  background: var(--action);
+  color: var(--white);
+}
+
+.btn-primario:hover:not(:disabled) {
+  background: var(--action-dark);
+}
+
+.btn-secundario {
+  background: var(--white);
+  border-color: var(--line);
+  color: var(--ink);
+}
+
+.btn-secundario:hover:not(:disabled) {
+  border-color: var(--action);
+  color: var(--action);
+}
+
+.btn-fantasma {
+  background: transparent;
+  color: var(--action);
+  padding-inline: 8px;
+}
+
+.btn-perigo {
+  background: var(--red);
+  color: var(--white);
+}
+
+.btn-com-motivo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+}
+
+.btn-motivo {
+  font-size: 12px;
+  color: var(--ink-soft);
+}

@@ -1,0 +1,26 @@
+.gate {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.gate-aviso {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 14px;
+  padding: 14px 16px;
+  border: 2px solid var(--action);
+  border-radius: var(--radius);
+  background: var(--brand-soft);
+  color: var(--action);
+}
+
+.gate-conteudo {
+  opacity: 0.45;
+  filter: blur(3px) grayscale(0.4);
+  pointer-events: none;
+  user-select: none;
+  max-height: 520px;
+  overflow: hidden;
+}

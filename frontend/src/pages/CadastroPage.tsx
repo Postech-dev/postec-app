@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import AuthLayout from '../components/AuthLayout/AuthLayout'
 import Button from '../components/Button/Button'
 import Input from '../components/Input/Input'
+import { usePlano } from '../hooks/usePlano'
 import { cadastrar } from '../services/auth.service'
 
 interface Erros {
@@ -17,6 +18,7 @@ interface Erros {
 
 function CadastroPage() {
   const navigate = useNavigate()
+  const { recarregar } = usePlano()
   const [nome, setNome] = useState('')
   const [loja, setLoja] = useState('')
   const [email, setEmail] = useState('')
@@ -40,6 +42,7 @@ function CadastroPage() {
     setEnviando(true)
     try {
       await cadastrar({ nome: nome.trim(), loja: loja.trim(), email: email.trim(), senha })
+      recarregar()
       navigate('/ocorrencias')
     } catch (err) {
       setErros({ geral: (err as Error).message })

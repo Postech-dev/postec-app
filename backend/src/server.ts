@@ -10,6 +10,24 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 3000;
 
+// origens do front liberadas (em desenvolvimento o proxy do Vite já evita CORS)
+const origensPermitidas = (process.env.CORS_ORIGIN || 'http://localhost:5173,http://localhost:4173').split(',');
+
+app.use((req, res, next) => {
+  const origem = req.headers.origin;
+  if (origem && origensPermitidas.includes(origem)) {
+    res.setHeader('Access-Control-Allow-Origin', origem);
+    res.setHeader('Vary', 'Origin');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS');
+  }
+  if (req.method === 'OPTIONS') {
+    res.sendStatus(204);
+    return;
+  }
+  next();
+});
+
 app.use(express.json());
 
 // Rota raiz para conferir status da API

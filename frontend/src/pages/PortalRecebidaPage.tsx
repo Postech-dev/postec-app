@@ -45,8 +45,8 @@ function PortalRecebidaPage() {
         </dl>
       </Card>
       <p className="portal-nota">
-        Enviamos uma confirmação para {ocorrencia.pedido.cliente.email}. Guarde o protocolo: com ele você acompanha a
-        solicitação quando quiser.
+        Enviamos uma confirmação para o seu e-mail. Guarde o protocolo: com ele você acompanha a solicitação quando
+        quiser.
       </p>
       <div className="portal-botoes">
         <Button to={`/portal/${slug}/acompanhar/${ocorrencia.protocolo}`}>Acompanhar minha solicitação</Button>

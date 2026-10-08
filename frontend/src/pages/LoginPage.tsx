@@ -4,10 +4,12 @@ import { Link, useNavigate } from 'react-router-dom'
 import AuthLayout from '../components/AuthLayout/AuthLayout'
 import Button from '../components/Button/Button'
 import Input from '../components/Input/Input'
+import { usePlano } from '../hooks/usePlano'
 import { login } from '../services/auth.service'
 
 function LoginPage() {
   const navigate = useNavigate()
+  const { recarregar } = usePlano()
   const [email, setEmail] = useState('')
   const [senha, setSenha] = useState('')
   const [erros, setErros] = useState<{ email?: string; senha?: string; geral?: string }>({})
@@ -25,6 +27,7 @@ function LoginPage() {
     setEnviando(true)
     try {
       await login(email, senha)
+      recarregar()
       navigate('/ocorrencias')
     } catch (err) {
       setErros({ geral: (err as Error).message })

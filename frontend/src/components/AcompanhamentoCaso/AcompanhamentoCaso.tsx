@@ -50,10 +50,10 @@ function AcompanhamentoCaso({ ocorrencia: o, slug, onAtualizar }: Acompanhamento
   const { mostrar } = useToast()
   const fonte = useMemo(
     () => ({
-      listar: () => listarMensagensPortal(o.protocolo),
-      observar: (aoMudar: (m: Mensagem[]) => void) => observarMensagensPortal(o.protocolo, aoMudar),
+      listar: () => listarMensagensPortal(slug, o.protocolo),
+      observar: (aoMudar: (m: Mensagem[]) => void) => observarMensagensPortal(slug, o.protocolo, aoMudar),
     }),
-    [o.protocolo],
+    [slug, o.protocolo],
   )
   const { mensagens, recarregar } = useMensagens(fonte)
 
@@ -72,7 +72,7 @@ function AcompanhamentoCaso({ ocorrencia: o, slug, onAtualizar }: Acompanhamento
     setErroTexto('')
     setEnviando(true)
     try {
-      await responderSolicitacao(o.protocolo, texto.trim(), anexo?.name)
+      await responderSolicitacao(slug, o.protocolo, texto.trim())
       await recarregar()
       await onAtualizar()
       setTexto('')

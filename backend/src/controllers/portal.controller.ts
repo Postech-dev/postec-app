@@ -2,6 +2,27 @@ import { Request, Response } from 'express';
 import pool from '../database';
 import { sendEmailNotification } from '../services/email.service';
 
+// Dados públicos da loja do portal (nome, prazo, endereço de devolução)
+export async function getLoja(req: Request, res: Response): Promise<void> {
+  try {
+    const { slug } = req.params;
+    const result = await pool.query(
+      `SELECT id, nome, slug, email, plano, prazo_resposta_dias, endereco_devolucao FROM lojas WHERE slug = $1`,
+      [slug]
+    );
+
+    if (result.rows.length === 0) {
+      res.status(404).json({ mensagem: 'Loja não encontrada' });
+      return;
+    }
+
+    res.status(200).json(result.rows[0]);
+  } catch (error) {
+    console.error('Erro ao buscar loja do portal:', error);
+    res.status(500).json({ mensagem: 'Erro interno ao buscar loja' });
+  }
+}
+
 // Consultar pedido pelo slug da loja, número do pedido e CPF do cliente
 export async function consultarPedido(req: Request, res: Response): Promise<void> {
   try {
@@ -17,17 +38,18 @@ export async function consultarPedido(req: Request, res: Response): Promise<void
     const cpfLimpo = cpf.toString().replace(/\D/g, '');
 
     const query = `
-      SELECT p.id AS pedido_id, p.numero_pedido, p.cliente_nome, p.cliente_email, p.produto, p.valor
+      SELECT p.id AS pedido_id, p.numero_pedido, p.cliente_nome, p.cliente_email, p.produto, p.valor, p.data_compra
       FROM pedidos p
       JOIN lojas l ON l.id = p.loja_id
-      WHERE l.slug = $1 
-        AND p.numero_pedido = $2 
+      WHERE l.slug = $1
+        AND p.numero_pedido = $2
         AND regexp_replace(p.cliente_cpf, '\\D', '', 'g') = $3
     `;
     const result = await pool.query(query, [slug, numero_pedido, cpfLimpo]);
 
+    // sempre a mesma resposta, exista o número com outro CPF ou não
     if (result.rows.length === 0) {
-      res.status(404).json({ mensagem: 'Pedido não encontrado para esses dados' });
+      res.status(404).json({ mensagem: 'Não encontramos um pedido com esses dados' });
       return;
     }
 
@@ -73,10 +95,10 @@ export async function abrirOcorrencia(req: Request, res: Response): Promise<void
     const total = parseInt(countResult.rows[0].count, 10);
     const protocolo = `POS-${1000 + total + 1}`;
 
-    // 3. Criar a ocorrência
+    // 3. Criar a ocorrência (nasce como "não lida" para a loja)
     const insertOcorrenciaQuery = `
-      INSERT INTO ocorrencias (loja_id, pedido_id, protocolo, status, motivo, descricao)
-      VALUES ($1, $2, $3, 'Novo', $4, $5)
+      INSERT INTO ocorrencias (loja_id, pedido_id, protocolo, status, motivo, descricao, canal, nao_lida)
+      VALUES ($1, $2, $3, 'Novo', $4, $5, 'portal', true)
       RETURNING *
     `;
     const ocorrenciaResult = await client.query(insertOcorrenciaQuery, [
@@ -90,42 +112,44 @@ export async function abrirOcorrencia(req: Request, res: Response): Promise<void
 
     // 4. Inserir a mensagem inicial da conversa aberta pelo cliente
     const insertMensagemQuery = `
-      INSERT INTO mensagens (ocorrencia_id, autor, texto)
-      VALUES ($1, 'cliente', $2)
+      INSERT INTO mensagens (ocorrencia_id, autor, autor_nome, texto)
+      VALUES ($1, 'cliente', $2, $3)
     `;
-    await client.query(insertMensagemQuery, [novaOcorrencia.id, descricao]);
+    await client.query(insertMensagemQuery, [novaOcorrencia.id, pedido.cliente_nome, descricao]);
 
     await client.query('COMMIT');
 
     // 5. Disparar notificação transacional por e-mail (não bloqueia a resposta se falhar)
     sendEmailNotification({
       to: pedido.cliente_email,
-      subject: `[${pedido.loja_nome}] Ocorrência ${protocolo} Recebida!`,
-      text: `Olá ${pedido.cliente_nome},\n\nRecebemos a sua solicitação referente ao pedido ${pedido.numero_pedido}.\nSeu protocolo de atendimento é: ${protocolo}.\n\nNossa equipe já está analisando o caso e você receberá atualizações em breve!`
+      subject: `[${pedido.loja_nome}] Recebemos sua solicitação ${protocolo}`,
+      text: `Olá ${pedido.cliente_nome},\n\nRecebemos a sua solicitação referente ao pedido ${pedido.numero_pedido}.\nSeu protocolo de atendimento é: ${protocolo}.\n\nA loja já está analisando o caso e você receberá atualizações por aqui.`
     }).catch(err => console.error('Erro no disparo de email:', err));
 
     res.status(201).json({
       protocolo,
-      mensagem: 'Ocorrência aberta com sucesso! Enviamos a confirmação para seu e-mail.'
+      mensagem: 'Solicitação aberta com sucesso! Enviamos a confirmação para seu e-mail.'
     });
   } catch (error) {
     await client.query('ROLLBACK');
     console.error('Erro ao abrir ocorrência:', error);
-    res.status(500).json({ mensagem: 'Erro interno ao abrir ocorrência' });
+    res.status(500).json({ mensagem: 'Erro interno ao abrir a solicitação' });
   } finally {
     client.release();
   }
 }
 
 // Consultar status e histórico da ocorrência pelo protocolo
+// (nunca devolve notas internas, CPF nem e-mail do cliente)
 export async function getStatusOcorrencia(req: Request, res: Response): Promise<void> {
   try {
     const { slug, protocolo } = req.params;
 
     const ocorrenciaQuery = `
-      SELECT o.id, o.protocolo, o.status, o.motivo, o.tipo_resolucao, o.codigo_rastreio, 
-             o.valor_estorno, o.comprovante_estorno, o.criado_em,
-             p.numero_pedido, p.produto, p.cliente_nome
+      SELECT o.id, o.protocolo, o.status, o.motivo, o.descricao, o.criado_em, o.concluido_em,
+             o.tipo_resolucao, o.codigo_rastreio, o.itens_reenviados,
+             o.valor_estorno, o.comprovante_estorno, o.orientacao_devolucao,
+             p.numero_pedido, p.produto, p.valor AS pedido_valor, p.data_compra, p.cliente_nome
       FROM ocorrencias o
       JOIN lojas l ON l.id = o.loja_id
       JOIN pedidos p ON p.id = o.pedido_id
@@ -134,34 +158,71 @@ export async function getStatusOcorrencia(req: Request, res: Response): Promise<
     const ocorrenciaResult = await pool.query(ocorrenciaQuery, [slug, protocolo]);
 
     if (ocorrenciaResult.rows.length === 0) {
-      res.status(404).json({ mensagem: 'Ocorrência não encontrada' });
+      res.status(404).json({ mensagem: 'Solicitação não encontrada' });
       return;
     }
 
-    const ocorrencia = ocorrenciaResult.rows[0];
+    const { id, ...ocorrencia } = ocorrenciaResult.rows[0];
 
-    // Buscar histórico de mensagens
+    // Buscar histórico de mensagens (sem as notas internas)
     const mensagensResult = await pool.query(
-      'SELECT autor, texto, enviado_em FROM mensagens WHERE ocorrencia_id = $1 ORDER BY id ASC',
-      [ocorrencia.id]
+      `SELECT id, autor, autor_nome, texto, enviado_em
+       FROM mensagens WHERE ocorrencia_id = $1 AND interna = false ORDER BY id ASC`,
+      [id]
     );
 
     res.status(200).json({
-      protocolo: ocorrencia.protocolo,
-      status: ocorrencia.status,
-      motivo: ocorrencia.motivo,
-      tipo_resolucao: ocorrencia.tipo_resolucao,
-      codigo_rastreio: ocorrencia.codigo_rastreio,
-      valor_estorno: ocorrencia.valor_estorno,
-      comprovante_estorno: ocorrencia.comprovante_estorno,
-      mensagens: mensagensResult.rows.map(m => ({
-        autor: m.autor,
-        texto: m.texto,
-        enviado_em: m.enviado_em
-      }))
+      ...ocorrencia,
+      mensagens: mensagensResult.rows
     });
   } catch (error) {
     console.error('Erro ao buscar status da ocorrência:', error);
-    res.status(500).json({ mensagem: 'Erro interno ao consultar ocorrência' });
+    res.status(500).json({ mensagem: 'Erro interno ao consultar a solicitação' });
+  }
+}
+
+// O cliente responde à loja pelo portal
+export async function responderOcorrencia(req: Request, res: Response): Promise<void> {
+  try {
+    const { slug, protocolo } = req.params;
+    const { texto } = req.body;
+
+    if (!texto || !String(texto).trim()) {
+      res.status(400).json({ mensagem: 'Escreva a mensagem antes de enviar' });
+      return;
+    }
+    if (String(texto).length > 2000) {
+      res.status(400).json({ mensagem: 'A mensagem é longa demais. Use até 2000 caracteres' });
+      return;
+    }
+
+    const ocorrenciaResult = await pool.query(
+      `SELECT o.id, p.cliente_nome
+       FROM ocorrencias o
+       JOIN lojas l ON l.id = o.loja_id
+       JOIN pedidos p ON p.id = o.pedido_id
+       WHERE l.slug = $1 AND o.protocolo = $2`,
+      [slug, protocolo]
+    );
+
+    if (ocorrenciaResult.rows.length === 0) {
+      res.status(404).json({ mensagem: 'Solicitação não encontrada' });
+      return;
+    }
+
+    const { id, cliente_nome } = ocorrenciaResult.rows[0];
+
+    const mensagem = await pool.query(
+      `INSERT INTO mensagens (ocorrencia_id, autor, autor_nome, texto)
+       VALUES ($1, 'cliente', $2, $3)
+       RETURNING id, autor, autor_nome, texto, enviado_em`,
+      [id, cliente_nome, String(texto).trim()]
+    );
+    await pool.query('UPDATE ocorrencias SET nao_lida = true WHERE id = $1', [id]);
+
+    res.status(201).json(mensagem.rows[0]);
+  } catch (error) {
+    console.error('Erro ao responder solicitação:', error);
+    res.status(500).json({ mensagem: 'Erro interno ao enviar a resposta' });
   }
 }

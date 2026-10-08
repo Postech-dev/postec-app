@@ -8,11 +8,12 @@ import { PLANO_MINIMO, planoIncluiRecurso } from '../utils/planos'
 // clientes, metricas) precisa de um middleware requirePlan(<plano mínimo>) que responde 403 e confere o plano
 // da loja no servidor. Sem isso, qualquer pessoa chama a API direto e ignora o cadeado.
 export function usePlano() {
-  const { plano, trocarPlano } = useContext(PlanoContext)
+  const { plano, trocarPlano, recarregar } = useContext(PlanoContext)
 
   return {
     plano,
     trocarPlano,
+    recarregar,
     inclui: (recurso: Recurso) => planoIncluiRecurso(plano, recurso),
     planoMinimo: (recurso: Recurso) => PLANO_MINIMO[recurso],
   }

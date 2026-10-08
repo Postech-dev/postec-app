@@ -1,6 +1,6 @@
 import type { Metricas } from '../types'
 import { atraso } from './atraso'
-import { calcularMetricas } from './ocorrencias.service'
+import { calcularMetricas } from './simulado/ocorrencias.simulado'
 
 // backend: GET /metricas (só plano Business; 403 nos outros, via requirePlan)
 // - abertas: ocorrências com status diferente de Concluído

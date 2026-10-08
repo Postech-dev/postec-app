@@ -1,7 +1,12 @@
-import { Pool } from "pg";
+import { Pool, types } from "pg";
 import dotenv from "dotenv";
 
 dotenv.config();
+
+// datas e horários voltam como texto do banco ("2026-10-06 10:30:00"), sem virar Date.
+// assim o horário que o front mostra é o mesmo gravado, sem depender do fuso do servidor
+types.setTypeParser(1114, (valor: string) => valor); // TIMESTAMP
+types.setTypeParser(1082, (valor: string) => valor); // DATE
 
 const pool = new Pool({
   user:  process.env.DB_USER,

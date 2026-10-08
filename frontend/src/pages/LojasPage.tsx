@@ -21,7 +21,7 @@ function LojasPage() {
   const [excluindo, setExcluindo] = useState(false)
 
   async function pedirExclusao(loja: Loja) {
-    setAbertas(await contarAbertas(loja.id))
+    setAbertas(await contarAbertas())
     setAlvo(loja)
   }
 
@@ -30,7 +30,7 @@ function LojasPage() {
     setExcluindo(true)
     try {
       // por enquanto só fecha a confirmação; nada é apagado
-      await excluirLoja(alvo.id)
+      await excluirLoja()
       setAlvo(null)
       mostrar('Pedido de exclusão registrado. Nenhuma loja foi apagada nesta versão.')
     } finally {

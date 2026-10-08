@@ -8,8 +8,7 @@ import EstadoVazio from '../components/EstadoVazio/EstadoVazio'
 import PageHeader from '../components/PageHeader/PageHeader'
 import StatusBadge from '../components/StatusBadge/StatusBadge'
 import { useDados } from '../hooks/useDados'
-import { listarOcorrencias } from '../services/ocorrencias.service'
-import { buscarPedido } from '../services/pedidos.service'
+import { buscarPedido, ocorrenciasDoPedido } from '../services/pedidos.service'
 import { mascararCpf } from '../utils/cpf'
 import { formatarData, formatarMoeda } from '../utils/format'
 import './pages.css'
@@ -19,8 +18,7 @@ function PedidoDetalhePage() {
   const { id = '' } = useParams()
   const carregar = useCallback(async () => {
     const pedido = await buscarPedido(Number(id))
-    const todas = await listarOcorrencias()
-    return { pedido, ocorrencias: todas.filter((o) => o.pedido.numero === pedido.numero) }
+    return { pedido, ocorrencias: await ocorrenciasDoPedido(pedido.numero) }
   }, [id])
   const { dados, erro, tentarDeNovo } = useDados(carregar)
 

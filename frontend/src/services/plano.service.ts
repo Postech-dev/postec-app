@@ -1,19 +1,19 @@
 import type { Plano } from '../types'
-import { lojasMock } from '../mocks/lojas'
 import { ORDEM } from '../utils/planos'
+import { usuarioLogado } from './auth.service'
 
 const CHAVE = 'postec:plano'
 
-// backend: o plano vem da loja logada (campo plano em GET /lojas/:id ou no login); não é escolhido pelo front
-// aqui ele é mockado e pode ser trocado na demonstração
+// o plano vem da loja logada (login); o seletor da demonstração só sobrescreve na tela
+// backend: quem bloqueia recurso por plano é o servidor (requirePlan); isto é só visual
 export function obterPlano(): Plano {
   try {
     const salvo = sessionStorage.getItem(CHAVE) as Plano | null
     if (salvo && ORDEM.includes(salvo)) return salvo
   } catch {
-    // sem acesso ao armazenamento: usa o plano do mock
+    // sem acesso ao armazenamento: usa o plano da loja
   }
-  return lojasMock[0].plano
+  return usuarioLogado()?.lojaPlano ?? 'starter'
 }
 
 // só o modo demonstração chama isto

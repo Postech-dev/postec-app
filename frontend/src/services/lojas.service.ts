@@ -1,65 +1,55 @@
 import type { Loja } from '../types'
-import { lojasMock } from '../mocks/lojas'
-import { atraso } from './atraso'
+import { adaptarLoja } from '../utils/adaptadores'
+import type { LinhaLojaApi } from '../utils/adaptadores'
+import { ErroApi, api } from './api'
+import { usuarioLogado } from './auth.service'
 import { obterPlano } from './plano.service'
 
-const lojas: Loja[] = structuredClone(lojasMock)
 const ERRO_LOJA = 'Não encontramos essa loja. Confira o endereço do portal com a loja ou volte à lista de lojas.'
 
-// a loja 1 é a logada: o plano dela segue o seletor da demonstração
+// na loja logada, o seletor da demonstração pode trocar o plano na tela
 function comPlano(loja: Loja): Loja {
-  return loja.id === 1 ? { ...loja, plano: obterPlano() } : loja
+  return loja.id === usuarioLogado()?.lojaId ? { ...loja, plano: obterPlano() } : loja
+}
+
+async function traduzir404<T>(chamada: Promise<T>): Promise<T> {
+  try {
+    return await chamada
+  } catch (erro) {
+    if (erro instanceof ErroApi && erro.status === 404) throw new Error(ERRO_LOJA, { cause: erro })
+    throw erro
+  }
 }
 
 export async function listarLojas(): Promise<Loja[]> {
-  return atraso(structuredClone(lojas.map(comPlano)))
+  const linhas = await api.get<LinhaLojaApi[]>('/lojas')
+  return linhas.map(adaptarLoja).map(comPlano)
 }
 
 export async function buscarLoja(id: number): Promise<Loja> {
-  const loja = lojas.find((l) => l.id === id)
-  if (!loja) throw new Error(ERRO_LOJA)
-  return atraso(structuredClone(comPlano(loja)))
+  return comPlano(adaptarLoja(await traduzir404(api.get<LinhaLojaApi>(`/lojas/${id}`))))
 }
 
+// público: o portal do cliente usa para mostrar o nome da loja, o prazo e o endereço de devolução
 export async function buscarLojaPorSlug(slug: string): Promise<Loja> {
-  const loja = lojas.find((l) => l.slug === slug)
-  if (!loja) throw new Error(ERRO_LOJA)
-  return atraso(structuredClone(comPlano(loja)))
+  const linha = await traduzir404(api.get<LinhaLojaApi>(`/portal/${encodeURIComponent(slug)}`, { publico: true }))
+  return comPlano(adaptarLoja(linha))
 }
 
-export async function salvarLoja(id: number, dados: Pick<Loja, 'nome' | 'slug' | 'email'>): Promise<Loja> {
-  const loja = lojas.find((l) => l.id === id)
-  if (!loja) throw new Error(ERRO_LOJA)
-  Object.assign(loja, dados)
-  return atraso(structuredClone(comPlano(loja)))
+type DadosLoja = Pick<Loja, 'nome' | 'slug' | 'email' | 'prazoRespostaDias' | 'enderecoDevolucao'>
+
+export async function salvarLoja(id: number, dados: DadosLoja): Promise<Loja> {
+  const resposta = await api.put<{ loja: LinhaLojaApi }>(`/lojas/${id}`, {
+    nome: dados.nome,
+    slug: dados.slug,
+    email: dados.email,
+    prazo_resposta_dias: dados.prazoRespostaDias,
+    endereco_devolucao: dados.enderecoDevolucao,
+  })
+  return comPlano(adaptarLoja(resposta.loja))
 }
 
-// mock: a exclusão ainda não apaga nada
-export async function excluirLoja(id: number): Promise<void> {
-  return atraso(void id)
-}
-
-function gerarSlug(nome: string): string {
-  return nome
-    .normalize('NFD')
-    .replace(/[̀-ͯ]/g, '')
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-|-$/g, '')
-}
-
-export async function criarLoja(nome: string): Promise<Loja> {
-  const slug = gerarSlug(nome)
-  const loja: Loja = {
-    id: lojas.length + 1,
-    nome,
-    slug,
-    plano: 'starter',
-    email: '',
-    ativa: true,
-    prazoRespostaDias: 2,
-    enderecoDevolucao: '',
-  }
-  lojas.push(loja)
-  return atraso(structuredClone(loja))
+// a exclusão ainda não apaga nada: a tela só confirma
+export async function excluirLoja(): Promise<void> {
+  return
 }

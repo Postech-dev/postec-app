@@ -53,7 +53,8 @@ export interface Ocorrencia {
   descricao: string
   pedido: Pedido
   abertaEm: string
-  responsavel: string
+  // quem assumiu o atendimento (vazio enquanto ninguém assumiu)
+  responsavel?: string
   canal: CanalOrigem
   // código longo do link enviado por e-mail (/portal/:slug/caso/:token)
   token: string
@@ -100,6 +101,10 @@ export interface Usuario {
   email: string
   papel: 'Administradora' | 'Atendente'
   lojaNome: string
+  // vêm do login real; o mock da equipe não tem
+  lojaId?: number
+  lojaSlug?: string
+  lojaPlano?: Plano
 }
 
 export interface ContagensPainel {

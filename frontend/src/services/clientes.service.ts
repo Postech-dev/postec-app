@@ -1,6 +1,6 @@
 import type { FichaCliente } from '../types'
 import { atraso } from './atraso'
-import { listarOcorrencias } from './ocorrencias.service'
+import { listarOcorrencias } from './simulado/ocorrencias.simulado'
 import { buscarCliente, listarPedidosDoCliente } from './pedidos.service'
 
 // backend: GET /clientes/:id (só plano Business; responder 403 nos outros, via requirePlan)

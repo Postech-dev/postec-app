@@ -1,5 +1,12 @@
-// "hoje" fixo para bater com os dados de exemplo
-export const HOJE = '2026-10-06'
+// data de hoje (AAAA-MM-DD) no fuso do navegador; os "Hoje 10:30" e "há 2 dias" partem dela
+function hojeLocal(): string {
+  const d = new Date()
+  const mm = String(d.getMonth() + 1).padStart(2, '0')
+  const dd = String(d.getDate()).padStart(2, '0')
+  return `${d.getFullYear()}-${mm}-${dd}`
+}
+
+export const HOJE = hojeLocal()
 
 const MESES = ['jan.', 'fev.', 'mar.', 'abr.', 'mai.', 'jun.', 'jul.', 'ago.', 'set.', 'out.', 'nov.', 'dez.']
 
@@ -78,6 +85,12 @@ export function formatarSeparadorDia(iso: string): string {
   const [, mes, dia] = data.split('-')
   const texto = `${dia} de ${MESES_EXTENSO[Number(mes) - 1]}`
   return data === HOJE ? `Hoje, ${texto}` : texto
+}
+
+// "Tamanho M • 2 unidades" (ou só "1 unidade" quando não há tamanho)
+export function montarDetalhe(tamanho: string | undefined, quantidade: number): string {
+  const un = `${quantidade} ${quantidade === 1 ? 'unidade' : 'unidades'}`
+  return tamanho ? `Tamanho ${tamanho} • ${un}` : un
 }
 
 // "Tamanho M • 1 unidade" -> "Tam. M"

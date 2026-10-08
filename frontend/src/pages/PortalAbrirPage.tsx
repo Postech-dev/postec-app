@@ -45,7 +45,7 @@ function PortalAbrirPage() {
 
     setEnviando(true)
     try {
-      const o = await abrirOcorrencia(slug, pedido.numero, motivo, descricao.trim(), arquivo?.name)
+      const o = await abrirOcorrencia(slug, pedido.id, motivo, descricao.trim())
       navigate(`/portal/${slug}/recebida/${o.protocolo}`, { replace: true })
     } catch (err) {
       setErros({ geral: `${(err as Error).message} Seus dados continuam aqui; tente enviar de novo.` })

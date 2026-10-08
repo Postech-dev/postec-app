@@ -126,7 +126,7 @@ function OcorrenciaDetalhePage() {
     setErroTexto('')
     setEnviando(true)
     try {
-      await enviarMensagem(protocolo, texto.trim(), 'loja', { interna })
+      await enviarMensagem(protocolo, texto.trim(), { interna })
       rolarRef.current = true
       setTexto('')
       await recarregar()
@@ -147,7 +147,7 @@ function OcorrenciaDetalhePage() {
       <PageHeader
         eyebrow={`${o.protocolo} · ${o.pedido.numero}`}
         titulo={o.motivo}
-        subtitulo={`Aberta em ${formatarDataHora(o.abertaEm)} • Responsável: ${o.responsavel}`}
+        subtitulo={`Aberta em ${formatarDataHora(o.abertaEm)}${o.responsavel ? ` • Responsável: ${o.responsavel}` : ' • Ninguém assumiu ainda'}`}
         acoes={
           <div className="detalhe-status">
             <div className="detalhe-badges">

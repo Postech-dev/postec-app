@@ -8,9 +8,9 @@ import type {
 } from '../types'
 import { clientesMock, pedidosMock } from '../mocks/pedidos'
 import type { LinhaCsv } from '../utils/csv'
-import { apenasDigitos, normalizarPedido } from '../utils/format'
+import { apenasDigitos, montarDetalhe, normalizarPedido } from '../utils/format'
 import { atraso } from './atraso'
-import { contagemPorPedido } from './ocorrencias.service'
+import { contagemPorPedido, listarOcorrencias } from './simulado/ocorrencias.simulado'
 
 // estado em memória; o backend guarda pedidos e clientes isolados por loja
 const clientes: Cliente[] = structuredClone(clientesMock)
@@ -18,11 +18,6 @@ const pedidos: Pedido[] = structuredClone(pedidosMock).map((p) => ({
   ...p,
   cliente: clientes.find((c) => c.id === p.cliente.id) ?? p.cliente,
 }))
-
-function montarDetalhe(tamanho: string | undefined, quantidade: number): string {
-  const un = `${quantidade} ${quantidade === 1 ? 'unidade' : 'unidades'}`
-  return tamanho ? `Tamanho ${tamanho} • ${un}` : un
-}
 
 // o cliente é identificado pelo CPF: mesmo CPF, mesmo cliente
 function upsertCliente(dados: DadosPedido): Cliente {
@@ -148,4 +143,10 @@ export async function buscarCliente(id: number): Promise<Cliente> {
 export async function listarPedidosDoCliente(clienteId: number): Promise<Pedido[]> {
   const doCliente = pedidos.filter((p) => p.cliente.id === clienteId).sort((a, b) => b.dataPedido.localeCompare(a.dataPedido))
   return atraso(structuredClone(doCliente))
+}
+
+// ainda simulado, junto com os pedidos: ocorrências deste pedido
+export async function ocorrenciasDoPedido(numero: string) {
+  const todas = await listarOcorrencias()
+  return todas.filter((o) => o.pedido.numero === numero)
 }

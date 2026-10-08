@@ -9,7 +9,9 @@ CREATE TABLE IF NOT EXISTS lojas (
     nome VARCHAR(100) NOT NULL,
     slug VARCHAR(50) UNIQUE NOT NULL,      -- Ex: 'mariana-modas' (usado na URL do portal)
     email VARCHAR(100) NOT NULL,
-    plano VARCHAR(20) DEFAULT 'Starter'     -- 'Starter' ou 'Pro'
+    plano VARCHAR(20) DEFAULT 'Starter',    -- 'starter', 'pro' ou 'business'
+    prazo_resposta_dias INT NOT NULL DEFAULT 2,       -- prazo prometido ao cliente, em dias uteis
+    endereco_devolucao TEXT NOT NULL DEFAULT ''       -- endereco para o cliente devolver produtos
 );
 
 -- 2. USUÁRIOS (Quem acessa o painel de atendimento)
@@ -54,6 +56,13 @@ CREATE TABLE IF NOT EXISTS ocorrencias (
     codigo_rastreio VARCHAR(50),           -- Preenchido se for Reenvio
     valor_estorno NUMERIC(10, 2),          -- Preenchido se for Estorno
     comprovante_estorno VARCHAR(100),      -- ID da transação / comprovante PIX
+    itens_reenviados TEXT,                 -- Preenchido se for Reenvio (ex.: '1 x Vestido - Tam M')
+    concluido_em TIMESTAMP,                -- Quando foi resolvida
+
+    canal VARCHAR(20) NOT NULL DEFAULT 'portal', -- 'portal', 'telefone', 'instagram', 'loja_fisica', 'reclame_aqui', 'email', 'outro'
+    responsavel VARCHAR(100),              -- Quem assumiu o atendimento
+    nao_lida BOOLEAN NOT NULL DEFAULT false,     -- Mensagem do cliente ainda nao vista pela loja
+    orientacao_devolucao TEXT,             -- Texto enviado ao cliente quando a loja pede a devolucao
     
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -63,6 +72,8 @@ CREATE TABLE IF NOT EXISTS mensagens (
     id SERIAL PRIMARY KEY,
     ocorrencia_id INT REFERENCES ocorrencias(id) ON DELETE CASCADE,
     autor VARCHAR(20) NOT NULL,            -- 'cliente', 'atendente' ou 'sistema'
+    autor_nome VARCHAR(100),               -- Nome de quem escreveu (atendente)
+    interna BOOLEAN NOT NULL DEFAULT false, -- Nota interna: so a equipe da loja ve
     texto TEXT NOT NULL,
     enviado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

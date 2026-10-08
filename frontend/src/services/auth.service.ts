@@ -1,29 +1,56 @@
 import type { Usuario } from '../types'
-import { equipeMock } from '../mocks/lojas'
-import { atraso } from './atraso'
-import { criarLoja } from './lojas.service'
+import { planoDoBanco } from '../utils/adaptadores'
+import { ErroApi, api } from './api'
+import { gravarSessao, lerSessao, limparSessao } from './sessao'
 
-const CHAVE = 'postec:usuario'
-
-export function usuarioLogado(): Usuario | null {
-  try {
-    const bruto = sessionStorage.getItem(CHAVE)
-    return bruto ? (JSON.parse(bruto) as Usuario) : null
-  } catch {
-    return null
+interface RespostaAuth {
+  token: string
+  usuario: {
+    id: number
+    nome: string
+    email: string
+    role: 'admin' | 'atendente'
+    loja_id: number
+    loja_nome: string
+    loja_slug: string
+    loja_plano: string
   }
 }
 
-// mock: aceita qualquer credencial preenchida
+function guardar({ token, usuario }: RespostaAuth): Usuario {
+  const adaptado: Usuario = {
+    id: usuario.id,
+    nome: usuario.nome,
+    email: usuario.email,
+    papel: usuario.role === 'admin' ? 'Administradora' : 'Atendente',
+    lojaNome: usuario.loja_nome,
+    lojaId: usuario.loja_id,
+    lojaSlug: usuario.loja_slug,
+    lojaPlano: planoDoBanco(usuario.loja_plano),
+  }
+  gravarSessao({ token, usuario: adaptado })
+  return adaptado
+}
+
+export function usuarioLogado(): Usuario | null {
+  return lerSessao()?.usuario ?? null
+}
+
 export async function login(email: string, senha: string): Promise<Usuario> {
   if (!email.trim() || !senha.trim()) throw new Error('Digite e-mail e senha para entrar.')
-  const usuario = equipeMock.find((u) => u.email === email.trim().toLowerCase()) ?? equipeMock[0]
-  sessionStorage.setItem(CHAVE, JSON.stringify(usuario))
-  return atraso(usuario)
+  try {
+    const resposta = await api.post<RespostaAuth>('/auth/login', { email: email.trim(), senha }, { publico: true })
+    return guardar(resposta)
+  } catch (erro) {
+    if (erro instanceof ErroApi && erro.status === 401) {
+      throw new Error('E-mail ou senha incorretos. Confira os dados e tente de novo.', { cause: erro })
+    }
+    throw erro
+  }
 }
 
 export function logout(): void {
-  sessionStorage.removeItem(CHAVE)
+  limparSessao()
 }
 
 interface NovoCadastro {
@@ -33,17 +60,8 @@ interface NovoCadastro {
   senha: string
 }
 
-// mock: cria a loja e a administradora e já abre a sessão
-export async function cadastrar({ nome, loja, email }: NovoCadastro): Promise<Usuario> {
-  if (equipeMock.some((u) => u.email === email.toLowerCase())) throw new Error('Este e-mail já tem cadastro. Entre com ele ou use outro e-mail.')
-  await criarLoja(loja)
-  const usuario: Usuario = {
-    id: equipeMock.length + 1,
-    nome,
-    email: email.toLowerCase(),
-    papel: 'Administradora',
-    lojaNome: loja,
-  }
-  sessionStorage.setItem(CHAVE, JSON.stringify(usuario))
-  return atraso(usuario)
+// cria a loja (plano starter) e a administradora, e já abre a sessão
+export async function cadastrar({ nome, loja, email, senha }: NovoCadastro): Promise<Usuario> {
+  const resposta = await api.post<RespostaAuth>('/auth/cadastro', { nome, loja, email, senha }, { publico: true })
+  return guardar(resposta)
 }

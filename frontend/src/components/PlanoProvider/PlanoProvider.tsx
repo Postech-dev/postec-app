@@ -12,7 +12,9 @@ function PlanoProvider({ children }: { children: ReactNode }) {
     setPlano(novo)
   }, [])
 
-  const valor = useMemo(() => ({ plano, trocarPlano }), [plano, trocarPlano])
+  const recarregar = useCallback(() => setPlano(obterPlano()), [])
+
+  const valor = useMemo(() => ({ plano, trocarPlano, recarregar }), [plano, trocarPlano, recarregar])
 
   return <PlanoContext.Provider value={valor}>{children}</PlanoContext.Provider>
 }

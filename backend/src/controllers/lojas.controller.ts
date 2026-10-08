@@ -1,11 +1,24 @@
-import { type Request, type Response } from 'express';
+import { type Response } from 'express';
 import pool from '../database';
-import { Loja as lojas } from '../models/types';
+import { AuthenticatedRequest } from '../middlewares/auth.middleware';
 
-// Listar todas as lojas
-export async function getLojas(req: Request, res: Response): Promise<void> {
+// todas as rotas exigem login e só enxergam a loja do usuário logado
+// (o plano só muda no servidor; não é editável por aqui)
+
+const CAMPOS = `id, nome, slug, email, plano, prazo_resposta_dias, endereco_devolucao`;
+
+function soAdmin(req: AuthenticatedRequest, res: Response): boolean {
+  if (req.user?.role !== 'admin') {
+    res.status(403).json({ mensagem: 'Só administradores podem fazer isso' });
+    return false;
+  }
+  return true;
+}
+
+// Lista as lojas do usuário (hoje, uma)
+export async function getLojas(req: AuthenticatedRequest, res: Response): Promise<void> {
   try {
-    const result = await pool.query('SELECT * FROM lojas ORDER BY id ASC');
+    const result = await pool.query(`SELECT ${CAMPOS} FROM lojas WHERE id = $1`, [req.user?.loja_id]);
     res.status(200).json(result.rows);
   } catch (error) {
     console.error('Erro ao buscar lojas:', error);
@@ -13,11 +26,11 @@ export async function getLojas(req: Request, res: Response): Promise<void> {
   }
 }
 
-// Buscar uma loja específica pelo ID
-export async function getLojaById(req: Request, res: Response): Promise<void> {
+// Buscar uma loja específica pelo ID (só a própria)
+export async function getLojaById(req: AuthenticatedRequest, res: Response): Promise<void> {
   try {
     const { id } = req.params;
-    const result = await pool.query('SELECT * FROM lojas WHERE id = $1', [id]);
+    const result = await pool.query(`SELECT ${CAMPOS} FROM lojas WHERE id = $1 AND id = $2`, [id, req.user?.loja_id]);
 
     if (result.rows.length === 0) {
       res.status(404).json({ mensagem: 'Loja não encontrada' });
@@ -31,10 +44,11 @@ export async function getLojaById(req: Request, res: Response): Promise<void> {
   }
 }
 
-// Criar uma nova loja
-export async function postLojas(req: Request, res: Response): Promise<void> {
+// Criar uma nova loja (administradores)
+export async function postLojas(req: AuthenticatedRequest, res: Response): Promise<void> {
   try {
-    const { nome, slug, email, plano } = req.body as Partial<lojas>;
+    if (!soAdmin(req, res)) return;
+    const { nome, slug, email } = req.body;
 
     if (!nome || !slug || !email) {
       res.status(400).json({ mensagem: 'Campos obrigatórios: nome, slug e email' });
@@ -43,11 +57,10 @@ export async function postLojas(req: Request, res: Response): Promise<void> {
 
     const query = `
       INSERT INTO lojas (nome, slug, email, plano)
-      VALUES ($1, $2, $3, $4)
-      RETURNING *
+      VALUES ($1, $2, $3, 'starter')
+      RETURNING ${CAMPOS}
     `;
-    const values = [nome, slug, email, plano || 'Starter'];
-    const result = await pool.query(query, values);
+    const result = await pool.query(query, [nome, slug, email]);
 
     res.status(201).json({ mensagem: 'Loja criada com sucesso', loja: result.rows[0] });
   } catch (error: any) {
@@ -60,22 +73,40 @@ export async function postLojas(req: Request, res: Response): Promise<void> {
   }
 }
 
-// Atualizar loja pelo ID
-export async function putLojas(req: Request, res: Response): Promise<void> {
+// Atualizar a própria loja (administradores)
+export async function putLojas(req: AuthenticatedRequest, res: Response): Promise<void> {
   try {
+    if (!soAdmin(req, res)) return;
     const { id } = req.params;
-    const { nome, slug, email, plano } = req.body as Partial<lojas>;
+    const { nome, slug, email, prazo_resposta_dias, endereco_devolucao } = req.body;
+
+    if (prazo_resposta_dias !== undefined) {
+      const prazo = Number(prazo_resposta_dias);
+      if (!Number.isInteger(prazo) || prazo < 1 || prazo > 30) {
+        res.status(400).json({ mensagem: 'O prazo de resposta deve ser um número de dias entre 1 e 30' });
+        return;
+      }
+    }
 
     const query = `
       UPDATE lojas
       SET nome = COALESCE($1, nome),
           slug = COALESCE($2, slug),
           email = COALESCE($3, email),
-          plano = COALESCE($4, plano)
-      WHERE id = $5
-      RETURNING *
+          prazo_resposta_dias = COALESCE($4, prazo_resposta_dias),
+          endereco_devolucao = COALESCE($5, endereco_devolucao)
+      WHERE id = $6 AND id = $7
+      RETURNING ${CAMPOS}
     `;
-    const values = [nome, slug, email, plano, id];
+    const values = [
+      nome ?? null,
+      slug ?? null,
+      email ?? null,
+      prazo_resposta_dias ?? null,
+      endereco_devolucao ?? null,
+      id,
+      req.user?.loja_id
+    ];
     const result = await pool.query(query, values);
 
     if (result.rows.length === 0) {
@@ -84,17 +115,22 @@ export async function putLojas(req: Request, res: Response): Promise<void> {
     }
 
     res.status(200).json({ mensagem: 'Loja atualizada com sucesso', loja: result.rows[0] });
-  } catch (error) {
+  } catch (error: any) {
     console.error('Erro ao atualizar loja:', error);
+    if (error.code === '23505') {
+      res.status(400).json({ mensagem: 'Já existe uma loja com esse endereço de portal. Escolha outro.' });
+      return;
+    }
     res.status(500).json({ mensagem: 'Erro interno ao atualizar loja' });
   }
 }
 
-// Deletar loja pelo ID
-export async function deleteLojas(req: Request, res: Response): Promise<void> {
+// Deletar a própria loja (administradores)
+export async function deleteLojas(req: AuthenticatedRequest, res: Response): Promise<void> {
   try {
+    if (!soAdmin(req, res)) return;
     const { id } = req.params;
-    const result = await pool.query('DELETE FROM lojas WHERE id = $1 RETURNING *', [id]);
+    const result = await pool.query('DELETE FROM lojas WHERE id = $1 AND id = $2 RETURNING id, nome', [id, req.user?.loja_id]);
 
     if (result.rows.length === 0) {
       res.status(404).json({ mensagem: 'Loja não encontrada para exclusão' });

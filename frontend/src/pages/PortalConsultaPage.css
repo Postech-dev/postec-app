@@ -1,0 +1,130 @@
+/* ── Grade duas colunas (desktop ≥1024px) ─────────────── */
+.consulta-grade {
+  display: grid;
+  grid-template-columns: 1fr 440px;
+  gap: 64px;
+  align-items: start;
+}
+
+/* ── Coluna esquerda ────────────────────────────────── */
+.consulta-intro {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.consulta-titulo {
+  font-size: clamp(22px, 3vw, 32px);
+  font-weight: 800;
+  line-height: 1.2;
+  text-wrap: balance;
+  color: var(--ink);
+  margin: 0;
+}
+
+.consulta-subtitulo {
+  font-size: 15px;
+  color: var(--ink-soft);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* "Como funciona" — lista numerada */
+.consulta-passos {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.consulta-passo {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+}
+
+.consulta-passo-num {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--brand-soft);
+  color: var(--action);
+  font-size: 14px;
+  font-weight: 800;
+  border-radius: 50%;
+  border: 2px solid var(--brand-border);
+  margin-top: 1px;
+}
+
+.consulta-passo-titulo {
+  display: block;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.consulta-passo-desc {
+  margin: 2px 0 0;
+  font-size: 14px;
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+
+/* ── Coluna direita ─────────────────────────────────── */
+.consulta-formularios {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+/* "Como funciona" compacto — escondido no desktop */
+.consulta-como-mobile {
+  display: none;
+}
+
+/* ── Mobile: uma coluna ─────────────────────────────── */
+@media (max-width: 1023px) {
+  .consulta-grade {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+
+  /* esconde coluna esquerda — conteúdo migra para disclosure */
+  .consulta-intro {
+    display: none;
+  }
+
+  .consulta-formularios {
+    gap: var(--space-3);
+  }
+
+  .consulta-como-mobile {
+    display: block;
+    font-size: 13px;
+    color: var(--ink-soft);
+  }
+
+  .consulta-como-mobile summary {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--action);
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .consulta-como-mobile ol {
+    padding-left: var(--space-4);
+    margin: var(--space-2) 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    line-height: 1.5;
+  }
+}

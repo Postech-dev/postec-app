@@ -1,0 +1,140 @@
+/* ── Form layout ──────────────────────────────────── */
+.pc-bloco {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.pc-card-titulo {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0;
+}
+
+/* ── Campo ────────────────────────────────────────── */
+.pc-campo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.pc-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.pc-obrig {
+  color: var(--action);
+}
+
+/* inputs 48px, fonte 16px (evita zoom no iOS) */
+.pc-input {
+  width: 100%;
+  height: 48px;
+  padding: 0 14px;
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius-ctrl);
+  background: var(--white);
+  font: inherit;
+  font-size: 16px;
+  color: var(--ink);
+  transition: border-color 0.15s, box-shadow 0.15s;
+  /* necessário para box-sizing correto em iOS */
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.pc-input::placeholder {
+  color: #9aa0aa;
+}
+
+.pc-input:focus {
+  outline: none;
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px var(--brand-soft);
+}
+
+.pc-input-erro {
+  border-color: var(--red);
+}
+
+.pc-input-erro:focus {
+  border-color: var(--red);
+  box-shadow: 0 0 0 3px #fdeceb;
+}
+
+/* ── Mensagens inline ─────────────────────────────── */
+.pc-erro {
+  font-size: 13px;
+  color: var(--red);
+  font-weight: 500;
+}
+
+.pc-nota {
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+
+/* ── Disclosure "Onde encontro..." ────────────────── */
+.pc-disclosure {
+  font-size: 13px;
+}
+
+.pc-disclosure summary {
+  display: flex;
+  align-items: center;
+  min-height: 36px;
+  color: var(--action);
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none;
+  gap: 6px;
+}
+
+.pc-disclosure summary::-webkit-details-marker {
+  display: none;
+}
+
+.pc-disclosure summary::before {
+  content: '▸';
+  font-size: 10px;
+  transition: transform 0.15s;
+}
+
+.pc-disclosure[open] summary::before {
+  transform: rotate(90deg);
+}
+
+.pc-disclosure p {
+  margin: 6px 0 0 18px;
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+
+/* ── Erro geral (caixa vermelha) ──────────────────── */
+.pc-erro-geral {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 14px;
+  border: 1px solid #f0c5c1;
+  border-radius: var(--radius-ctrl);
+  background: var(--red-soft);
+  color: var(--red);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.pc-erro-geral span {
+  color: var(--ink-soft);
+  font-size: 13px;
+}
+
+/* ── Botão no portal: 48px, bloco no mobile ──────── */
+/* O componente Button usa .btn-bloco; garantimos 48px aqui */
+.pc-bloco .btn {
+  min-height: 48px;
+  font-size: 15px;
+}

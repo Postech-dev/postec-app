@@ -53,10 +53,26 @@ async function buscar(caminho: string, mensagemNaoEncontrada: string): Promise<D
   }
 }
 
-// backend: GET /portal/:slug/ocorrencias/:protocolo precisa exigir protocolo + CPF (ou só o token do e-mail)
-// protocolo sequencial (POS-1001, POS-1002...) dá para enumerar: sem o CPF, qualquer pessoa lê o caso de outro cliente
-export async function acompanharOcorrencia(slug: string, protocolo: string): Promise<Ocorrencia> {
-  const caminho = `/portal/${encodeURIComponent(slug)}/ocorrencias/${encodeURIComponent(normalizarProtocolo(protocolo))}`
+// protocolo + e-mail via formulário: par validado para não enumerar casos de outros clientes
+// sem e-mail: acesso interno (vindo de navegação já autenticada ou link com token)
+export async function acompanharOcorrencia(slug: string, protocolo: string, email?: string): Promise<Ocorrencia> {
+  const norm = normalizarProtocolo(protocolo)
+  if (email) {
+    // formulário externo: POST exige par protocolo+email no backend
+    try {
+      const linha = await api.post<DetalhePortalApi>(
+        `/portal/${encodeURIComponent(slug)}/acompanhar`,
+        { protocolo: norm, email },
+        PUBLICO,
+      )
+      return adaptarOcorrencia(linha)
+    } catch (erro) {
+      if (erro instanceof ErroApi && (erro.status === 404 || erro.status === 400)) throw new Error(ERRO_PROTOCOLO, { cause: erro })
+      throw erro
+    }
+  }
+  // acesso interno: GET direto pelo protocolo (rota já existente)
+  const caminho = `/portal/${encodeURIComponent(slug)}/ocorrencias/${encodeURIComponent(norm)}`
   return adaptarOcorrencia(await buscar(caminho, ERRO_PROTOCOLO))
 }
 

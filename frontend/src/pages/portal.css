@@ -17,9 +17,10 @@
 }
 
 .portal-titulo {
-  font-size: 26px;
+  font-size: clamp(20px, 4vw, 28px);
   font-weight: 800;
   line-height: 1.25;
+  text-wrap: balance;
 }
 
 .portal-lista {

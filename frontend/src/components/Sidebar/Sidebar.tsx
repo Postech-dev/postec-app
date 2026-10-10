@@ -1,9 +1,11 @@
+import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { usePlano } from '../../hooks/usePlano'
 import type { ContagensPainel, Recurso, Usuario } from '../../types'
 import { iniciais } from '../../utils/format'
 import { NOMES } from '../../utils/planos'
 import Logo from '../Logo/Logo'
+import PlanosModal from '../PlanosModal/PlanosModal'
 import PlanoSwitcher from '../PlanoSwitcher/PlanoSwitcher'
 import './Sidebar.css'
 
@@ -33,6 +35,7 @@ const links: Item[] = [
 
 function Sidebar({ usuario, contagens, aberta, onNavegar, onSair }: SidebarProps) {
   const { plano, inclui } = usePlano()
+  const [planos, setPlanos] = useState(false)
 
   return (
     <aside id="menu-principal" className={`sidebar ${aberta ? 'sidebar-aberta' : ''}`} aria-label="Menu principal">
@@ -41,10 +44,11 @@ function Sidebar({ usuario, contagens, aberta, onNavegar, onSair }: SidebarProps
         <span className="sidebar-lema">PÓS-VENDA EM ORDEM</span>
       </div>
 
-      <button type="button" className="sidebar-loja">
-        <span className="sidebar-loja-nome">{usuario.lojaNome} ⌄</span>
+      <button type="button" className="sidebar-loja" onClick={() => setPlanos(true)}>
+        <span className="sidebar-loja-nome">{usuario.lojaNome}</span>
         <span className="sidebar-loja-plano">Plano {NOMES[plano]}</span>
       </button>
+      <PlanosModal aberto={planos} onFechar={() => setPlanos(false)} />
 
       <nav className="sidebar-nav">
         <span className="sidebar-grupo">PRINCIPAL</span>
@@ -74,7 +78,7 @@ function Sidebar({ usuario, contagens, aberta, onNavegar, onSair }: SidebarProps
           )
         })}
         <a className="sidebar-link" href="/portal/mariana-modas" target="_blank" rel="noreferrer">
-          Portal do cliente ↗<span className="so-leitor"> (abre em nova aba)</span>
+          Portal do cliente<span className="so-leitor"> (abre em nova aba)</span>
         </a>
       </nav>
 

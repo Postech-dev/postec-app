@@ -31,6 +31,13 @@
   padding: 24px 16px 48px;
 }
 
+@media (max-width: 480px) {
+  .portal-main {
+    padding: 16px 12px 40px;
+    gap: 14px;
+  }
+}
+
 .portal-erro {
   color: var(--red);
   font-weight: 600;

@@ -19,11 +19,11 @@ function OcorrenciasKanbanPage() {
   if (!itens) return <p className="carregando">Carregando…</p>
 
   return (
-    <div className="pagina">
+    <div className="pagina pagina-kanban">
       <PageHeader
         eyebrow="OCORRÊNCIAS"
         titulo="Uma visão de cada etapa."
-        subtitulo="Abra um cartão para atender. As mudanças de etapa seguem o fluxo de resolução."
+        subtitulo="Clique em um cartão para mais informações, as mudanças de etapa seguem o fluxo de resolução."
         acoes={
           <>
             <BackLink to="/ocorrencias">Tabela</BackLink> <span>{pluralOcorrencias(itens.length)}</span>
@@ -40,9 +40,6 @@ function OcorrenciasKanbanPage() {
       ) : (
         <KanbanBoard itens={itens} />
       )}
-      <p className="carregando">
-        Novo → Em triagem → Devolução (quando necessária) → Reenvio ou estorno → Concluído.
-      </p>
     </div>
   )
 }

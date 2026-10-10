@@ -75,7 +75,7 @@ function PedidosPage() {
         </EstadoVazio>
       ) : (
         <>
-          <div className="ocorrencias-busca">
+          <div style={{ maxWidth: 360 }}>
             <Input
               label="Buscar"
               type="search"

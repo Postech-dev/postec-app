@@ -7,6 +7,37 @@
   color: var(--ink-soft);
 }
 
+@media (max-width: 480px) {
+  .detalhe-status {
+    align-items: flex-start;
+  }
+
+  .detalhe-badges {
+    justify-content: flex-start;
+  }
+
+  .detalhe-modos {
+    width: 100%;
+    display: flex;
+  }
+
+  .detalhe-modos button {
+    flex: 1;
+    text-align: center;
+    font-size: 13px;
+    padding: 6px 8px;
+  }
+
+  .detalhe-chips {
+    gap: 6px;
+  }
+
+  .detalhe-chip {
+    font-size: 11px;
+    padding: 5px 10px;
+  }
+}
+
 .detalhe-envio {
   display: flex;
   flex-wrap: wrap;

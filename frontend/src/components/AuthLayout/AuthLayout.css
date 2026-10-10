@@ -153,3 +153,14 @@
     padding-block: 24px 40px;
   }
 }
+
+@media (max-width: 480px) {
+  .auth-card {
+    padding: 24px 20px;
+    border-radius: 20px;
+  }
+
+  .auth-nome {
+    font-size: 36px;
+  }
+}

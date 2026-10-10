@@ -45,6 +45,26 @@
   .pagina-grid {
     grid-template-columns: 1fr;
   }
+
+  .cards-resumo {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .cards-resumo {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* kanban: a página ocupa toda a altura disponível do app-shell-main,
+   deixando o quadro do kanban (.kanban-wrapper) esticar e rolar sozinho */
+.pagina-kanban {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 /* lista de dados na revisão antes de concluir */

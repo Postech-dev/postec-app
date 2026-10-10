@@ -7,6 +7,16 @@
   border-radius: 12px;
   background: var(--bg);
   border: 1px solid var(--line);
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 480px) {
+  .msg {
+    max-width: 92%;
+    padding: 10px 12px;
+    font-size: 14px;
+  }
 }
 
 .msg-meu {

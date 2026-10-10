@@ -14,22 +14,27 @@ interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
 function Select({ label, obrigatorio, erro, opcoes, placeholder, ...rest }: SelectProps) {
   const id = useId()
 
+  const campo = (
+    <select id={id} className={`campo-input ${erro ? 'campo-invalido' : ''}`} aria-invalid={!!erro} {...rest}>
+      {placeholder && <option value="">{placeholder}</option>}
+      {opcoes.map((o) => (
+        <option key={o} value={o}>
+          {o}
+        </option>
+      ))}
+    </select>
+  )
+
+  // sem label: renderiza só o select (útil em toolbars inline)
+  if (!label) return campo
+
   return (
     <div className="campo">
-      {label && (
-        <label htmlFor={id} className="campo-label">
-          {label}
-          {obrigatorio && <span className="campo-obrigatorio"> *</span>}
-        </label>
-      )}
-      <select id={id} className={`campo-input ${erro ? 'campo-invalido' : ''}`} aria-invalid={!!erro} {...rest}>
-        {placeholder && <option value="">{placeholder}</option>}
-        {opcoes.map((o) => (
-          <option key={o} value={o}>
-            {o}
-          </option>
-        ))}
-      </select>
+      <label htmlFor={id} className="campo-label">
+        {label}
+        {obrigatorio && <span className="campo-obrigatorio"> *</span>}
+      </label>
+      {campo}
       {erro && (
         <span className="campo-erro" role="alert">
           {erro}

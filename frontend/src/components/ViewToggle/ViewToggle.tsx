@@ -1,15 +1,28 @@
-import { NavLink } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
+import ViewToggleLink from './ViewToggleLink'
 import './ViewToggle.css'
 
+// preserva busca e filtros ao trocar de visão (q, status, canal)
+function filtrosParam(search: string): string {
+  const p = new URLSearchParams(search)
+  p.delete('pagina')
+  const s = p.toString()
+  return s ? `?${s}` : ''
+}
+
 function ViewToggle() {
+  const { search, pathname } = useLocation()
+  const params = filtrosParam(search)
+  const tabelaAtiva = pathname === '/ocorrencias'
+
   return (
-    <div className="view-toggle">
-      <NavLink to="/ocorrencias" end className={({ isActive }) => (isActive ? 'view-ativo' : '')}>
+    <div className="view-toggle" role="group" aria-label="Alternar visão">
+      <ViewToggleLink to={`/ocorrencias${params}`} ativo={tabelaAtiva}>
         Tabela
-      </NavLink>
-      <NavLink to="/ocorrencias/kanban" className={({ isActive }) => (isActive ? 'view-ativo' : '')}>
+      </ViewToggleLink>
+      <ViewToggleLink to={`/ocorrencias/kanban${params}`} ativo={!tabelaAtiva}>
         Kanban
-      </NavLink>
+      </ViewToggleLink>
     </div>
   )
 }

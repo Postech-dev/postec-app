@@ -1,10 +1,10 @@
 import { useCallback } from 'react'
-import BackLink from '../components/BackLink/BackLink'
 import CopyButton from '../components/CopyButton/CopyButton'
 import ErroCarregamento from '../components/ErroCarregamento/ErroCarregamento'
 import EstadoVazio from '../components/EstadoVazio/EstadoVazio'
 import KanbanBoard from '../components/KanbanBoard/KanbanBoard'
 import PageHeader from '../components/PageHeader/PageHeader'
+import ViewToggle from '../components/ViewToggle/ViewToggle'
 import { useDados } from '../hooks/useDados'
 import { listarOcorrencias } from '../services/ocorrencias.service'
 import { pluralOcorrencias } from '../utils/format'
@@ -22,12 +22,12 @@ function OcorrenciasKanbanPage() {
     <div className="pagina pagina-kanban">
       <PageHeader
         eyebrow="OCORRÊNCIAS"
-        titulo="Uma visão de cada etapa."
-        subtitulo="Clique em um cartão para mais informações, as mudanças de etapa seguem o fluxo de resolução."
+        titulo="Seu pós-venda, sob controle."
         acoes={
-          <>
-            <BackLink to="/ocorrencias">Tabela</BackLink> <span>{pluralOcorrencias(itens.length)}</span>
-          </>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+            <ViewToggle />
+            <span>{pluralOcorrencias(itens.length)}</span>
+          </div>
         }
       />
       {itens.length === 0 ? (

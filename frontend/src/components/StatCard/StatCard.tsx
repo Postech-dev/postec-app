@@ -3,9 +3,8 @@ import './StatCard.css'
 interface StatCardProps {
   titulo: string
   valor: number | string
-  descricao: string
+  descricao?: string
   cor?: 'brand' | 'blue' | 'green' | 'ink'
-  // com onClick, o card vira um filtro
   onClick?: () => void
   ativo?: boolean
 }
@@ -13,13 +12,17 @@ interface StatCardProps {
 function StatCard({ titulo, valor, descricao, cor = 'ink', onClick, ativo }: StatCardProps) {
   const conteudo = (
     <>
-      <span className="stat-titulo">{titulo}</span>
       <strong className={`stat-valor stat-${cor}`}>{valor}</strong>
-      <span className="stat-descricao">{descricao}</span>
+      <span className="stat-titulo">{titulo}</span>
     </>
   )
 
-  if (!onClick) return <div className="stat-card">{conteudo}</div>
+  if (!onClick)
+    return (
+      <div className="stat-card" title={descricao}>
+        {conteudo}
+      </div>
+    )
 
   return (
     <button
@@ -27,6 +30,7 @@ function StatCard({ titulo, valor, descricao, cor = 'ink', onClick, ativo }: Sta
       className={`stat-card stat-botao ${ativo ? 'stat-ativo' : ''}`}
       onClick={onClick}
       aria-pressed={ativo}
+      title={descricao}
     >
       {conteudo}
     </button>

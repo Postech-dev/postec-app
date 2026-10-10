@@ -6,7 +6,6 @@ import Button from '../components/Button/Button'
 import CopyButton from '../components/CopyButton/CopyButton'
 import ErroCarregamento from '../components/ErroCarregamento/ErroCarregamento'
 import EstadoVazio from '../components/EstadoVazio/EstadoVazio'
-import Input from '../components/Input/Input'
 import OcorrenciaTable from '../components/OcorrenciaTable/OcorrenciaTable'
 import PageHeader from '../components/PageHeader/PageHeader'
 import Select from '../components/Select/Select'
@@ -26,7 +25,6 @@ const OPCOES_STATUS = [EM_ABERTO, ...FLUXO]
 const OPCOES_CANAL = Object.values(CANAIS)
 
 function OcorrenciasPage() {
-  // busca, status e página ficam na URL para sobreviver ao voltar do detalhe
   const [params, setParams] = useSearchParams()
   const busca = params.get('q') ?? ''
   const status = params.get('status') ?? ''
@@ -64,6 +62,7 @@ function OcorrenciasPage() {
   const novas = itens.filter((o) => o.status === 'Novo')
   const filtroAtivo = !!(busca || status || canal)
   const alternar = (valor: string) => atualizar({ status: status === valor ? '' : valor })
+  const temNaoLida = filtrados.some((o) => o.naoLida)
 
   return (
     <div className="pagina">
@@ -113,42 +112,50 @@ function OcorrenciasPage() {
       </div>
 
       {novas.length > 0 && (
-        <Alert to={`/ocorrencias/${novas[0].protocolo}`}>
-          {novas.length === 1 ? '1 nova ocorrência precisa' : `${novas.length} novas ocorrências precisam`} de
-          triagem. Abra {novas[0].protocolo} para começar o atendimento.
+        <Alert
+          acao="Iniciar triagem"
+          to={`/ocorrencias/${novas[0].protocolo}`}
+        >
+          {novas.length === 1 ? '1 nova ocorrência precisa' : `${novas.length} novas ocorrências precisam`} de triagem.
         </Alert>
       )}
 
       <div className="ocorrencias-filtros">
         <ViewToggle />
-        <div className="ocorrencias-busca">
-          <Input
-            label="Buscar"
-            type="search"
-            placeholder="Protocolo, cliente ou pedido"
-            value={busca}
-            onChange={(e) => atualizar({ q: e.target.value })}
-          />
-        </div>
-        <div className="ocorrencias-status">
-          <Select
-            label="Status"
-            opcoes={OPCOES_STATUS}
-            placeholder="Todos os status"
-            value={status}
-            onChange={(e) => atualizar({ status: e.target.value })}
-          />
-        </div>
-        <div className="ocorrencias-status">
-          <Select
-            label="Canal"
-            opcoes={OPCOES_CANAL}
-            placeholder="Todos os canais"
-            value={canal}
-            onChange={(e) => atualizar({ canal: e.target.value })}
-          />
-        </div>
+        <input
+          className="ocorrencias-busca campo-input"
+          type="search"
+          aria-label="Buscar por protocolo, cliente ou pedido"
+          placeholder="Protocolo, cliente ou pedido"
+          value={busca}
+          onChange={(e) => atualizar({ q: e.target.value })}
+        />
+        <Select
+          aria-label="Filtrar por status"
+          opcoes={OPCOES_STATUS}
+          placeholder="Todos os status"
+          value={status}
+          onChange={(e) => atualizar({ status: e.target.value })}
+        />
+        <Select
+          aria-label="Filtrar por canal"
+          opcoes={OPCOES_CANAL}
+          placeholder="Todos os canais"
+          value={canal}
+          onChange={(e) => atualizar({ canal: e.target.value })}
+        />
+        {filtroAtivo && (
+          <Button variante="fantasma" onClick={() => setParams({}, { replace: true })}>
+            Limpar
+          </Button>
+        )}
       </div>
+
+      {temNaoLida && (
+        <p className="ocorrencias-legenda">
+          <span className="ponto-nao-lida" aria-hidden="true" /> Cliente respondeu — aguardando sua resposta
+        </p>
+      )}
 
       {itens.length === 0 ? (
         <EstadoVazio
@@ -159,8 +166,8 @@ function OcorrenciasPage() {
         </EstadoVazio>
       ) : filtrados.length === 0 ? (
         <EstadoVazio
-          titulo="Nenhuma ocorrência encontrada"
-          texto="Nenhum caso combina com a busca ou o filtro. Tente outro termo ou limpe os filtros."
+          titulo="Nenhuma ocorrência com esses filtros"
+          texto="Tente outro termo ou limpe os filtros para ver todos os casos."
         >
           {filtroAtivo && (
             <Button variante="secundario" onClick={() => setParams({}, { replace: true })}>

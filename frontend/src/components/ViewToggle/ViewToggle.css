@@ -1,20 +1,29 @@
 .view-toggle {
   display: inline-flex;
+  flex-shrink: 0;
   padding: 3px;
   border: 1px solid var(--line);
-  border-radius: 10px;
+  border-radius: var(--radius-ctrl);
   background: var(--white);
+  height: var(--ctrl-height);
+  align-items: center;
 }
 
 .view-toggle a {
-  padding: 6px 16px;
-  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  height: 100%;
+  border-radius: calc(var(--radius-ctrl) - 2px);
   font-weight: 600;
+  font-size: 14px;
   color: var(--ink-soft);
+  white-space: nowrap;
 }
 
 .view-toggle a:hover {
   text-decoration: none;
+  color: var(--ink);
 }
 
 .view-toggle .view-ativo {

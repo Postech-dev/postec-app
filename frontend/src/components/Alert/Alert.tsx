@@ -4,23 +4,20 @@ import './Alert.css'
 
 interface AlertProps {
   children: ReactNode
-  // com `to`, o aviso inteiro vira um link
+  // botão de ação à direita
+  acao?: string
   to?: string
 }
 
-function Alert({ children, to }: AlertProps) {
-  if (to) {
-    return (
-      <Link to={to} className="alert alert-link">
-        {children}
-        <span aria-hidden="true"> →</span>
-      </Link>
-    )
-  }
-
+function Alert({ children, acao, to }: AlertProps) {
   return (
     <div className="alert" role="status">
-      {children}
+      <span className="alert-texto">{children}</span>
+      {acao && to && (
+        <Link to={to} className="alert-botao">
+          {acao}
+        </Link>
+      )}
     </div>
   )
 }

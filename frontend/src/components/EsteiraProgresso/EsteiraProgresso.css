@@ -1,0 +1,94 @@
+.esteira {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding: var(--space-3) 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.esteira::-webkit-scrollbar {
+  display: none;
+}
+
+.esteira-etapa {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-shrink: 0;
+  color: var(--ink-soft);
+  font-size: 13px;
+}
+
+.esteira-bolinha {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid var(--line);
+  background: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  flex-shrink: 0;
+  color: var(--ink-soft);
+}
+
+.esteira-linha {
+  flex: 1;
+  height: 2px;
+  background: var(--line);
+  min-width: 20px;
+  max-width: 48px;
+  margin: 0 var(--space-2);
+}
+
+/* etapa concluída */
+.esteira-feita .esteira-bolinha {
+  background: var(--green);
+  border-color: var(--green);
+  color: var(--white);
+}
+
+.esteira-feita .esteira-rotulo {
+  color: var(--green);
+}
+
+.esteira-feita .esteira-linha {
+  background: var(--green);
+}
+
+/* etapa atual */
+.esteira-ativa .esteira-bolinha {
+  background: var(--action);
+  border-color: var(--action);
+  color: var(--white);
+}
+
+.esteira-ativa .esteira-rotulo {
+  font-weight: 700;
+  color: var(--action);
+}
+
+/* etapa opcional */
+.esteira-opcional .esteira-rotulo {
+  opacity: 0.65;
+}
+
+/* mobile: esconde a faixa, mostra o texto */
+.esteira-mobile {
+  display: none;
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+
+@media (max-width: 768px) {
+  .esteira {
+    display: none;
+  }
+
+  .esteira-mobile {
+    display: block;
+  }
+}

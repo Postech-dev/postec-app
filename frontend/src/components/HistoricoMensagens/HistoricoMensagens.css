@@ -1,7 +1,17 @@
+/* container com scroll interno — ocupa o espaço disponível */
+.historico-container {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  position: relative;
+  scroll-behavior: auto;
+}
+
 .historico {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  padding: var(--space-4);
 }
 
 .historico-item {
@@ -23,4 +33,31 @@
 .historico-vazio {
   color: var(--ink-soft);
   text-align: center;
+  padding: var(--space-6);
+}
+
+/* botão flutuante para ir ao fim */
+.historico-ir-fim {
+  position: sticky;
+  bottom: var(--space-3);
+  left: 50%;
+  transform: translateX(-50%);
+  display: block;
+  padding: 6px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--white);
+  box-shadow: var(--shadow-card);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink-soft);
+  cursor: pointer;
+  white-space: nowrap;
+  width: max-content;
+}
+
+.historico-ir-fim:hover {
+  border-color: var(--action);
+  color: var(--action);
 }

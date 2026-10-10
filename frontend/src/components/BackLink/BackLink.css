@@ -2,20 +2,15 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  min-height: 44px;
-  padding: 0 14px;
-  border: 1px solid var(--brand-border);
-  border-radius: 8px;
-  background: var(--brand-soft);
   font-size: 13px;
   font-weight: 600;
-  color: var(--action);
+  color: var(--ink-soft);
   white-space: nowrap;
 }
 
 .back-link:hover {
   text-decoration: none;
-  background: var(--brand-border);
+  color: var(--action);
 }
 
 .back-link-seta {

@@ -67,6 +67,18 @@
   margin-inline: 0;
 }
 
+/* detalhe da ocorrência: ocupa a altura total e rola internamente */
+.app-shell-conteudo:has(.detalhe-pagina) {
+  overflow: hidden;
+}
+
+.app-shell-main:has(.detalhe-pagina) {
+  max-width: none;
+  padding: 0;
+  margin-inline: 0;
+  gap: 0;
+}
+
 .app-shell-fundo {
   display: none;
 }

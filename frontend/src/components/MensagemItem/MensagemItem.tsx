@@ -6,11 +6,12 @@ import './MensagemItem.css'
 function MensagemItem({ mensagem, perspectiva }: { mensagem: Mensagem; perspectiva: 'loja' | 'cliente' }) {
   const hora = formatarHora(mensagem.data)
 
-  // eventos do sistema aparecem em linha
+  // eventos do sistema: linha centralizada com ícone
   if (mensagem.autor === 'sistema') {
     return (
       <div className="msg-sistema">
-        {hora} • {mensagem.texto}
+        <span className="msg-sistema-icone" aria-hidden="true">●</span>
+        <span>{mensagem.texto} · {hora}</span>
       </div>
     )
   }

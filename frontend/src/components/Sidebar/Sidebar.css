@@ -157,19 +157,28 @@
   text-align: center;
 }
 
-@media (max-width: 860px) {
+@media (max-width: 1024px) {
   .sidebar {
     position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
     z-index: 50;
     visibility: hidden;
     transform: translateX(-100%);
-    transition: transform 0.2s, visibility 0.2s;
+    transition: transform 0.25s ease, visibility 0.25s;
     overflow-y: auto;
   }
 
   .sidebar-aberta {
     visibility: visible;
-    transform: none;
+    transform: translateX(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sidebar {
+      transition: none;
+    }
   }
 }
 

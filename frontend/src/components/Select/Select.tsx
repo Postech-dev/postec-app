@@ -1,6 +1,7 @@
 import { useId } from 'react'
 import type { SelectHTMLAttributes } from 'react'
 import '../Input/Input.css'
+import './Select.css'
 
 interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
   label?: string

@@ -75,10 +75,10 @@
 }
 
 .detalhe-modos button {
-  min-height: 40px;
+  min-height: var(--ctrl-height);
   padding: 6px 14px;
   border: 0;
-  border-radius: 8px;
+  border-radius: var(--radius-ctrl);
   background: transparent;
   font-weight: 600;
   color: var(--ink-soft);
@@ -98,10 +98,10 @@
 }
 
 .detalhe-chip {
-  min-height: 36px;
-  padding: 6px 12px;
+  min-height: var(--ctrl-height);
+  padding: 6px 14px;
   border: 1px solid var(--brand-border);
-  border-radius: 999px;
+  border-radius: var(--radius-ctrl);
   background: var(--brand-soft);
   color: var(--action);
   font-size: 12px;

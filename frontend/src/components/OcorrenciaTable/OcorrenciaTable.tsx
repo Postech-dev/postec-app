@@ -48,16 +48,16 @@ function OcorrenciaTable({ itens, pagina, porPagina, onPagina }: OcorrenciaTable
                     )}
                   </Link>
                 </td>
-                <td>{o.pedido.cliente.nome}</td>
-                <td>{o.pedido.numero}</td>
-                <td>{o.motivo}</td>
-                <td>
+                <td data-label="Cliente">{o.pedido.cliente.nome}</td>
+                <td data-label="Pedido">{o.pedido.numero}</td>
+                <td data-label="Motivo">{o.motivo}</td>
+                <td data-label="Canal">
                   <CanalBadge canal={o.canal} />
                 </td>
-                <td>
+                <td data-label="Status">
                   <StatusBadge status={o.status} />
                 </td>
-                <td>
+                <td data-label="Abertura">
                   {formatarAbertura(o.abertaEm)}
                   {tempoRelativo(o.abertaEm) && <span className="otabela-tempo">{tempoRelativo(o.abertaEm)}</span>}
                 </td>

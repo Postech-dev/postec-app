@@ -1,3 +1,9 @@
 .otabela .pedidos-tabela {
   min-width: 980px;
 }
+
+@media (max-width: 768px) {
+  .otabela .pedidos-tabela {
+    min-width: 0;
+  }
+}

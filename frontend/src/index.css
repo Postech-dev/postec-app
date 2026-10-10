@@ -16,6 +16,18 @@
   --red: #c0392b;
   --red-soft: #fdeceb;
   --radius: 12px;
+  /* escala de espaçamento */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  /* tokens de componentes */
+  --radius-ctrl: 8px;
+  --radius-card: 12px;
+  --shadow-card: 0 1px 4px rgba(35, 42, 52, 0.08), 0 0 0 1px rgba(35, 42, 52, 0.04);
+  --ctrl-height: 40px;
   font-family: 'Montserrat', system-ui, sans-serif;
   color: var(--ink);
   background: var(--bg);
@@ -106,8 +118,11 @@ textarea {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  * {
-    transition: none !important;
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
 }

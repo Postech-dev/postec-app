@@ -11,32 +11,44 @@
   flex-direction: column;
   overflow-y: auto;
   overflow-x: hidden;
+  scrollbar-gutter: stable;
 }
 
 .app-shell-main {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  padding: 28px 32px 48px;
+  gap: var(--space-6);
+  padding: var(--space-6) var(--space-6) var(--space-8);
   width: 100%;
-  max-width: 1200px;
+  max-width: 1440px;
   margin-inline: auto;
   min-width: 0;
   flex: 1;
   min-height: 0;
 }
 
+@media (max-width: 1024px) {
+  .app-shell {
+    flex-direction: column;
+  }
+
+  .app-shell-main {
+    padding: var(--space-4) var(--space-4) var(--space-8);
+    gap: var(--space-4);
+  }
+}
+
 @media (max-width: 860px) {
   .app-shell-main {
-    padding: 16px 16px 40px;
-    gap: 16px;
+    padding: var(--space-4) var(--space-4) 40px;
+    gap: var(--space-4);
   }
 }
 
 @media (max-width: 480px) {
   .app-shell-main {
-    padding: 12px 12px 32px;
-    gap: 12px;
+    padding: var(--space-3) var(--space-3) var(--space-8);
+    gap: var(--space-3);
   }
 }
 
@@ -44,7 +56,7 @@
   outline: none;
 }
 
-/* no kanban: conteudo não rola, o quadro do kanban tem sua própria rolagem */
+/* kanban: conteudo não rola, o quadro do kanban tem sua própria rolagem */
 .app-shell-conteudo:has(.pagina-kanban) {
   overflow: hidden;
 }
@@ -59,7 +71,7 @@
   display: none;
 }
 
-@media (max-width: 860px) {
+@media (max-width: 1024px) {
   .app-shell-fundo {
     display: block;
     position: fixed;

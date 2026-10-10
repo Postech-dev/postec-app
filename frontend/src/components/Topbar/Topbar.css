@@ -24,20 +24,26 @@
 
 .topbar-menu {
   display: none;
-  min-width: 44px;
-  min-height: 44px;
+  min-width: 40px;
+  min-height: 40px;
   border: 0;
   background: none;
   font-size: 20px;
   cursor: pointer;
 }
 
-@media (max-width: 860px) {
+@media (max-width: 1024px) {
   .topbar {
-    padding-inline: 16px;
+    padding-inline: var(--space-4);
   }
 
   .topbar-menu {
     display: block;
+  }
+}
+
+@media (max-width: 860px) {
+  .topbar {
+    padding-inline: var(--space-4);
   }
 }

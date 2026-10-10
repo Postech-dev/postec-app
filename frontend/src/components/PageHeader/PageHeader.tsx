@@ -12,7 +12,7 @@ function PageHeader({ eyebrow, titulo, subtitulo, acoes }: PageHeaderProps) {
   return (
     <header className="page-header">
       <div>
-        {eyebrow && <span className="eyebrow">{eyebrow}</span>}
+        {/* eyebrow removido — breadcrumb na topbar cobre essa função */}
         <h1 className="page-header-titulo">{titulo}</h1>
         {subtitulo && <p className="page-header-subtitulo">{subtitulo}</p>}
       </div>

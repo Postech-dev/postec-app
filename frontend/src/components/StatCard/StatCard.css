@@ -5,7 +5,8 @@
   padding: 16px 18px;
   background: var(--white);
   border: 1px solid var(--line);
-  border-radius: var(--radius);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
 }
 
 .stat-titulo {

@@ -46,12 +46,12 @@ function PedidosTable({ pedidos, pagina, porPagina, onPagina, destino }: Pedidos
                     {p.numero}
                   </Link>
                 </td>
-                <td>{p.cliente.nome}</td>
-                <td>{mascararCpf(p.cliente.cpf)}</td>
-                <td>{p.produto}</td>
-                <td>{formatarMoeda(p.valor)}</td>
-                <td>{formatarData(p.dataPedido)}</td>
-                <td>{p.totalOcorrencias}</td>
+                <td data-label="Cliente">{p.cliente.nome}</td>
+                <td data-label="CPF">{mascararCpf(p.cliente.cpf)}</td>
+                <td data-label="Produto">{p.produto}</td>
+                <td data-label="Valor">{formatarMoeda(p.valor)}</td>
+                <td data-label="Data">{formatarData(p.dataPedido)}</td>
+                <td data-label="Ocorrências">{p.totalOcorrencias}</td>
                 <td onClick={(e) => e.stopPropagation()}>
                   <BotaoPlano recurso="crm" to={`/ocorrencias/nova?pedido=${p.id}`} variante="secundario">
                     Abrir contato

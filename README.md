@@ -84,9 +84,14 @@ postec-app/
      ```
    - Edite o arquivo `.env` com suas credenciais de banco de dados e chaves da API.
 
-4. Configure o banco de dados:
-   - Certifique-se de que o PostgreSQL está rodando.
-   - Execute o script de migração (se houver) ou crie as tabelas manualmente baseado nos scripts SQL fornecidos anteriormente.
+4. Suba o banco e carregue o seed:
+   ```bash
+   # Sobe o PostgreSQL via Docker (schema aplicado automaticamente)
+   docker-compose up -d
+
+   # Carrega os dados de demonstração (garante UTF-8 correto no Windows)
+   node backend/database/seed.js
+   ```
 
 ### Execução
 Para iniciar o servidor em modo de desenvolvimento:

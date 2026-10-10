@@ -4,13 +4,27 @@
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 }
 
 .grafico-linha {
   display: flex;
   justify-content: space-between;
-  gap: 12px;
+  align-items: baseline;
+  gap: var(--space-2);
+  font-size: 13px;
+}
+
+.grafico-rotulo {
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.grafico-num {
+  flex-shrink: 0;
   font-size: 13px;
 }
 
@@ -20,7 +34,7 @@
 }
 
 .grafico-trilho {
-  height: 10px;
+  height: 8px;
   margin-top: 4px;
   border-radius: 999px;
   background: var(--bg);
@@ -31,8 +45,14 @@
   height: 100%;
   border-radius: 999px;
   background: var(--action);
+  transition: width 0.3s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .grafico-barra { transition: none; }
 }
 
 .grafico-vazio {
   color: var(--ink-soft);
+  font-size: 13px;
 }

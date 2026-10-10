@@ -1,5 +1,181 @@
+/* seletor de período */
+.metricas-periodo {
+  display: inline-flex;
+  padding: 3px;
+  gap: 2px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-ctrl);
+  background: var(--white);
+  align-self: flex-start;
+}
+
+.metricas-periodo-btn {
+  padding: 0 var(--space-4);
+  height: calc(var(--ctrl-height) - 8px);
+  border: none;
+  border-radius: calc(var(--radius-ctrl) - 2px);
+  background: transparent;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-soft);
+  cursor: pointer;
+}
+
+.metricas-periodo-btn:hover {
+  color: var(--ink);
+}
+
+.metricas-periodo-ativo {
+  background: var(--action);
+  color: var(--white) !important;
+}
+
+/* KPIs: 5 colunas desktop, 2 tablet, 1 mobile */
+.metricas-kpis {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--space-4);
+}
+
+@media (max-width: 1100px) {
+  .metricas-kpis {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .metricas-kpis {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .metricas-kpis {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* skeleton de carregamento */
+.metricas-skeleton {
+  height: 72px;
+  border-radius: var(--radius-card);
+  background: linear-gradient(90deg, var(--line) 25%, var(--bg) 50%, var(--line) 75%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.4s ease infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .metricas-skeleton {
+    animation: none;
+    background: var(--line);
+  }
+}
+
+@keyframes skeleton-shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* gráficos: 2 por linha */
 .metricas-graficos {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-6);
+}
+
+@media (max-width: 768px) {
+  .metricas-graficos {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* por etapa */
+.metricas-etapas {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.metricas-etapa {
+  display: grid;
+  grid-template-columns: 180px 1fr 40px;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+@media (max-width: 600px) {
+  .metricas-etapa {
+    grid-template-columns: 1fr 24px;
+    grid-template-rows: auto auto;
+  }
+
+  .metricas-etapa-barra-wrap {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .metricas-etapa-num {
+    grid-row: 1;
+    grid-column: 2;
+    text-align: right;
+  }
+}
+
+.metricas-etapa-barra-wrap {
+  min-width: 0;
+}
+
+.metricas-etapa-num {
+  font-weight: 700;
+  font-size: 14px;
+  text-align: right;
+}
+
+/* gráfico semanal SVG */
+.grafico-semanal {
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.grafico-semanal svg {
+  min-width: 300px;
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.grafico-semanal-legenda {
+  display: flex;
+  gap: var(--space-4);
+  font-size: 12px;
+  margin-bottom: var(--space-2);
+}
+
+.grafico-semanal-leg {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.grafico-semanal-leg::before {
+  content: '';
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+}
+
+.grafico-semanal-leg-abertas::before  { background: var(--action); }
+.grafico-semanal-leg-concluidas::before { background: var(--green); }
+
+/* sem dados no período */
+.metricas-sem-dados {
+  color: var(--ink-soft);
+  font-size: 13px;
+  text-align: center;
+  padding: var(--space-8) 0;
 }

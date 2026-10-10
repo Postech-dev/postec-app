@@ -7,7 +7,6 @@ function MetricasPage() {
   return (
     <div className="pagina">
       <PageHeader
-        eyebrow="ATENDIMENTO"
         titulo="Como está o seu pós-venda."
         subtitulo="Números simples para saber onde melhorar."
       />

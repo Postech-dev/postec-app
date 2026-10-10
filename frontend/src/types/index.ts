@@ -177,14 +177,25 @@ export interface ItemGrafico {
   valor: number
 }
 
+export interface ItemSemana {
+  rotulo: string
+  abertas: number
+  concluidas: number
+}
+
 export interface Metricas {
   abertas: number
-  // minutos
+  // minutos; null até o backend expor primeira_resposta_em
   tempoMedioPrimeiraResposta: number | null
   // 0 a 100
   taxaResolucao: number
   porMotivo: ItemGrafico[]
   porCanal: ItemGrafico[]
+  reenviosPeriodo: number
+  estornosPeriodo: number
+  valorEstornosPeriodo: number
+  porStatus: ItemGrafico[]
+  porSemana: ItemSemana[]
 }
 
 export interface StatusIntegracao {

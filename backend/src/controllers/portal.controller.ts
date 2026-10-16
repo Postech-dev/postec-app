@@ -91,9 +91,8 @@ export async function abrirOcorrencia(req: Request, res: Response): Promise<void
     await client.query('BEGIN');
 
     // 2. Gerar número de protocolo sequencial/único (Ex: POS-1001, POS-1002...)
-    const countResult = await client.query('SELECT COUNT(*) FROM ocorrencias');
-    const total = parseInt(countResult.rows[0].count, 10);
-    const protocolo = `POS-${1000 + total + 1}`;
+    const sequencia = await client.query("SELECT nextval('ocorrencias_protocolo_seq') AS numero");
+    const protocolo = `POS-${sequencia.rows[0].numero}`;
 
     // 3. Criar a ocorrência (nasce como "não lida" para a loja)
     const insertOcorrenciaQuery = `

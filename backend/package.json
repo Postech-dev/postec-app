@@ -4,11 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "tsx --test tests/*.test.ts",
     "dev": "tsx watch src/server.ts",
     "build": "tsc",
     "start": "node dist/server.js",
-    "seed": "node database/seed.js"
+    "seed": "node database/seed.js",
+    "migrate": "node scripts/migrate.cjs",
+    "test:integration": "bash scripts/test-integration.sh"
   },
   "keywords": [],
   "author": "",
@@ -30,5 +32,8 @@
     "ts-node-dev": "^2.0.0",
     "tsx": "^4.23.15",
     "typescript": "^7.0.2"
+  },
+  "engines": {
+    "node": ">=22"
   }
 }

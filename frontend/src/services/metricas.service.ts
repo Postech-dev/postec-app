@@ -1,6 +1,6 @@
 import type { Metricas } from '../types'
 import { CANAIS } from '../utils/canais'
-import { diasDesde, HOJE } from '../utils/format'
+import { diasDesde } from '../utils/format'
 import { listarOcorrencias } from './ocorrencias.service'
 
 // "aberta" = tudo que não é Concluído — mesma definição usada na lista e no resumo

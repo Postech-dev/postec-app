@@ -45,11 +45,12 @@ function PedidosTable({ pedidos, pagina, porPagina, onPagina, destino }: Pedidos
                   <Link to={destino(p)} className="otabela-protocolo">
                     {p.numero}
                   </Link>
+                  {p.origem === 'nuvemshop' && <small className="pedido-origem">Nuvemshop</small>}
                 </td>
                 <td data-label="Cliente">{p.cliente.nome}</td>
-                <td data-label="CPF">{mascararCpf(p.cliente.cpf)}</td>
+                <td data-label="CPF">{p.cliente.cpf ? mascararCpf(p.cliente.cpf) : 'Não informado'}</td>
                 <td data-label="Produto">{p.produto}</td>
-                <td data-label="Valor">{formatarMoeda(p.valor)}</td>
+                <td data-label="Valor">{formatarMoeda(p.valor, p.moeda)}</td>
                 <td data-label="Data">{formatarData(p.dataPedido)}</td>
                 <td data-label="Ocorrências">{p.totalOcorrencias}</td>
                 <td onClick={(e) => e.stopPropagation()}>

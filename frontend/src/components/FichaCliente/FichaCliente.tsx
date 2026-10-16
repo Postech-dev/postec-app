@@ -33,7 +33,7 @@ function FichaCliente({ clienteId }: { clienteId: number }) {
       <PageHeader
         eyebrow="CLIENTE"
         titulo={cliente.nome}
-        subtitulo={`${cliente.email} • CPF ${mascararCpf(cliente.cpf)}`}
+        subtitulo={`${cliente.email || 'E-mail não informado'} • ${cliente.cpf ? `CPF ${mascararCpf(cliente.cpf)}` : 'CPF não informado'}`}
         acoes={
           maisRecente && (
             <BotaoPlano recurso="crm" to={`/ocorrencias/nova?pedido=${maisRecente.id}`}>
@@ -58,11 +58,11 @@ function FichaCliente({ clienteId }: { clienteId: number }) {
           <ul className="lista-simples">
             {pedidos.map((p) => (
               <li key={p.id}>
-                <strong>{p.numero}</strong>
+                <Link to={`/pedidos/${p.id}`}><strong>{p.numero}</strong></Link>
                 <span className="ficha-grande">
                   {p.produto} • {p.detalhe}
                 </span>
-                <span>{formatarMoeda(p.valor)}</span>
+                <span>{formatarMoeda(p.valor, p.moeda)}</span>
                 <span className="ficha-data">{formatarData(p.dataPedido)}</span>
                 <BotaoPlano recurso="crm" to={`/ocorrencias/nova?pedido=${p.id}`} variante="secundario">
                   Abrir contato

@@ -1,7 +1,9 @@
 import type {
   ContagensPainel,
+  CanalOrigem,
   Mensagem,
   Ocorrencia,
+  Pedido,
   ResumoOcorrencias,
   StatusOcorrencia,
 } from '../types'
@@ -142,5 +144,12 @@ export async function resolverEstorno(protocolo: string, dados: DadosEstorno) {
   return buscarOcorrencia(protocolo)
 }
 
-// ainda simulado: depende de rotas e colunas que o backend não tem
-export { calcularMetricas, contagemPorPedido, criarOcorrenciaPelaLoja } from './simulado/ocorrencias.simulado'
+export async function criarOcorrenciaPelaLoja(pedido: Pedido, dados: {
+  motivo: string; canal: CanalOrigem; relato: string; primeiraMensagem: string
+}): Promise<Ocorrencia> {
+  const r = await api.post<{ protocolo: string }>('/painel/ocorrencias', {
+    pedido_id: pedido.id, motivo: dados.motivo, canal: dados.canal,
+    relato: dados.relato, primeira_mensagem: dados.primeiraMensagem,
+  })
+  return buscarOcorrencia(r.protocolo)
+}

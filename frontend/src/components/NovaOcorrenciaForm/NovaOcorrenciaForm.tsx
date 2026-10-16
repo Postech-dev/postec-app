@@ -52,7 +52,7 @@ function NovaOcorrenciaForm({ pedidoInicial }: NovaOcorrenciaFormProps) {
     if (!motivo) novos.motivo = 'Escolha o motivo do contato.'
     if (!canal) novos.canal = 'Escolha por onde o cliente falou com você.'
     if (!relato.trim()) novos.relato = 'Escreva o que o cliente relatou. Fica anotado para a equipe.'
-    if (!mensagem.trim()) novos.mensagem = 'Escreva a primeira mensagem para o cliente. Ela vai junto com o e-mail.'
+    if (!mensagem.trim()) novos.mensagem = 'Escreva a primeira mensagem para registrar no atendimento.'
     setErros(novos)
     if (Object.keys(novos).length) return
 
@@ -64,7 +64,7 @@ function NovaOcorrenciaForm({ pedidoInicial }: NovaOcorrenciaFormProps) {
         relato: relato.trim(),
         primeiraMensagem: mensagem.trim(),
       })
-      mostrar(`Ocorrência ${o.protocolo} aberta. O cliente recebeu o e-mail com o link.`)
+      mostrar(`Ocorrência ${o.protocolo} aberta. A mensagem foi registrada no atendimento.`)
       navigate(`/ocorrencias/${o.protocolo}`)
     } catch (err) {
       setErros({ geral: `${(err as Error).message} Seus dados continuam aqui; tente enviar de novo.` })
@@ -149,7 +149,7 @@ function NovaOcorrenciaForm({ pedidoInicial }: NovaOcorrenciaFormProps) {
           />
         </div>
 
-        <Alert>O cliente receberá um e-mail com o link para acompanhar e responder pelo portal.</Alert>
+        <Alert>A mensagem ficará registrada no histórico do atendimento. O envio automático de um convite ao cliente ainda não está disponível.</Alert>
 
         {erros.geral && (
           <span className="campo-erro" role="alert">
@@ -179,17 +179,17 @@ function ResumoPedido({ pedido }: { pedido: Pedido }) {
       <div>
         <dt>Cliente</dt>
         <dd>
-          {pedido.cliente.nome} • {mascararCpf(pedido.cliente.cpf)}
+          {pedido.cliente.nome} • {pedido.cliente.cpf ? mascararCpf(pedido.cliente.cpf) : 'CPF não informado'}
         </dd>
       </div>
       <div>
         <dt>E-mail</dt>
-        <dd>{pedido.cliente.email}</dd>
+        <dd>{pedido.cliente.email || 'Não informado'}</dd>
       </div>
       <div>
         <dt>Produto</dt>
         <dd>
-          {pedido.produto} • {formatarMoeda(pedido.valor)}
+          {pedido.produto} • {formatarMoeda(pedido.valor, pedido.moeda)}
         </dd>
       </div>
     </dl>

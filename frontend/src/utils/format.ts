@@ -10,8 +10,8 @@ export const HOJE = hojeLocal()
 
 const MESES = ['jan.', 'fev.', 'mar.', 'abr.', 'mai.', 'jun.', 'jul.', 'ago.', 'set.', 'out.', 'nov.', 'dez.']
 
-export function formatarMoeda(valor: number): string {
-  return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
+export function formatarMoeda(valor: number, moeda = 'BRL'): string {
+  return valor.toLocaleString('pt-BR', { style: 'currency', currency: moeda })
 }
 
 function partes(iso: string) {

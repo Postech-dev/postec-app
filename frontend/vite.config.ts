@@ -7,10 +7,11 @@ export default defineConfig(({ mode }) => {
   // o front chama /api e o Vite repassa para o backend (evita CORS em desenvolvimento)
   const backend = env.VITE_API_PROXY || 'http://localhost:3333'
   const proxy = { '/api': { target: backend, changeOrigin: true } }
+  const allowedHosts = env.VITE_ALLOWED_HOST ? [env.VITE_ALLOWED_HOST] : []
 
   return {
     plugins: [react()],
-    server: { proxy },
-    preview: { proxy },
+    server: { proxy, port: 5173, strictPort: true, allowedHosts },
+    preview: { proxy, allowedHosts },
   }
 })

@@ -63,13 +63,21 @@ export interface LinhaPedidoApi {
   pedido_id?: number
   numero_pedido: string
   cliente_nome: string
-  cliente_email?: string
-  cliente_cpf?: string
+  cliente_email?: string | null
+  cliente_cpf?: string | null
   produto: string
   // a consulta do portal devolve "valor"; o painel devolve "pedido_valor"
   valor?: string | number
   pedido_valor?: string | number
   data_compra?: string
+  origem?: 'manual' | 'nuvemshop'
+  moeda?: string
+  quantidade?: number
+  tamanho?: string
+  status_pedido?: string
+  status_pagamento?: string
+  status_envio?: string
+  itens?: { id: number; produto: string; sku?: string; variacao?: string; quantidade: number; valor_unitario: string | number }[]
 }
 
 export function adaptarPedido(linha: LinhaPedidoApi, cpfDigitado = ''): Pedido {
@@ -85,11 +93,17 @@ export function adaptarPedido(linha: LinhaPedidoApi, cpfDigitado = ''): Pedido {
       cpf: (linha.cliente_cpf ?? cpfDigitado).replace(/\D/g, ''),
     },
     produto,
-    tamanho,
-    quantidade,
-    detalhe: montarDetalhe(tamanho, quantidade),
+    tamanho: linha.tamanho ?? tamanho,
+    quantidade: linha.quantidade ?? quantidade,
+    detalhe: montarDetalhe(linha.tamanho ?? tamanho, linha.quantidade ?? quantidade),
     valor: Number(linha.pedido_valor ?? linha.valor ?? 0),
     dataPedido: (linha.data_compra ?? '').slice(0, 10),
+    origem: linha.origem,
+    moeda: linha.moeda,
+    statusPedido: linha.status_pedido,
+    statusPagamento: linha.status_pagamento,
+    statusEnvio: linha.status_envio,
+    itens: linha.itens?.map(i => ({ ...i, valorUnitario: Number(i.valor_unitario) })),
   }
 }
 

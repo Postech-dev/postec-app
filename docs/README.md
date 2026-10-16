@@ -11,6 +11,8 @@ Esta pasta reúne toda a especificação oficial do projeto, dividida estrategic
 | 📄 [`01-escopo-mvp.md`](./01-escopo-mvp.md) | Definição completa do MVP (Dentro vs. Fora), máquina de estados, validação com lojistas, roteiro da demo na banca e divisão das 6 pessoas. | **Toda a Equipe, Professor e Gestão** |
 | 🗄️ [`02-database-schema.sql`](./02-database-schema.sql) | Script SQL DDL executável para PostgreSQL com extensão UUID, tabelas de lojas, usuários, pedidos simulados, ocorrências e mensagens, já incluindo dados de teste (SEED). | **Pessoa de Banco de Dados & Dev Back-end** |
 | 🔌 [`03-api-contract.md`](./03-api-contract.md) | Contrato de rotas REST, payloads de entrada/saída (JSONs) para o Portal do Cliente e Painel do Lojista, além dos gatilhos para o Resend. | **André (Back) & Luiz (Front)** |
+| [`estudo-integracoes-vendas.md`](./estudo-integracoes-vendas.md) | Comparação de Nuvemshop, Mercado Livre e Shopee, dificuldades e prioridades. | **Toda a Equipe** |
+| [`integracao-nuvemshop.md`](./integracao-nuvemshop.md) | Implementação, migrações, testes locais e configuração posterior com ngrok e loja demo. | **Desenvolvimento** |
 
 ---
 

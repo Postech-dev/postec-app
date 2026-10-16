@@ -9,6 +9,7 @@ import {
   enviarMensagem
 } from '../controllers/painel.controller';
 import { authMiddleware } from '../middlewares/auth.middleware';
+import { criarContato } from '../controllers/contato.controller';
 
 const router = Router();
 
@@ -20,6 +21,7 @@ router.get('/contagens', contagens);
 
 // Listar todas as ocorrências da loja
 router.get('/ocorrencias', listarOcorrencias);
+router.post('/ocorrencias', (req, res, next) => { criarContato(req, res).catch(next); });
 
 // Detalhar uma ocorrência (por id ou protocolo) com timeline de mensagens
 router.get('/ocorrencias/:id', detalharOcorrencia);

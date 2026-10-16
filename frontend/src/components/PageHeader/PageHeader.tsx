@@ -8,7 +8,7 @@ interface PageHeaderProps {
   acoes?: ReactNode
 }
 
-function PageHeader({ eyebrow, titulo, subtitulo, acoes }: PageHeaderProps) {
+function PageHeader({ titulo, subtitulo, acoes }: PageHeaderProps) {
   return (
     <header className="page-header">
       <div>

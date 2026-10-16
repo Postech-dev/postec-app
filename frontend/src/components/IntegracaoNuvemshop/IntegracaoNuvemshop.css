@@ -46,3 +46,8 @@
   border-color: var(--green-soft);
   color: var(--green);
 }
+
+.integracao-acoes { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.integracao-detalhes { display: grid; gap: 8px; margin-top: 20px; color: var(--ink-soft); font-size: 14px; }
+.integracao-detalhes a { color: var(--blue); }
+.integracao-confirmacao { padding: 16px; border: 1px solid var(--line); border-radius: 12px; display: grid; gap: 12px; }

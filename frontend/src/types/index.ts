@@ -33,6 +33,12 @@ export interface Pedido {
   valor: number
   // AAAA-MM-DD
   dataPedido: string
+  origem?: 'manual' | 'nuvemshop'
+  moeda?: string
+  statusPedido?: string
+  statusPagamento?: string
+  statusEnvio?: string
+  itens?: { id: number; produto: string; sku?: string; variacao?: string; quantidade: number; valorUnitario: number }[]
 }
 
 export interface Resolucao {
@@ -201,4 +207,15 @@ export interface Metricas {
 export interface StatusIntegracao {
   conectada: boolean
   conectadaEm?: string
+  configurada: boolean
+  pendencias: string[]
+  podeGerenciar: boolean
+  storeId?: string
+  ultimaSincronizacao?: string
+  suspensa: boolean
+  pedidosImportados: number
+  tarefasPendentes: number
+  tarefasComFalha: number
+  webhooksAtivos: boolean
+  erro?: string
 }

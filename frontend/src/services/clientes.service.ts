@@ -1,6 +1,6 @@
 import type { FichaCliente } from '../types'
 import { atraso } from './atraso'
-import { listarOcorrencias } from './simulado/ocorrencias.simulado'
+import { listarOcorrencias } from './ocorrencias.service'
 import { buscarCliente, listarPedidosDoCliente } from './pedidos.service'
 
 // backend: GET /clientes/:id (só plano Business; responder 403 nos outros, via requirePlan)
@@ -13,7 +13,7 @@ export async function fichaDoCliente(id: number): Promise<FichaCliente> {
     listarOcorrencias(),
   ])
   const ocorrencias = todas
-    .filter((o) => o.pedido.cliente.id === id)
+    .filter((o) => pedidos.some(p => p.id === o.pedido.id))
     .sort((a, b) => b.abertaEm.localeCompare(a.abertaEm))
 
   const datas = [...pedidos.map((p) => p.dataPedido), ...ocorrencias.map((o) => o.ultimaAtividade ?? o.abertaEm)]

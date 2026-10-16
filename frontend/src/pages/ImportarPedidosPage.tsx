@@ -49,8 +49,8 @@ function ImportarPedidosPage() {
       const { novos, atualizados } = await importarPedidos(resultado.linhas)
       mostrar(`Importação concluída: ${novos} novos e ${atualizados} atualizados.`)
       navigate('/pedidos')
-    } catch {
-      setErroArquivo('A importação não terminou. Seus dados continuam aqui; tente confirmar de novo.')
+    } catch (e) {
+      setErroArquivo(e instanceof Error ? e.message : 'A importação não terminou. Tente confirmar de novo.')
     } finally {
       setImportando(false)
     }
@@ -83,7 +83,7 @@ function ImportarPedidosPage() {
 
           <Card titulo="2. Envie o arquivo">
             <CsvDropzone onArquivo={receber} erro={erroArquivo} ocupado={lendo} />
-            <Alert>Pedidos existentes serão atualizados. Importar o mesmo arquivo de novo não duplica nada.</Alert>
+            <Alert>Pedidos manuais existentes serão atualizados. Importar o mesmo arquivo de novo não duplica nada.</Alert>
           </Card>
         </>
       ) : (
@@ -92,7 +92,7 @@ function ImportarPedidosPage() {
             Arquivo: <strong>{nomeArquivo}</strong>
           </p>
           <ImportacaoPreview resultado={resultado} />
-          <Alert>Pedidos existentes serão atualizados. A chave é o número do pedido, então nada é duplicado.</Alert>
+          <Alert>Pedidos manuais existentes serão atualizados. A chave é o número do pedido, então nada é duplicado.</Alert>
           {erroArquivo && (
             <span className="campo-erro" role="alert">
               {erroArquivo}

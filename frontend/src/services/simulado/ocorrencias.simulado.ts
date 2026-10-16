@@ -283,7 +283,7 @@ function contar(itens: string[]) {
 }
 
 // mock: calculado sobre os dados em memória; no backend isso é agregação no banco
-export function calcularMetricas(): Metricas {
+export function calcularMetricas(): Pick<Metricas, 'abertas' | 'tempoMedioPrimeiraResposta' | 'taxaResolucao' | 'porMotivo' | 'porCanal'> {
   const esperas = ocorrencias.flatMap((o) => {
     const resposta = (mensagens[o.protocolo] ?? []).find((m) => m.autor === 'loja' && !m.interna)
     // casos abertos pela loja já nascem respondidos; só conta quem começou com o cliente

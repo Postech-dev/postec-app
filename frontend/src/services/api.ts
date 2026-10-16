@@ -62,4 +62,5 @@ export const api = {
   post: <T>(caminho: string, corpo?: unknown, opcoes?: Opcoes) => chamar<T>('POST', caminho, { ...opcoes, corpo }),
   patch: <T>(caminho: string, corpo?: unknown, opcoes?: Opcoes) => chamar<T>('PATCH', caminho, { ...opcoes, corpo }),
   put: <T>(caminho: string, corpo?: unknown, opcoes?: Opcoes) => chamar<T>('PUT', caminho, { ...opcoes, corpo }),
+  delete: <T>(caminho: string, opcoes?: Opcoes) => chamar<T>('DELETE', caminho, opcoes),
 }

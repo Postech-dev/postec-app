@@ -1,0 +1,27 @@
+---
+import '../styles/global.css';
+import { site } from '../data/site';
+---
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={site.description} />
+    <meta name="theme-color" content="#0c0d0e" />
+    {site.draft && <meta name="robots" content="noindex, nofollow" />}
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:title" content={site.title} />
+    <meta property="og:description" content={site.description} />
+    <meta property="og:image" content={`${site.url}/brand/postec-original.jpeg`} />
+    <meta property="og:url" content={site.url} />
+    <link rel="canonical" href={site.url} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{site.title}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+    <slot />
+  </body>
+</html>

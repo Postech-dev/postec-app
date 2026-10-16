@@ -1,0 +1,9 @@
+---
+interface Props { compact?: boolean; }
+const { compact = false } = Astro.props;
+---
+<a class:list={['brand', { compact }]} href="#inicio" aria-label="PosTec — início">
+  <svg viewBox="388 280 468 150" role="img" aria-label="PosTec" width="156" height="50">
+    <image href="/brand/postec-original.jpeg" width="1280" height="714" />
+  </svg>
+</a>

@@ -1,0 +1,65 @@
+---
+import Icon from './Icon.astro';
+---
+<div class="product-window" id="demonstracao">
+  <div class="window-chrome"><div class="window-dots"><i></i><i></i><i></i></div><span>Seu pós-venda, em um só lugar</span><span class="demo-label">DEMO</span></div>
+  <div class="app-shell">
+    <aside class="app-sidebar" aria-hidden="true">
+      <span class="app-monogram">p<span>↻</span></span>
+      <span class="sidebar-item selected"><Icon name="grid" size={18} /></span><span class="sidebar-item"><Icon name="box" size={18} /></span><span class="sidebar-item"><Icon name="chat" size={18} /></span><span class="sidebar-item"><Icon name="truck" size={18} /></span>
+      <span class="sidebar-bottom">M</span>
+    </aside>
+    <div class="app-content">
+      <div class="app-header"><div><span class="app-breadcrumb">Sua loja / Pós-venda</span><h2>Visão geral <span>✦</span></h2></div><span class="app-avatar" aria-label="Loja de demonstração">M</span></div>
+      <div class="app-stats">
+        <div><span>Em aberto</span><strong>12 <small>ocorrências</small></strong><div class="stat-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+        <div><span>Em atendimento</span><strong>08 <small>ocorrências</small></strong><span class="stat-caption"><i></i> Equipe em ação</span></div>
+        <div><span>Resolvidas</span><strong>24 <small>ocorrências</small></strong><span class="stat-caption green"><Icon name="check" size={12} /> Tudo acompanhado</span></div>
+      </div>
+      <div class="cases-heading"><h3>Ocorrências recentes</h3><span>Dados ilustrativos</span></div>
+      <div class="case-table" role="group" aria-label="Escolha um caso para explorar">
+        <div class="case-table-heading"><span>Pedido / Cliente</span><span>Ocorrência</span><span>Status</span></div>
+        <button class="case-row active" data-case="0" aria-pressed="true"><span><b>#1042</b><small>Mariana S.</small></span><span class="case-type">Produto avariado</span><span class="status-pill orange">Em atendimento</span></button>
+        <button class="case-row" data-case="1" aria-pressed="false"><span><b>#1041</b><small>Lucas R.</small></span><span class="case-type">Devolução</span><span class="status-pill violet">Em análise</span></button>
+        <button class="case-row" data-case="2" aria-pressed="false"><span><b>#1040</b><small>Beatriz M.</small></span><span class="case-type">Reenvio</span><span class="status-pill green">Em transporte</span></button>
+      </div>
+      <div class="case-detail">
+        <div class="detail-heading"><span><Icon name="refresh" size={15} /><strong id="case-title">#1042 · Produto avariado</strong></span><span class="detail-tag">Fluxo do caso</span></div>
+        <div class="demo-progress" aria-label="Etapas da ocorrência"><span data-step="0" class="done">Pedido</span><i></i><span data-step="1" class="done">Problema</span><i></i><span data-step="2" class="current">Atendimento</span><i></i><span data-step="3">Solução</span><i></i><span data-step="4">Resolvido</span></div>
+        <div class="detail-action"><p id="case-description" aria-live="polite">A equipe está conferindo a avaria com a cliente.</p><button id="advance-case">Simular reenvio <Icon name="arrow" size={13} /></button></div>
+      </div>
+      <div class="app-footnote"><span class="live-dot"></span> Demonstração interativa · sem conexão com lojas reais</div>
+    </div>
+  </div>
+</div>
+<script>
+  const cases = [
+    { title: '#1042 · Produto avariado', stage: 2, action: 'Simular reenvio', texts: ['A equipe está conferindo a avaria com a cliente.', 'Reenvio registrado. A cliente recebe a atualização do caso.', 'Entrega confirmada. Ocorrência encerrada com histórico completo.'] },
+    { title: '#1041 · Devolução', stage: 2, action: 'Simular estorno', texts: ['A equipe está analisando a solicitação de devolução.', 'Estorno registrado. O cliente recebe a atualização do caso.', 'Estorno confirmado. Ocorrência encerrada com histórico completo.'] },
+    { title: '#1040 · Reenvio', stage: 3, action: 'Confirmar entrega', texts: ['O novo envio está em transporte. A equipe acompanha o caso.', 'Entrega confirmada. Ocorrência encerrada com histórico completo.'] },
+  ];
+  let selected = 0;
+  let offset = 0;
+  const next = document.querySelector<HTMLButtonElement>('#advance-case')!;
+  function render() {
+    const item = cases[selected];
+    const stage = item.stage + offset;
+    document.querySelector('#case-title')!.textContent = item.title;
+    document.querySelector('#case-description')!.textContent = item.texts[offset];
+    document.querySelectorAll<HTMLElement>('[data-step]').forEach((step) => { const index = Number(step.dataset.step); step.classList.toggle('done', index < stage); step.classList.toggle('current', index === stage); if (index === stage) step.setAttribute('aria-current', 'step'); else step.removeAttribute('aria-current'); });
+    next.textContent = stage === 4 ? 'Reiniciar simulação ↻' : offset === 0 ? `${item.action} →` : 'Concluir caso →';
+    document.querySelectorAll<HTMLButtonElement>('[data-case]').forEach((row) => {
+      const index = Number(row.dataset.case);
+      const active = index === selected;
+      row.classList.toggle('active', active);
+      row.setAttribute('aria-pressed', String(active));
+      const status = row.querySelector<HTMLElement>('.status-pill')!;
+      const initial = [ ['Em atendimento', 'orange'], ['Em análise', 'violet'], ['Em transporte', 'green'] ];
+      const [label, color] = active && stage === 4 ? ['Resolvido', 'green'] : active && offset > 0 ? [selected === 1 ? 'Estorno registrado' : 'Reenvio registrado', 'orange'] : initial[index];
+      status.textContent = label;
+      status.className = `status-pill ${color}`;
+    });
+  }
+  document.querySelectorAll<HTMLButtonElement>('[data-case]').forEach((row) => row.addEventListener('click', () => { selected = Number(row.dataset.case); offset = 0; render(); }));
+  next.addEventListener('click', () => { offset = cases[selected].stage + offset === 4 ? 0 : offset + 1; render(); });
+</script>

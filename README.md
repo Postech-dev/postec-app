@@ -123,3 +123,19 @@ npm run dev
 - `PATCH /api/painel/ocorrencias/:id/status`: Atualizar status.
 - `POST /api/painel/ocorrencias/:id/resolver`: Resolver ocorrência.
 - `POST /api/painel/ocorrencias/:id/mensagens`: Enviar mensagem.
+
+## Landing page PosTec
+
+A landing page está em [`landing-page/`](./landing-page/README.md), como projeto independente com Astro, TypeScript e Tailwind CSS.
+
+**Site publicado:** https://landing-page-delta-umber-19.vercel.app
+
+Para executar localmente:
+
+```sh
+cd landing-page
+npm ci
+npm run dev
+```
+
+Inclui identidade visual da PosTec, proposta de valor, demonstração interativa do fluxo de pós-venda, integrações previstas, planos, FAQ e contato em `suporte@postec.com`. Consulte o README da pasta para detalhes e publicação na Vercel.

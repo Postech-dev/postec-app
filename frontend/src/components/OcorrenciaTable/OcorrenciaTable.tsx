@@ -64,7 +64,7 @@ function OcorrenciaTable({ itens, pagina, porPagina, onPagina }: OcorrenciaTable
     return <span className="otabela-sort otabela-sort-ativo" aria-hidden="true">{direcao === 'asc' ? '↑' : '↓'}</span>
   }
 
-  function Th({ col, label }: { col: Coluna; label: string }) {
+  function cabecalho(col: Coluna, label: string) {
     return (
       <th scope="col" onClick={() => alternarOrdem(col)} className="otabela-th-sort">
         {label}{icone(col)}
@@ -78,14 +78,14 @@ function OcorrenciaTable({ itens, pagina, porPagina, onPagina }: OcorrenciaTable
         <table>
           <thead>
             <tr>
-              <Th col="protocolo"   label="PROTOCOLO" />
-              <Th col="cliente"     label="CLIENTE" />
-              <Th col="pedido"      label="PEDIDO" />
-              <Th col="motivo"      label="MOTIVO" />
-              <Th col="canal"       label="CANAL" />
-              <Th col="status"      label="STATUS" />
-              <Th col="responsavel" label="RESPONSÁVEL" />
-              <Th col="abertura"    label="ABERTURA" />
+              {cabecalho('protocolo', 'PROTOCOLO')}
+              {cabecalho('cliente', 'CLIENTE')}
+              {cabecalho('pedido', 'PEDIDO')}
+              {cabecalho('motivo', 'MOTIVO')}
+              {cabecalho('canal', 'CANAL')}
+              {cabecalho('status', 'STATUS')}
+              {cabecalho('responsavel', 'RESPONSÁVEL')}
+              {cabecalho('abertura', 'ABERTURA')}
             </tr>
           </thead>
           <tbody>

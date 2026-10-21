@@ -6,14 +6,14 @@ export function useDados<T>(carregar: () => Promise<T>) {
   const [dados, setDados] = useState<T | null>(null)
   const [erro, setErro] = useState('')
   const [tentativa, setTentativa] = useState(0)
-  const [carregando, setCarregando] = useState(true)
+  const [concluida, setConcluida] = useState<{ carregar: () => Promise<T>; tentativa: number } | null>(null)
+  const carregando = concluida?.carregar !== carregar || concluida?.tentativa !== tentativa
 
   useEffect(() => {
     let ativo = true
-    setCarregando(true)
     carregar()
-      .then((d) => { if (ativo) { setDados(d); setCarregando(false) } })
-      .catch((e: Error) => { if (ativo) { setErro(e.message || 'Não foi possível carregar.'); setCarregando(false) } })
+      .then((d) => { if (ativo) { setDados(d); setConcluida({ carregar, tentativa }) } })
+      .catch((e: Error) => { if (ativo) { setErro(e.message || 'Não foi possível carregar.'); setConcluida({ carregar, tentativa }) } })
     return () => {
       ativo = false
     }

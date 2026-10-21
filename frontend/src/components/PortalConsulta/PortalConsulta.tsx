@@ -75,7 +75,7 @@ function PortalConsulta() {
     try {
       const o = await acompanharOcorrencia(slug, protocolo, email.trim())
       navigate(`/portal/${slug}/acompanhar/${o.protocolo}`)
-    } catch (err) {
+    } catch {
       // mesma mensagem para protocolo errado ou e-mail errado (não vazar qual existe)
       setErrosAcomp({ geral: 'Não encontramos uma solicitação com esses dados. Confira o protocolo e o e-mail que chegou no seu e-mail de confirmação.' })
     } finally {

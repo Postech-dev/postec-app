@@ -14,15 +14,12 @@ function StatCard({ titulo, valor, descricao, cor = 'ink', onClick, ativo }: Sta
     <>
       <strong className={`stat-valor stat-${cor}`}>{valor}</strong>
       <span className="stat-titulo">{titulo}</span>
+      {descricao && <span className="stat-descricao">{descricao}</span>}
     </>
   )
 
   if (!onClick)
-    return (
-      <div className="stat-card" title={descricao}>
-        {conteudo}
-      </div>
-    )
+    return <div className="stat-card">{conteudo}</div>
 
   return (
     <button
@@ -30,7 +27,6 @@ function StatCard({ titulo, valor, descricao, cor = 'ink', onClick, ativo }: Sta
       className={`stat-card stat-botao ${ativo ? 'stat-ativo' : ''}`}
       onClick={onClick}
       aria-pressed={ativo}
-      title={descricao}
     >
       {conteudo}
     </button>

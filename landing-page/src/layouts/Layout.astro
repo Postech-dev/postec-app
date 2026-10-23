@@ -19,6 +19,9 @@ import { site } from '../data/site';
     <link rel="canonical" href={site.url} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{site.title}</title>
+    <script is:inline>
+      document.documentElement.classList.add('has-motion');
+    </script>
   </head>
   <body>
     <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>

@@ -17,89 +17,148 @@ const PERIODOS = [
   { label: '90 dias', valor: 90 },
 ]
 
-// "4h 3min" ou "25 min"
 function formatarDuracao(minutos: number | null): string {
   if (minutos === null) return '—'
   if (minutos < 60) return `${minutos} min`
   return `${Math.floor(minutos / 60)}h ${minutos % 60}min`
 }
 
-// skeleton de card para estado de carregamento
 function SkeletonCard() {
   return <div className="metricas-skeleton" aria-hidden="true" />
 }
 
-// gráfico de barras agrupadas abertas x concluídas por semana (SVG simples)
 function GraficoSemanal({ dados }: { dados: ItemSemana[] }) {
-  const alturaMax = 80
-  const larguraBarra = 14
-  const gap = 4
-  const grupoPasso = larguraBarra * 2 + gap + 8
-  const larguraTotal = dados.length * grupoPasso + 20
+  const alturaGrafico = 120
+  const labelHeight = 28
+  const svgHeight = alturaGrafico + labelHeight
+  const larguraBarra = 18
+  const gap = 6
+  const grupoPasso = larguraBarra * 2 + gap + 16
+  const paddingLeft = 32
+  const larguraTotal = dados.length * grupoPasso + paddingLeft + 16
   const maximo = Math.max(1, ...dados.flatMap((s) => [s.abertas, s.concluidas]))
 
+  // linhas de grade em 25%, 50%, 75%, 100%
+  const grades = [0.25, 0.5, 0.75, 1].map((f) => Math.round(f * maximo))
+
   function altBarra(v: number) {
-    return Math.max(2, (v / maximo) * alturaMax)
+    return Math.max(3, (v / maximo) * alturaGrafico)
   }
+
+  const semDados = dados.every((s) => s.abertas === 0 && s.concluidas === 0)
 
   return (
     <Card titulo="Abertas × concluídas por semana">
-      {dados.every((s) => s.abertas === 0 && s.concluidas === 0) ? (
+      {semDados ? (
         <p className="grafico-vazio">Ainda não há dados para mostrar.</p>
       ) : (
-        <div className="grafico-semanal">
+        <>
           <div className="grafico-semanal-legenda">
             <span className="grafico-semanal-leg grafico-semanal-leg-abertas">Abertas</span>
             <span className="grafico-semanal-leg grafico-semanal-leg-concluidas">Concluídas</span>
           </div>
-          <svg
-            viewBox={`0 0 ${larguraTotal} ${alturaMax + 24}`}
-            aria-label="Gráfico de barras abertas versus concluídas por semana"
-            role="img"
-          >
-            {dados.map((s, i) => {
-              const x = i * grupoPasso + 10
-              const hA = altBarra(s.abertas)
-              const hC = altBarra(s.concluidas)
-              return (
-                <g key={s.rotulo}>
-                  {/* barra abertas */}
-                  <rect
-                    x={x}
-                    y={alturaMax - hA}
-                    width={larguraBarra}
-                    height={hA}
-                    rx={3}
-                    fill="var(--action)"
-                    opacity={0.85}
-                    aria-label={`${s.rotulo}: ${s.abertas} abertas`}
-                  />
-                  {/* barra concluídas */}
-                  <rect
-                    x={x + larguraBarra + gap}
-                    y={alturaMax - hC}
-                    width={larguraBarra}
-                    height={hC}
-                    rx={3}
-                    fill="var(--green)"
-                    opacity={0.85}
-                    aria-label={`${s.rotulo}: ${s.concluidas} concluídas`}
-                  />
-                  {/* rótulo semana */}
-                  <text
-                    x={x + larguraBarra}
-                    y={alturaMax + 16}
-                    textAnchor="middle"
-                    fontSize={9}
-                    fill="var(--ink-soft)"
-                  >
-                    {s.rotulo}
-                  </text>
-                </g>
-              )
-            })}
-          </svg>
-        </div>
+          <div className="grafico-semanal-wrap">
+            <svg
+              className="grafico-semanal-svg"
+              viewBox={`0 0 ${larguraTotal} ${svgHeight}`}
+              aria-label="Gráfico de barras abertas versus concluídas por semana"
+              role="img"
+            >
+              {/* linhas de grade */}
+              {grades.map((v) => {
+                const y = alturaGrafico - (v / maximo) * alturaGrafico
+                return (
+                  <g key={v}>
+                    <line
+                      x1={paddingLeft}
+                      x2={larguraTotal - 8}
+                      y1={y}
+                      y2={y}
+                      stroke="var(--line)"
+                      strokeWidth={1}
+                    />
+                    <text
+                      x={paddingLeft - 4}
+                      y={y + 4}
+                      textAnchor="end"
+                      fontSize={9}
+                      fill="var(--ink-soft)"
+                    >
+                      {v}
+                    </text>
+                  </g>
+                )
+              })}
+
+              {/* barras */}
+              {dados.map((s, i) => {
+                const x = paddingLeft + i * grupoPasso
+                const hA = altBarra(s.abertas)
+                const hC = altBarra(s.concluidas)
+                const yA = alturaGrafico - hA
+                const yC = alturaGrafico - hC
+                return (
+                  <g key={s.rotulo}>
+                    {/* barra abertas */}
+                    <rect
+                      x={x}
+                      y={yA}
+                      width={larguraBarra}
+                      height={hA}
+                      rx={4}
+                      fill="var(--action)"
+                    />
+                    {s.abertas > 0 && (
+                      <text
+                        x={x + larguraBarra / 2}
+                        y={yA - 4}
+                        textAnchor="middle"
+                        fontSize={9}
+                        fontWeight="700"
+                        fill="var(--action)"
+                      >
+                        {s.abertas}
+                      </text>
+                    )}
+
+                    {/* barra concluídas */}
+                    <rect
+                      x={x + larguraBarra + gap}
+                      y={yC}
+                      width={larguraBarra}
+                      height={hC}
+                      rx={4}
+                      fill="var(--green)"
+                    />
+                    {s.concluidas > 0 && (
+                      <text
+                        x={x + larguraBarra + gap + larguraBarra / 2}
+                        y={yC - 4}
+                        textAnchor="middle"
+                        fontSize={9}
+                        fontWeight="700"
+                        fill="var(--green)"
+                      >
+                        {s.concluidas}
+                      </text>
+                    )}
+
+                    {/* rótulo semana */}
+                    <text
+                      x={x + larguraBarra + gap / 2}
+                      y={alturaGrafico + 18}
+                      textAnchor="middle"
+                      fontSize={10}
+                      fill="var(--ink-soft)"
+                    >
+                      {s.rotulo}
+                    </text>
+                  </g>
+                )
+              })}
+            </svg>
+          </div>
+        </>
       )}
     </Card>
   )
@@ -118,7 +177,6 @@ function PainelMetricas() {
 
   return (
     <>
-      {/* seletor de período */}
       <div className="metricas-periodo" role="group" aria-label="Selecionar período">
         {PERIODOS.map((p) => (
           <button
@@ -133,39 +191,38 @@ function PainelMetricas() {
         ))}
       </div>
 
-      {/* KPIs — grid 5 colunas desktop */}
       <div className="metricas-kpis">
         {carregando ? (
           Array.from({ length: 5 }).map((_, i) => <SkeletonCard key={i} />)
         ) : (
           <>
             <StatCard
-              titulo="Abertas"
+              titulo="Em aberto"
               valor={dados?.abertas ?? 0}
-              descricao="Tudo que não está Concluído"
+              descricao="Ocorrências não concluídas agora"
               cor="brand"
             />
             <StatCard
               titulo="1ª resposta"
               valor={formatarDuracao(dados?.tempoMedioPrimeiraResposta ?? null)}
-              descricao="Média entre abertura e 1ª mensagem do atendente"
+              descricao="Tempo médio até o atendente responder"
               cor="blue"
             />
             <StatCard
               titulo="Taxa de resolução"
               valor={`${dados?.taxaResolucao ?? 0}%`}
-              descricao={`Concluídas / total nos últimos ${periodo} dias`}
+              descricao={`Concluídas / abertas nos últimos ${periodo} dias`}
               cor="green"
             />
             <StatCard
               titulo="Reenvios"
               valor={dados?.reenviosPeriodo ?? 0}
-              descricao={`Nos últimos ${periodo} dias`}
+              descricao={`Últimos ${periodo} dias`}
             />
             <StatCard
               titulo="Estornos"
               valor={dados?.estornosPeriodo ?? 0}
-              descricao={dados?.valorEstornosPeriodo ? formatarMoeda(dados.valorEstornosPeriodo) : `Nos últimos ${periodo} dias`}
+              descricao={dados?.valorEstornosPeriodo ? `Total: ${formatarMoeda(dados.valorEstornosPeriodo)}` : `Últimos ${periodo} dias`}
               cor="ink"
             />
           </>
@@ -178,7 +235,6 @@ function PainelMetricas() {
         </p>
       )}
 
-      {/* gráficos 2 por linha */}
       {!carregando && dados && (
         <>
           <div className="metricas-graficos">
@@ -186,8 +242,7 @@ function PainelMetricas() {
             <GraficoBarras titulo="Por canal de origem" itens={dados.porCanal} cor="var(--blue)" />
           </div>
 
-          {/* por etapa na ordem do fluxo */}
-          <Card titulo="Ocorrências por etapa">
+          <Card titulo="Distribuição por etapa do fluxo">
             <ul className="metricas-etapas">
               {FLUXO.map((status) => {
                 const item = dados.porStatus.find((s) => s.rotulo === status)

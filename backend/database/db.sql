@@ -37,7 +37,18 @@ CREATE TABLE IF NOT EXISTS pedidos (
     data_compra DATE NOT NULL DEFAULT CURRENT_DATE
 );
 
--- 4. OCORRÊNCIAS (O coração do PosTec)
+-- 4. ITENS DO PEDIDO (linhas de produto — opcional; preenchido pela integração Nuvemshop)
+CREATE TABLE IF NOT EXISTS pedido_itens (
+    id SERIAL PRIMARY KEY,
+    pedido_id INTEGER NOT NULL REFERENCES pedidos(id) ON DELETE CASCADE,
+    produto TEXT NOT NULL,
+    sku TEXT,
+    variacao TEXT,
+    quantidade INTEGER NOT NULL DEFAULT 1,
+    valor_unitario NUMERIC(10,2) NOT NULL DEFAULT 0
+);
+
+-- 5. OCORRÊNCIAS (O coração do PosTec)
 CREATE TABLE IF NOT EXISTS ocorrencias (
     id SERIAL PRIMARY KEY,
     loja_id INT REFERENCES lojas(id) ON DELETE CASCADE,

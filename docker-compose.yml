@@ -1,17 +1,51 @@
 services:
   database:
-    image: postgres:15.3-alpine
-    container_name: postec-database
+    image: postgres:15-alpine
     restart: unless-stopped
-    environment:
-      POSTGRES_USER: postec_user
-      POSTGRES_PASSWORD: postec_password
-      POSTGRES_DB: postec_db
-    ports:
-      - "5432:5432"
+    env_file:
+      - ./backend/.env
+    entrypoint: ["sh", "-c", 'export POSTGRES_USER="$${DB_USER:-postec_user}" POSTGRES_PASSWORD="$${DB_PASSWORD:?Configure DB_PASSWORD em backend/.env}" POSTGRES_DB="$${DB_NAME:-postec_db}"; exec docker-entrypoint.sh postgres']
     volumes:
       - pgdata:/var/lib/postgresql/data
-      - ./backend/database/db.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./backend/database/db.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", 'pg_isready -U "$${DB_USER:-postec_user}" -d "$${DB_NAME:-postec_db}"']
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  backend:
+    build: ./backend
+    restart: unless-stopped
+    env_file:
+      - ./backend/.env
+    environment:
+      NODE_ENV: production
+      PORT: 3333
+      DATABASE_URL: ""
+      DB_HOST: database
+      DB_PORT: 5432
+    command: ["sh", "-c", "npm run migrate && exec node dist/server.js"]
+    depends_on:
+      database:
+        condition: service_healthy
+
+  frontend:
+    build: ./frontend
+    restart: unless-stopped
+    environment:
+      APP_DOMAIN: ${APP_DOMAIN:-:80}
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - backend
 
 volumes:
   pgdata:
+  caddy_data:
+  caddy_config:

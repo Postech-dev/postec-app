@@ -45,6 +45,14 @@ export async function chamarNuvemshop<T>(storeId: string, token: string, path: s
     headers: { Authorization: `Bearer ${token}`, 'User-Agent': config.userAgent, 'Content-Type': 'application/json' },
     body: body === undefined ? undefined : JSON.stringify(body),
   });
+  // A API real retorna 404 (Last page is 0) quando a consulta de pedidos não tem resultados.
+  // Não confundir com pedido individual inexistente ou outros erros de rota/permissão.
+  if (r.status === 404 && method === 'GET' && path.split('?')[0] === '/orders') {
+    try {
+      const erro = lerJsonExterno(await r.text()) as Record<string, unknown>;
+      if (erro?.code === 404 && erro.description === 'Last page is 0') return [] as T;
+    } catch { /* Respostas inesperadas continuam sendo falhas HTTP. */ }
+  }
   if (!r.ok) throw new NuvemshopApiErro(r.status);
   if (r.status === 204) return undefined as T;
   return lerJsonExterno(await r.text()) as T;

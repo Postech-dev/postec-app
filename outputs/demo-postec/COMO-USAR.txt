@@ -1,0 +1,11 @@
+DEMONSTRAÇÃO POSTEC — DADOS SINTÉTICOS
+
+1. No Postec, abra Pedidos > Importar CSV.
+2. Selecione 01-pedidos-demo-30.csv, confira a prévia e confirme.
+3. Opcionalmente, importe 02-pedidos-demo-extra-10.csv para adicionar outros 10 pedidos.
+
+Os dois arquivos têm números diferentes (DEMO-1001 a DEMO-1040). Reimportar o mesmo arquivo atualiza os pedidos manuais correspondentes.
+
+Há 20 clientes fictícios, com compras repetidas, cinco produtos, quantidades variadas e datas entre setembro e outubro de 2026. O campo valor representa o total do pedido. Os e-mails example.com são de exemplo. Os CPFs são sintéticos com dígitos verificadores válidos, necessários ao importador; não representam identidades verificadas.
+
+A importação cria pedidos manuais no Postec. Não cria vendas na Nuvemshop nem aumenta seu contador de pedidos sincronizados. Ocorrências, mensagens e indicadores de atendimento precisam ser criados pelo fluxo de atendimento.

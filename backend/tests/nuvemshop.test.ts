@@ -2,12 +2,26 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { createHmac, randomBytes } from 'node:crypto';
 import { criptografar, descriptografar, assinaturaValida } from '../src/integracoes/nuvemshop/seguranca';
-import { lerJsonExterno } from '../src/integracoes/nuvemshop/api';
+import { chamarNuvemshop, lerJsonExterno, NuvemshopApiErro } from '../src/integracoes/nuvemshop/api';
 import { normalizarPedidoExterno } from '../src/integracoes/nuvemshop/pedidos';
 import { pedido } from './fixtures/nuvemshop';
 
 Object.assign(process.env, { NUVEMSHOP_APP_ID: '46963', NUVEMSHOP_CLIENT_SECRET: 'segredo-de-teste',
   APP_PUBLIC_URL: 'https://postec.test', NUVEMSHOP_USER_AGENT: 'Postec test', INTEGRATION_ENCRYPTION_KEY: randomBytes(32).toString('base64') });
+
+test('consulta sem pedidos aceita somente o 404 de coleção vazia', async (t) => {
+  const mock = t.mock.method(globalThis, 'fetch', async () => new Response(
+    JSON.stringify({ code: 404, message: 'Not Found', description: 'Last page is 0' }), { status: 404 }));
+  assert.deepEqual(await chamarNuvemshop('123', 'token', '/orders?page=1'), []);
+  await assert.rejects(chamarNuvemshop('123', 'token', '/orders/456'), NuvemshopApiErro);
+  await assert.rejects(chamarNuvemshop('123', 'token', '/webhooks'), NuvemshopApiErro);
+  mock.mock.mockImplementation(async () => new Response('{"code":404,"description":"Not Found"}', { status: 404 }));
+  await assert.rejects(chamarNuvemshop('123', 'token', '/orders'), NuvemshopApiErro);
+  mock.mock.mockImplementation(async () => new Response('not json', { status: 404 }));
+  await assert.rejects(chamarNuvemshop('123', 'token', '/orders'), NuvemshopApiErro);
+  mock.mock.mockImplementation(async () => new Response('{}', { status: 403 }));
+  await assert.rejects(chamarNuvemshop('123', 'token', '/orders'), NuvemshopApiErro);
+});
 
 
 test('token criptografado usa nonce distinto e detecta adulteração', () => {

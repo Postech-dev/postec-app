@@ -1,0 +1,31 @@
+﻿numero_pedido;cliente_nome;cliente_email;cliente_cpf;produto;tamanho;quantidade;valor;data_pedido
+DEMO-1001;Mariana Alves;cliente.demo01@example.com;90000013749;Camiseta Básica Algodão Branca;M;3;179,70;2026-10-27
+DEMO-1002;Camila Ribeiro;cliente.demo02@example.com;90000027456;Bolsa Transversal Caramelo;Único;1;129,90;2026-10-26
+DEMO-1003;Juliana Costa;cliente.demo03@example.com;90000041106;Calça Jeans Reta Azul;40;1;159,90;2026-10-24
+DEMO-1004;Beatriz Martins;cliente.demo04@example.com;90000054852;Tênis Casual Branco;38;1;219,90;2026-10-22
+DEMO-1005;Fernanda Lima;cliente.demo05@example.com;90000068560;Vestido Midi Floral;P;2;379,80;2026-10-20
+DEMO-1006;Larissa Rocha;cliente.demo06@example.com;90000082201;Calça Jeans Reta Azul;40;1;159,90;2026-10-18
+DEMO-1007;Rafael Souza;cliente.demo07@example.com;90000095966;Tênis Casual Branco;38;1;219,90;2026-10-17
+DEMO-1008;Gabriel Oliveira;cliente.demo08@example.com;90000109690;Vestido Midi Floral;P;1;189,90;2026-10-15
+DEMO-1009;Lucas Ferreira;cliente.demo09@example.com;90000123331;Camiseta Básica Algodão Branca;M;2;119,80;2026-10-13
+DEMO-1010;Amanda Santos;cliente.demo10@example.com;90000137049;Bolsa Transversal Caramelo;Único;3;389,70;2026-10-11
+DEMO-1011;Bruna Carvalho;cliente.demo11@example.com;90000150738;Vestido Midi Floral;P;1;189,90;2026-10-09
+DEMO-1012;Carolina Mendes;cliente.demo12@example.com;90000164445;Camiseta Básica Algodão Branca;M;1;59,90;2026-10-08
+DEMO-1013;Daniela Moreira;cliente.demo13@example.com;90000178152;Bolsa Transversal Caramelo;Único;2;259,80;2026-10-06
+DEMO-1014;Eduardo Almeida;cliente.demo14@example.com;90000191841;Calça Jeans Reta Azul;40;1;159,90;2026-10-04
+DEMO-1015;Felipe Barbosa;cliente.demo15@example.com;90000205575;Tênis Casual Branco;38;1;219,90;2026-10-02
+DEMO-1016;Isabela Teixeira;cliente.demo16@example.com;90000219282;Bolsa Transversal Caramelo;Único;1;129,90;2026-09-30
+DEMO-1017;Letícia Azevedo;cliente.demo17@example.com;90000232971;Calça Jeans Reta Azul;40;2;319,80;2026-09-29
+DEMO-1018;Patrícia Nogueira;cliente.demo18@example.com;90000246689;Tênis Casual Branco;38;1;219,90;2026-09-27
+DEMO-1019;Renata Cardoso;cliente.demo19@example.com;90000260320;Vestido Midi Floral;P;3;569,70;2026-09-25
+DEMO-1020;Sofia Monteiro;cliente.demo20@example.com;90000274038;Camiseta Básica Algodão Branca;M;1;59,90;2026-09-23
+DEMO-1021;Mariana Alves;cliente.demo01@example.com;90000013749;Tênis Casual Branco;38;2;439,80;2026-09-21
+DEMO-1022;Camila Ribeiro;cliente.demo02@example.com;90000027456;Vestido Midi Floral;P;1;189,90;2026-09-20
+DEMO-1023;Juliana Costa;cliente.demo03@example.com;90000041106;Camiseta Básica Algodão Branca;M;1;59,90;2026-09-18
+DEMO-1024;Beatriz Martins;cliente.demo04@example.com;90000054852;Bolsa Transversal Caramelo;Único;1;129,90;2026-09-16
+DEMO-1025;Fernanda Lima;cliente.demo05@example.com;90000068560;Calça Jeans Reta Azul;40;2;319,80;2026-09-14
+DEMO-1026;Larissa Rocha;cliente.demo06@example.com;90000082201;Camiseta Básica Algodão Branca;M;1;59,90;2026-09-12
+DEMO-1027;Rafael Souza;cliente.demo07@example.com;90000095966;Bolsa Transversal Caramelo;Único;1;129,90;2026-09-11
+DEMO-1028;Gabriel Oliveira;cliente.demo08@example.com;90000109690;Calça Jeans Reta Azul;40;3;479,70;2026-09-09
+DEMO-1029;Lucas Ferreira;cliente.demo09@example.com;90000123331;Tênis Casual Branco;38;2;439,80;2026-09-07
+DEMO-1030;Amanda Santos;cliente.demo10@example.com;90000137049;Vestido Midi Floral;P;1;189,90;2026-09-05

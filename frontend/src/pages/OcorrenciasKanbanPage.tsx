@@ -1,3 +1,4 @@
+import { usuarioLogado } from '../services/auth.service'
 import { useCallback } from 'react'
 import CopyButton from '../components/CopyButton/CopyButton'
 import ErroCarregamento from '../components/ErroCarregamento/ErroCarregamento'
@@ -12,6 +13,7 @@ import { ordenarPorPrioridade } from '../utils/ordenacao'
 import './pages.css'
 
 function OcorrenciasKanbanPage() {
+  const portalSlug = usuarioLogado()?.lojaSlug
   const carregar = useCallback(async () => ordenarPorPrioridade(await listarOcorrencias()), [])
   const { dados: itens, erro, tentarDeNovo } = useDados(carregar)
 
@@ -35,7 +37,7 @@ function OcorrenciasKanbanPage() {
           titulo="Nenhuma ocorrência ainda"
           texto="Compartilhe o link do portal com seus clientes. As solicitações aparecem aqui assim que forem abertas."
         >
-          <CopyButton texto={`${window.location.origin}/portal/mariana-modas`} rotulo="Copiar link do portal" />
+          {portalSlug && <CopyButton texto={`${window.location.origin}/portal/${encodeURIComponent(portalSlug)}`} rotulo="Copiar link do portal" />}
         </EstadoVazio>
       ) : (
         <KanbanBoard itens={itens} />

@@ -51,7 +51,7 @@ function EditarLojaPage() {
     e.preventDefault()
     const novos: typeof erros = {}
     if (!campos.nome.trim()) novos.nome = 'Informe o nome da loja. É ele que o cliente vê no portal.'
-    if (!campos.slug.trim()) novos.slug = 'Informe o endereço do portal, por exemplo mariana-modas.'
+    if (!campos.slug.trim()) novos.slug = 'Informe o endereço do portal, por exemplo minha-loja.'
     else if (!/^[a-z0-9-]+$/.test(campos.slug)) {
       novos.slug = 'Use só letras minúsculas, números e hífen, sem espaços ou acentos.'
     }

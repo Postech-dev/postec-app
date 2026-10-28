@@ -1,5 +1,6 @@
 import { Pool, types } from "pg";
 import dotenv from "dotenv";
+import { connectionOptions } from "../db-options.cjs";
 
 dotenv.config();
 
@@ -8,16 +9,13 @@ dotenv.config();
 types.setTypeParser(1114, (valor: string) => valor); // TIMESTAMP
 types.setTypeParser(1082, (valor: string) => valor); // DATE
 
-const pool = new Pool(process.env.DATABASE_URL ? {
-  connectionString: process.env.DATABASE_URL,
+const pool = new Pool({
+  ...connectionOptions(process.env.DATABASE_URL),
   client_encoding: 'UTF8',
-} : {
-  user:  process.env.DB_USER,
-  host: process.env.DB_HOST,
-  database: process.env.DB_NAME,
-  password: process.env.DB_PASSWORD,
-  port: Number(process.env.DB_PORT),
-  client_encoding: 'UTF8',
+  max: Number(process.env.DB_POOL_MAX || 3),
+  idleTimeoutMillis: 10_000,
+  connectionTimeoutMillis: 10_000,
+  allowExitOnIdle: true,
 });
 
   pool.on("connect", () => {

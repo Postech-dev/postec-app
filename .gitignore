@@ -1,3 +1,12 @@
 claude
 .env
 .env.vps
+
+node_modules/
+.vercel/
+.env.*
+!.env.example
+.vercel
+.env*
+
+supabase/.temp/

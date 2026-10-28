@@ -1,0 +1,12 @@
+.git
+.vercel
+**/node_modules
+**/dist
+**/.env
+**/.env.*
+**/*.local
+claude
+docs
+landing-page
+backend/tests
+backend/database/testes.sql

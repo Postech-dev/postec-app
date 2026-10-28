@@ -11,6 +11,7 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci --omit=dev && npm cache clean --force
 COPY --from=build /app/dist ./dist
+COPY db-options.cjs ./db-options.cjs
 COPY database ./database
 COPY scripts/migrate.cjs ./scripts/migrate.cjs
 USER node

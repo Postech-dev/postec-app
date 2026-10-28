@@ -139,3 +139,9 @@ npm run dev
 ```
 
 Inclui identidade visual da PosTec, proposta de valor, demonstração interativa do fluxo de pós-venda, integrações previstas, planos, FAQ e contato em `suporte@postec.com`. Consulte o README da pasta para detalhes e publicação na Vercel.
+
+## Aplicação em produção: Vercel + Supabase
+
+Aplicação publicada: https://postec-app.vercel.app
+
+O painel React e a API Express são publicados juntos a partir da raiz do repositório. O banco usa PostgreSQL no Supabase. Consulte [o guia de deploy](docs/deploy-vercel-supabase.md) para conexões, migrações sem dados de teste, variáveis de ambiente e agendamento da fila Nuvemshop.

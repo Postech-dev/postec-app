@@ -10,5 +10,10 @@ for attempt in {1..60}; do
   sleep 0.5
 done
 test_port=$(docker port "$test_container" 5432/tcp | sed 's/.*://')
-DATABASE_URL="postgresql://postgres:postec_test@127.0.0.1:$test_port/postec_test" \
-  ./node_modules/.bin/tsx --test tests/*.integration.ts
+# Cada arquivo recebe um banco vazio no container descartável.
+for test_file in tests/*.integration.ts; do
+  docker exec "$test_container" dropdb -U postgres --if-exists postec_test
+  docker exec "$test_container" createdb -U postgres postec_test
+  DATABASE_URL="postgresql://postgres:postec_test@127.0.0.1:$test_port/postec_test" \
+    npm exec -- tsx --test "$test_file"
+done

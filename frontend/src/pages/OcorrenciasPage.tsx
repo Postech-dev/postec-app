@@ -1,3 +1,4 @@
+import { usuarioLogado } from '../services/auth.service'
 import { useCallback, useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import Alert from '../components/Alert/Alert'
@@ -25,6 +26,7 @@ const OPCOES_STATUS = [EM_ABERTO, ...FLUXO]
 const OPCOES_CANAL = Object.values(CANAIS)
 
 function OcorrenciasPage() {
+  const portalSlug = usuarioLogado()?.lojaSlug
   const [params, setParams] = useSearchParams()
   const busca = params.get('q') ?? ''
   const status = params.get('status') ?? ''
@@ -162,7 +164,7 @@ function OcorrenciasPage() {
           titulo="Nenhuma ocorrência ainda"
           texto="Compartilhe o link do portal com seus clientes. As solicitações aparecem aqui assim que forem abertas."
         >
-          <CopyButton texto={`${window.location.origin}/portal/mariana-modas`} rotulo="Copiar link do portal" />
+          {portalSlug && <CopyButton texto={`${window.location.origin}/portal/${encodeURIComponent(portalSlug)}`} rotulo="Copiar link do portal" />}
         </EstadoVazio>
       ) : filtrados.length === 0 ? (
         <EstadoVazio

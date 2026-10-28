@@ -9,12 +9,14 @@ import PageHeader from '../components/PageHeader/PageHeader'
 import { useDados } from '../hooks/useDados'
 import { useToast } from '../hooks/useToast'
 import { criarAtendente, listarEquipe } from '../services/equipe.service'
+import { usuarioLogado } from '../services/auth.service'
 import { iniciais } from '../utils/format'
 import './pages.css'
 import './EquipePage.css'
 
 function EquipePage() {
   const { mostrar } = useToast()
+  const podeGerenciar = usuarioLogado()?.papel === 'Administradora'
   const { dados: equipe, setDados, erro, tentarDeNovo } = useDados(listarEquipe)
   const [nome, setNome] = useState('')
   const [email, setEmail] = useState('')
@@ -40,6 +42,8 @@ function EquipePage() {
       setNome('')
       setEmail('')
       setSenha('')
+    } catch (erro) {
+      mostrar(erro instanceof Error ? erro.message : 'Não foi possível criar o atendente.')
     } finally {
       setSalvando(false)
     }
@@ -79,7 +83,7 @@ function EquipePage() {
         </Card>
 
         <Card titulo="Adicionar atendente">
-          <form className="form-coluna" onSubmit={criar} noValidate>
+          {podeGerenciar ? <form className="form-coluna" onSubmit={criar} noValidate>
             <Input label="Nome" obrigatorio value={nome} onChange={(e) => setNome(e.target.value)} erro={erros.nome} />
             <Input
               label="E-mail"
@@ -103,7 +107,7 @@ function EquipePage() {
               Criar usuário
             </Button>
             <p className="equipe-nota">O usuário é criado diretamente pela administradora.</p>
-          </form>
+          </form> : <p>Somente administradores podem adicionar pessoas à equipe.</p>}
         </Card>
       </div>
     </div>

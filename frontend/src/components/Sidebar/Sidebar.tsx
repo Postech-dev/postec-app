@@ -77,9 +77,9 @@ function Sidebar({ usuario, contagens, aberta, onNavegar, onSair }: SidebarProps
             </NavLink>
           )
         })}
-        <a className="sidebar-link" href="/portal/mariana-modas" target="_blank" rel="noreferrer">
+        {usuario.lojaSlug && <a className="sidebar-link" href={`/portal/${encodeURIComponent(usuario.lojaSlug)}`} target="_blank" rel="noreferrer">
           Portal do cliente<span className="so-leitor"> (abre em nova aba)</span>
-        </a>
+        </a>}
       </nav>
 
       <div className="sidebar-rodape">

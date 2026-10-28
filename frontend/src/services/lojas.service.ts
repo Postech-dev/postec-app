@@ -4,6 +4,7 @@ import type { LinhaLojaApi } from '../utils/adaptadores'
 import { ErroApi, api } from './api'
 import { usuarioLogado } from './auth.service'
 import { obterPlano } from './plano.service'
+import { gravarSessao, lerSessao } from './sessao'
 
 const ERRO_LOJA = 'Não encontramos essa loja. Confira o endereço do portal com a loja ou volte à lista de lojas.'
 
@@ -46,7 +47,12 @@ export async function salvarLoja(id: number, dados: DadosLoja): Promise<Loja> {
     prazo_resposta_dias: dados.prazoRespostaDias,
     endereco_devolucao: dados.enderecoDevolucao,
   })
-  return comPlano(adaptarLoja(resposta.loja))
+  const loja = adaptarLoja(resposta.loja)
+  const sessao = lerSessao()
+  if (sessao?.usuario.lojaId === loja.id) {
+    gravarSessao({ ...sessao, usuario: { ...sessao.usuario, lojaNome: loja.nome, lojaSlug: loja.slug } })
+  }
+  return comPlano(loja)
 }
 
 // a exclusão ainda não apaga nada: a tela só confirma

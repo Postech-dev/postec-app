@@ -29,7 +29,7 @@ export async function login(req: Request, res: Response): Promise<void> {
              l.nome AS loja_nome, l.slug AS loja_slug, l.plano AS loja_plano
       FROM usuarios u
       JOIN lojas l ON l.id = u.loja_id
-      WHERE u.email = $1
+      WHERE lower(u.email) = lower($1)
     `;
     const result = await pool.query(query, [email]);
 
@@ -98,7 +98,7 @@ export async function cadastro(req: Request, res: Response): Promise<void> {
       return;
     }
 
-    const existente = await client.query('SELECT 1 FROM usuarios WHERE email = $1', [email]);
+    const existente = await client.query('SELECT 1 FROM usuarios WHERE lower(email) = lower($1)', [email]);
     if (existente.rows.length > 0) {
       res.status(409).json({ mensagem: 'Este e-mail já tem cadastro. Entre com ele ou use outro e-mail.' });
       return;
@@ -146,8 +146,13 @@ export async function cadastro(req: Request, res: Response): Promise<void> {
     });
   } catch (error) {
     await client.query('ROLLBACK');
-    console.error('Erro ao cadastrar:', error);
-    res.status(500).json({ mensagem: 'Erro interno ao cadastrar' });
+    const falha = error as { code?: string; constraint?: string };
+    if (falha.code === '23505' && falha.constraint?.startsWith('usuarios_email')) {
+      res.status(409).json({ mensagem: 'Este e-mail já tem cadastro. Entre com ele ou use outro e-mail.' });
+    } else {
+      console.error('Erro ao cadastrar:', error);
+      res.status(500).json({ mensagem: 'Erro interno ao cadastrar' });
+    }
   } finally {
     client.release();
   }

@@ -1,6 +1,8 @@
 import express from 'express';
+import { internalRoutes } from './routes/internal.routes';
 import lojasRoutes from './routes/lojas.routes';
 import authRoutes from './routes/auth.routes';
+import equipeRoutes from './routes/equipe.routes';
 import portalRoutes from './routes/portal.routes';
 import painelRoutes from './routes/painel.routes';
 import pedidosRoutes from './routes/pedidos.routes';
@@ -36,8 +38,10 @@ app.get('/', (req, res) => {
 });
 
 // Registra as rotas da aplicação com prefixo /api
+app.use('/api', internalRoutes);
 app.use('/api', lojasRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/equipe', equipeRoutes);
 app.use('/api/portal', portalRoutes);
 app.use('/api/painel', painelRoutes);
 

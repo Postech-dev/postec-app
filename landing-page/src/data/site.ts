@@ -9,9 +9,27 @@ export const site = {
   contactUrl: 'mailto:suporte@postec.com?subject=Quero%20conhecer%20a%20PosTec',
   integrations: ['Yampi', 'Reportana', 'bling', 'shopify', 'nuvemshop', 'WhatsApp'],
   plans: [
-    { name: 'Starter', price: '149', audience: 'O primeiro passo para organizar seu pós-venda.', tag: 'Para começar' },
-    { name: 'Pro', price: '399', audience: 'Uma nova fase para a operação da sua loja.', tag: 'Para crescer' },
-    { name: 'Business', price: '899', audience: 'O próximo capítulo do seu pós-venda.', tag: 'Para expandir' },
+    {
+      name: 'Starter',
+      price: '149',
+      audience: 'O primeiro passo para organizar seu pós-venda.',
+      tag: 'Para começar',
+      features: ['Fluxo de ocorrências e portal do cliente', 'Pedidos por planilha (CSV)', 'Cadastro manual de pedidos'],
+    },
+    {
+      name: 'Pro',
+      price: '399',
+      audience: 'Uma nova fase para a operação da sua loja.',
+      tag: 'Para crescer',
+      features: ['Tudo do Starter', 'Integração automática com a plataforma da loja', 'Pedidos sincronizados sem digitação'],
+    },
+    {
+      name: 'Business',
+      price: '899',
+      audience: 'O próximo capítulo do seu pós-venda.',
+      tag: 'Para expandir',
+      features: ['Tudo do Pro', 'Abertura de ocorrência pelo lojista (CRM)', 'Ficha do cliente e métricas de atendimento'],
+    },
   ],
   faq: [
     { question: 'O que é a PosTec?', answer: 'É uma proposta de plataforma SaaS para centralizar o pós-venda de pequenos e-commerces. A ideia é reunir pedidos, ocorrências, atendimento, reenvios, estornos e acompanhamento logístico em um único ambiente.' },

@@ -1,4 +1,5 @@
 import IntegracaoNuvemshop from '../components/IntegracaoNuvemshop/IntegracaoNuvemshop'
+import IntegracoesEmBreve from '../components/IntegracoesEmBreve/IntegracoesEmBreve'
 import PageHeader from '../components/PageHeader/PageHeader'
 import PlanGate from '../components/PlanGate/PlanGate'
 import './pages.css'
@@ -13,6 +14,7 @@ function IntegracoesPage() {
       />
       <PlanGate recurso="integracao">
         <IntegracaoNuvemshop />
+        <IntegracoesEmBreve />
       </PlanGate>
     </div>
   )

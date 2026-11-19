@@ -51,7 +51,9 @@ function IntegracaoNuvemshop() {
   return (
     <Card>
       <div className="integracao">
-        <div className="integracao-nome" aria-hidden="true">N</div>
+        <span className="integracao-logo" aria-hidden="true">
+          <img src="/integracoes/nuvemshop.png" alt="" />
+        </span>
         <div className="integracao-dados">
           <h2 className="card-titulo">Nuvemshop</h2>
           <p>Importe os pedidos da sua loja e acompanhe as atualizações automaticamente.</p>

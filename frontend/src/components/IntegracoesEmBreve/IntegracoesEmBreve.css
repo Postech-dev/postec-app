@@ -1,0 +1,56 @@
+.embreve-titulo {
+  margin-top: var(--space-6);
+  font-size: 16px;
+}
+
+.embreve-grade {
+  list-style: none;
+  margin: var(--space-3) 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: var(--space-4);
+}
+
+.embreve-card {
+  display: flex;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  background: var(--white);
+  box-shadow: var(--shadow-card);
+}
+
+/* sem ação disponível: o card fica levemente recuado */
+.embreve-card .integracao-logo img {
+  filter: saturate(0.9);
+}
+
+.embreve-dados {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.embreve-dados strong {
+  font-size: 14px;
+}
+
+.embreve-dados p {
+  color: var(--ink-soft);
+  font-size: 13px;
+}
+
+.embreve-badge {
+  align-self: flex-start;
+  margin-top: 2px;
+  padding: 2px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--brand-border);
+  background: var(--brand-soft);
+  color: var(--action);
+  font-size: 12px;
+  font-weight: 600;
+}

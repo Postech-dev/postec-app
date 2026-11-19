@@ -52,7 +52,7 @@
 
 .detalhe-titulo {
   font-size: 20px;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--ink);
   margin: 0 0 var(--space-1);
   line-height: 1.25;
@@ -169,14 +169,16 @@
   font: inherit;
   font-size: 12px;
   font-weight: 600;
-  color: var(--action);
-  background: var(--brand-soft, #fff6ee);
-  border: 1px solid var(--brand-border, #ffd5a8);
-  border-radius: 999px;
-  padding: 3px 12px;
+  color: var(--ink-soft);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 8px 12px;
+  max-width: 100%;
+  text-align: left;
   cursor: pointer;
   transition: background 0.12s, color 0.12s;
-  white-space: nowrap;
+  white-space: normal;
 }
 
 .detalhe-chip:hover {

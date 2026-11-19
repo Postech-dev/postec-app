@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react'
+import { Upload } from 'lucide-react'
 import { validarArquivo } from '../../utils/arquivo'
 import '../Input/Input.css'
 import './FileUpload.css'
@@ -72,7 +73,7 @@ function FileUpload({ rotulo, dica, arquivo, onChange, erro }: FileUploadProps) 
           className={`upload-botao ${mensagemErro ? 'upload-invalido' : ''}`}
           onClick={() => ref.current?.click()}
         >
-          <strong>↑ {rotulo}</strong>
+          <strong><Upload size={14} strokeWidth={1.8} aria-hidden="true" /> {rotulo}</strong>
           <span>{dica}</span>
         </button>
       )}

@@ -1,0 +1,82 @@
+.chart-container {
+  width: 100%;
+  font-size: 12px;
+}
+
+/* eixos e grid recessivos, no tom do texto suave */
+.chart-container .recharts-cartesian-axis-tick text {
+  fill: var(--ink-soft);
+  font-size: 12px;
+}
+
+.chart-container .recharts-cartesian-grid line {
+  stroke: var(--line);
+}
+
+/* tooltip estilo shadcn/ui */
+.chart-tooltip {
+  min-width: 140px;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-ctrl);
+  background: var(--white);
+  box-shadow: 0 4px 12px rgba(35, 42, 52, 0.08);
+  font-size: 12px;
+}
+
+.chart-tooltip-titulo {
+  display: block;
+  margin-bottom: var(--space-1);
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.chart-tooltip-lista {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.chart-tooltip-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.chart-tooltip-nome {
+  color: var(--ink-soft);
+}
+
+.chart-tooltip-valor {
+  margin-left: auto;
+  font-weight: 600;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.chart-swatch {
+  width: 10px;
+  height: 10px;
+  flex-shrink: 0;
+  border-radius: 3px;
+}
+
+/* legenda */
+.chart-legenda {
+  list-style: none;
+  margin: 0 0 var(--space-2);
+  padding: 0;
+  display: flex;
+  gap: var(--space-4);
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+
+.chart-legenda-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}

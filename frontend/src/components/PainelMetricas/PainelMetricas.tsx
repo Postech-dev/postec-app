@@ -1,4 +1,5 @@
 import { useCallback, useState } from 'react'
+import { Bar, BarChart, CartesianGrid, Legend, Tooltip, XAxis, YAxis } from 'recharts'
 import type { ItemSemana } from '../../types'
 import { useDados } from '../../hooks/useDados'
 import { obterMetricas } from '../../services/metricas.service'
@@ -7,6 +8,8 @@ import { FLUXO } from '../../utils/status'
 import Card from '../Card/Card'
 import ErroCarregamento from '../ErroCarregamento/ErroCarregamento'
 import GraficoBarras from '../GraficoBarras/GraficoBarras'
+import { ChartContainer, ChartLegendContent, ChartTooltipContent } from '../ui/chart'
+import type { ChartConfig } from '../ui/chart'
 import StatCard from '../StatCard/StatCard'
 import StatusBadge from '../StatusBadge/StatusBadge'
 import './PainelMetricas.css'
@@ -29,77 +32,33 @@ function SkeletonCard() {
   return <div className="metricas-skeleton" aria-hidden="true" />
 }
 
-// gráfico de barras agrupadas abertas x concluídas por semana (SVG simples)
+// gráfico de barras agrupadas abertas x concluídas por semana (Recharts, padrão shadcn/ui)
+const configSemanal: ChartConfig = {
+  abertas: { label: 'Abertas', color: 'var(--action)' },
+  concluidas: { label: 'Concluídas', color: 'var(--green)' },
+}
+
 function GraficoSemanal({ dados }: { dados: ItemSemana[] }) {
-  const alturaMax = 80
-  const larguraBarra = 14
-  const gap = 4
-  const grupoPasso = larguraBarra * 2 + gap + 8
-  const larguraTotal = dados.length * grupoPasso + 20
-  const maximo = Math.max(1, ...dados.flatMap((s) => [s.abertas, s.concluidas]))
-
-  function altBarra(v: number) {
-    return Math.max(2, (v / maximo) * alturaMax)
-  }
-
   return (
     <Card titulo="Abertas × concluídas por semana">
       {dados.every((s) => s.abertas === 0 && s.concluidas === 0) ? (
         <p className="grafico-vazio">Ainda não há dados para mostrar.</p>
       ) : (
-        <div className="grafico-semanal">
-          <div className="grafico-semanal-legenda">
-            <span className="grafico-semanal-leg grafico-semanal-leg-abertas">Abertas</span>
-            <span className="grafico-semanal-leg grafico-semanal-leg-concluidas">Concluídas</span>
-          </div>
-          <svg
-            viewBox={`0 0 ${larguraTotal} ${alturaMax + 24}`}
-            aria-label="Gráfico de barras abertas versus concluídas por semana"
-            role="img"
-          >
-            {dados.map((s, i) => {
-              const x = i * grupoPasso + 10
-              const hA = altBarra(s.abertas)
-              const hC = altBarra(s.concluidas)
-              return (
-                <g key={s.rotulo}>
-                  {/* barra abertas */}
-                  <rect
-                    x={x}
-                    y={alturaMax - hA}
-                    width={larguraBarra}
-                    height={hA}
-                    rx={3}
-                    fill="var(--action)"
-                    opacity={0.85}
-                    aria-label={`${s.rotulo}: ${s.abertas} abertas`}
-                  />
-                  {/* barra concluídas */}
-                  <rect
-                    x={x + larguraBarra + gap}
-                    y={alturaMax - hC}
-                    width={larguraBarra}
-                    height={hC}
-                    rx={3}
-                    fill="var(--green)"
-                    opacity={0.85}
-                    aria-label={`${s.rotulo}: ${s.concluidas} concluídas`}
-                  />
-                  {/* rótulo semana */}
-                  <text
-                    x={x + larguraBarra}
-                    y={alturaMax + 16}
-                    textAnchor="middle"
-                    fontSize={9}
-                    fill="var(--ink-soft)"
-                  >
-                    {s.rotulo}
-                  </text>
-                </g>
-              )
-            })}
-          </svg>
-        </div>
+        <ChartContainer
+          config={configSemanal}
+          altura={260}
+          rotuloAcessivel="Gráfico de barras abertas versus concluídas por semana"
+        >
+          <BarChart data={dados} margin={{ top: 8, right: 8, bottom: 0, left: 0 }} barGap={4}>
+            <CartesianGrid vertical={false} />
+            <XAxis dataKey="rotulo" tickLine={false} axisLine={false} tickMargin={10} />
+            <YAxis allowDecimals={false} width={28} tickLine={false} axisLine={false} />
+            <Tooltip cursor={{ fill: 'var(--bg)' }} content={<ChartTooltipContent />} />
+            <Bar dataKey="abertas" fill="var(--color-abertas)" radius={[4, 4, 0, 0]} maxBarSize={24} />
+            <Bar dataKey="concluidas" fill="var(--color-concluidas)" radius={[4, 4, 0, 0]} maxBarSize={24} />
+            <Legend verticalAlign="top" align="left" content={<ChartLegendContent />} />
+          </BarChart>
+        </ChartContainer>
       )}
     </Card>
   )
@@ -183,7 +142,7 @@ function PainelMetricas() {
         <>
           <div className="metricas-graficos">
             <GraficoBarras titulo="Por motivo" itens={dados.porMotivo} />
-            <GraficoBarras titulo="Por canal de origem" itens={dados.porCanal} cor="var(--blue)" />
+            <GraficoBarras titulo="Por canal de origem" itens={dados.porCanal} cor="var(--ink-soft)" />
           </div>
 
           {/* por etapa na ordem do fluxo */}

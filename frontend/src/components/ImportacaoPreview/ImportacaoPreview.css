@@ -13,7 +13,7 @@
 .previa-contador {
   display: flex;
   flex-direction: column;
-  padding: 14px 16px;
+  padding: 16px 16px;
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: var(--white);
@@ -21,7 +21,7 @@
 
 .previa-contador strong {
   font-size: 28px;
-  font-weight: 800;
+  font-weight: 600;
   line-height: 1.2;
 }
 
@@ -54,16 +54,16 @@
 }
 
 .previa th {
-  padding: 8px 10px;
+  padding: 8px 12px;
   text-align: left;
   font-size: 11px;
-  letter-spacing: 0.06em;
+  letter-spacing: 0;
   color: var(--ink-soft);
   background: var(--bg);
 }
 
 .previa td {
-  padding: 8px 10px;
+  padding: 8px 12px;
   border-top: 1px solid var(--line);
 }
 

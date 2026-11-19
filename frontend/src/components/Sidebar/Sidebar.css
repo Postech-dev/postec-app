@@ -22,9 +22,9 @@
 }
 
 .sidebar-lema {
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0;
   color: var(--ink-soft);
 }
 
@@ -32,7 +32,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 10px 12px;
+  padding: 12px 12px;
   border: 1px solid var(--line);
   border-radius: 10px;
   background: var(--bg);
@@ -41,7 +41,7 @@
 }
 
 .sidebar-loja-nome {
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .sidebar-loja-plano {
@@ -58,20 +58,30 @@
 .sidebar-grupo {
   padding: 0 12px 4px;
   font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
+  font-weight: 600;
+  letter-spacing: 0;
   color: var(--ink-soft);
 }
 
 .sidebar-link {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  min-height: 44px;
-  padding: 10px 12px;
+  gap: 10px;
+  min-height: 36px;
+  padding: 8px 12px;
   border-radius: 10px;
   color: var(--ink);
   font-weight: 600;
+}
+
+.sidebar-link-icone {
+  display: inline-flex;
+  flex-shrink: 0;
+  color: var(--ink-soft);
+}
+
+.sidebar-link-ativo .sidebar-link-icone {
+  color: var(--action);
 }
 
 .sidebar-link:hover {
@@ -81,7 +91,7 @@
 
 .sidebar-link-ativo,
 .sidebar-link-ativo:hover {
-  background: var(--brand-soft);
+  background: var(--bg);
   color: var(--action);
 }
 
@@ -89,7 +99,7 @@
   margin-top: auto;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 16px;
 }
 
 .sidebar-dica {
@@ -97,15 +107,15 @@
   flex-direction: column;
   padding: 12px;
   border-radius: 10px;
-  background: var(--brand-soft);
-  color: var(--action);
+  background: var(--bg);
+  color: var(--ink-soft);
   font-size: 12px;
 }
 
 .sidebar-usuario {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 
 .sidebar-usuario-dados {
@@ -121,6 +131,9 @@
 }
 
 .sidebar-sair {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
   min-height: 44px;
   padding-inline: 8px;
   margin-left: auto;
@@ -136,24 +149,25 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 34px;
-  height: 34px;
+  width: 36px;
+  height: 36px;
   flex-shrink: 0;
   border-radius: 50%;
-  background: var(--action);
-  color: var(--white);
+  background: var(--bg);
+  color: var(--ink-soft);
   font-size: 12px;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .sidebar-contador {
+  margin-left: auto;
   min-width: 22px;
-  padding: 1px 7px;
-  border-radius: 999px;
-  background: var(--action);
-  color: var(--white);
+  padding: 0 4px;
+  border-radius: 4px;
+  background: var(--bg);
+  color: var(--ink-soft);
   font-size: 12px;
-  font-weight: 700;
+  font-weight: 600;
   text-align: center;
 }
 
@@ -184,5 +198,6 @@
 
 .sidebar-cadeado {
   margin-left: auto;
-  font-size: 12px;
+  display: inline-flex;
+  color: var(--ink-soft);
 }

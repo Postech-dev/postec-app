@@ -1,0 +1,30 @@
+DEMO POSTEC — LUIZ_SHOP
+
+Dados fictícios cadastrados no ambiente publicado.
+
+1. Abra https://postec-app.vercel.app/ocorrencias e atualize a página.
+2. Mostre os filtros, mensagens não lidas e o Kanban.
+3. Abra cada caso abaixo para demonstrar a evolução do atendimento.
+
+POS-1001 | Novo | Tamanho Errado | DEMO-NOV26-001
+POS-1002 | Novo | Produto com Defeito | DEMO-NOV26-002
+POS-1003 | Novo | Item Faltante | DEMO-NOV26-003
+POS-1004 | Em Triagem | Produto Diferente | DEMO-NOV26-004
+POS-1005 | Em Triagem | Atraso na Entrega | DEMO-NOV26-005
+POS-1006 | Aguardando Devolução | Tamanho Errado | DEMO-NOV26-006
+POS-1007 | Aguardando Devolução | Arrependimento | DEMO-NOV26-007
+POS-1008 | Reenvio Solicitado | Produto com Defeito | DEMO-NOV26-008
+POS-1009 | Reenvio Solicitado | Produto Diferente | DEMO-NOV26-009
+POS-1010 | Estorno Solicitado | Arrependimento | DEMO-NOV26-010
+POS-1011 | Estorno Solicitado | Item Faltante | DEMO-NOV26-011
+POS-1012 | Concluído | Tamanho Errado | DEMO-NOV26-012
+POS-1013 | Concluído | Produto com Defeito | DEMO-NOV26-013
+POS-1014 | Concluído | Item Faltante | DEMO-NOV26-014
+
+4. Abra Pedidos e busque DEMO-NOV26. Há clientes com mais de uma compra.
+5. Abra Métricas e compare 7 e 30 dias.
+6. Portal do cliente: https://postec-app.vercel.app/portal/luiz-shop
+Pedido para consulta: DEMO-NOV26-001
+CPF sintético de teste: 91000013928
+
+Reenvios e estornos são registros fictícios. Nenhuma operação financeira foi executada.

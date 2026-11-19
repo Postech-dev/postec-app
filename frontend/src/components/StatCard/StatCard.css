@@ -8,12 +8,12 @@
   background: var(--white);
   border: 1px solid var(--line);
   border-radius: var(--radius-card);
-  box-shadow: var(--shadow-card);
+  box-shadow: none;
 }
 
 .stat-valor {
   font-size: clamp(24px, 3vw, 32px);
-  font-weight: 800;
+  font-weight: 500;
   line-height: 1;
   flex-shrink: 0;
 }
@@ -26,8 +26,8 @@
 }
 
 .stat-brand { color: var(--action); }
-.stat-blue  { color: var(--blue); }
-.stat-green { color: var(--green); }
+.stat-blue  { color: var(--ink); }
+.stat-green { color: var(--ink); }
 .stat-ink   { color: var(--ink); }
 
 .stat-botao {
@@ -47,5 +47,5 @@
 
 .stat-ativo {
   border-color: var(--action);
-  box-shadow: 0 0 0 2px var(--brand-border);
+  box-shadow: inset 3px 0 var(--action);
 }

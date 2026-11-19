@@ -17,7 +17,7 @@
 .campo-input {
   width: 100%;
   min-height: var(--ctrl-height);
-  padding: 8px 14px;
+  padding: 8px 16px;
   border: 1px solid var(--line);
   border-radius: var(--radius-ctrl);
   background: var(--white);

@@ -27,8 +27,8 @@
 }
 
 .metricas-periodo-ativo {
-  background: var(--action);
-  color: var(--white) !important;
+  background: var(--bg);
+  color: var(--ink) !important;
 }
 
 /* KPIs: 5 colunas desktop, 2 tablet, 1 mobile */
@@ -80,7 +80,7 @@
 /* gráficos: 2 por linha */
 .metricas-graficos {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
   gap: var(--space-6);
 }
 
@@ -130,47 +130,10 @@
 }
 
 .metricas-etapa-num {
-  font-weight: 700;
+  font-weight: 600;
   font-size: 14px;
   text-align: right;
 }
-
-/* gráfico semanal SVG */
-.grafico-semanal {
-  overflow-x: auto;
-  padding-bottom: 4px;
-}
-
-.grafico-semanal svg {
-  min-width: 300px;
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-.grafico-semanal-legenda {
-  display: flex;
-  gap: var(--space-4);
-  font-size: 12px;
-  margin-bottom: var(--space-2);
-}
-
-.grafico-semanal-leg {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.grafico-semanal-leg::before {
-  content: '';
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  border-radius: 2px;
-}
-
-.grafico-semanal-leg-abertas::before  { background: var(--action); }
-.grafico-semanal-leg-concluidas::before { background: var(--green); }
 
 /* sem dados no período */
 .metricas-sem-dados {

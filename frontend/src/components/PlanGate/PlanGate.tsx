@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import type { ReactNode } from 'react'
+import { Lock } from 'lucide-react'
 import { usePlano } from '../../hooks/usePlano'
 import type { Recurso } from '../../types'
 import { NOMES } from '../../utils/planos'
@@ -23,7 +24,7 @@ function PlanGate({ recurso, children }: PlanGateProps) {
   return (
     <div className="gate">
       <div className="gate-aviso" role="status">
-        <span aria-hidden="true">🔒</span>
+        <Lock size={15} strokeWidth={1.8} aria-hidden="true" />
         <strong>Disponível no plano {NOMES[planoMinimo(recurso)]}</strong>
         <Button onClick={() => setPlanos(true)}>Conhecer planos</Button>
       </div>

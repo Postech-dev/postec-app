@@ -86,9 +86,9 @@ function EditarLojaPage() {
     <div className="pagina">
       <BackLink to="/lojas">Minhas lojas</BackLink>
       <PageHeader
-        eyebrow="DADOS DA LOJA"
+        eyebrow="Dados da loja"
         titulo={`Editar ${loja.nome}`}
-        subtitulo="As informações abaixo identificam sua loja e o portal público."
+        subtitulo="As informações abaixo identificam sua loja e o portal público"
       />
       <form onSubmit={salvar} noValidate>
         <Card>

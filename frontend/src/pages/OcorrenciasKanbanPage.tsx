@@ -23,8 +23,8 @@ function OcorrenciasKanbanPage() {
   return (
     <div className="pagina pagina-kanban">
       <PageHeader
-        eyebrow="OCORRÊNCIAS"
-        titulo="Seu pós-venda, sob controle."
+        eyebrow="Ocorrências"
+        titulo="Ocorrências"
         acoes={
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
             <ViewToggle />

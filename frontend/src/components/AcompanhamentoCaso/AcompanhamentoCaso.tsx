@@ -92,7 +92,7 @@ function AcompanhamentoCaso({ ocorrencia: o, slug, onAtualizar }: Acompanhamento
       <PageHeader
         eyebrow={`${o.protocolo} · ${o.pedido.numero}`}
         titulo={concluida ? 'Sua solicitação foi resolvida.' : 'Sua solicitação está em andamento.'}
-        subtitulo="Veja as atualizações e converse com a loja."
+        subtitulo="Veja as atualizações e converse com a loja"
         acoes={
           <div className="portal-selos">
             <StatusBadge status={o.status} cliente />
@@ -144,7 +144,7 @@ function AcompanhamentoCaso({ ocorrencia: o, slug, onAtualizar }: Acompanhamento
             accept=".pdf,.jpg,.jpeg,.png"
             onChange={(e) => setAnexo(e.target.files?.[0] ?? null)}
           />
-          {anexo && <span className="portal-nota">📎 {anexo.name}</span>}
+          {anexo && <span className="portal-nota">Anexo: {anexo.name}</span>}
           <div className="portal-botoes">
             <Button type="submit" carregando={enviando}>
               Responder

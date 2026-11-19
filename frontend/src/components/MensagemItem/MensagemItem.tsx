@@ -23,7 +23,7 @@ function MensagemItem({ mensagem, perspectiva }: { mensagem: Mensagem; perspecti
         {mensagem.interna && <strong className="msg-nota-rotulo"> • Nota interna • Só a equipe vê</strong>}
       </span>
       <p>{mensagem.texto}</p>
-      {mensagem.anexo && <span className="msg-anexo">📎 {mensagem.anexo}</span>}
+      {mensagem.anexo && <span className="msg-anexo">Anexo: {mensagem.anexo}</span>}
     </div>
   )
 }

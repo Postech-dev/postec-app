@@ -23,9 +23,9 @@ function NovaOcorrenciaPage() {
     <div className="pagina">
       <BackLink to="/ocorrencias">Ocorrências</BackLink>
       <PageHeader
-        eyebrow="OCORRÊNCIAS"
+        eyebrow="Ocorrências"
         titulo="Nova ocorrência"
-        subtitulo="Registre um contato que chegou por fora do portal e já responda ao cliente."
+        subtitulo="Registre um contato que chegou por fora do portal e já responda ao cliente"
       />
       <PlanGate recurso="crm">
         {erro ? (

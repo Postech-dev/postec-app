@@ -18,8 +18,8 @@ function PortalPedidoPage() {
     <>
       <BackLink to={`/portal/${slug}`}>Voltar</BackLink>
       <PageHeader
-        eyebrow="PEDIDO ENCONTRADO"
-        titulo={`Olá, ${pedido.cliente.nome.split(' ')[0]}!`}
+        eyebrow="Pedido encontrado"
+        titulo="Seu pedido"
         subtitulo={`Encontramos sua compra na ${loja.nome}.`}
       />
       <PedidoCard pedido={pedido} variante="portal" />

@@ -7,8 +7,8 @@ function MetricasPage() {
   return (
     <div className="pagina">
       <PageHeader
-        titulo="Como está o seu pós-venda."
-        subtitulo="Números simples para saber onde melhorar."
+        titulo="Métricas do pós-venda"
+        subtitulo="Números simples para saber onde melhorar"
       />
       <PlanGate recurso="metricas">
         <PainelMetricas />

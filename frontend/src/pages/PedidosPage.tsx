@@ -48,9 +48,9 @@ function PedidosPage() {
   return (
     <div className="pagina">
       <PageHeader
-        eyebrow="PEDIDOS"
-        titulo="Os pedidos da sua loja."
-        subtitulo="É por eles que o cliente abre uma solicitação. Mantenha a lista atualizada."
+        eyebrow="Pedidos"
+        titulo="Pedidos"
+        subtitulo="É por eles que o cliente abre uma solicitação. Mantenha a lista atualizada"
         acoes={
           <>
             <Button to="/pedidos/importar" variante="secundario">

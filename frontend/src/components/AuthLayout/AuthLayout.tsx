@@ -8,7 +8,7 @@ interface AuthLayoutProps {
   children: ReactNode
 }
 
-// tela dividida: card sobre o laranja à esquerda, marca à direita
+// Acesso à esquerda e identidade do produto à direita.
 function AuthLayout({ titulo, subtitulo, children }: AuthLayoutProps) {
   return (
     <div className="auth">
@@ -27,7 +27,7 @@ function AuthLayout({ titulo, subtitulo, children }: AuthLayoutProps) {
         <p className="auth-nome">
           Pos<span>Tec</span>
         </p>
-        <p className="auth-slogan">Tecnologia e praticidade para Pós Vendas.</p>
+        <p className="auth-slogan">Pedidos, trocas e devoluções em ordem</p>
       </section>
     </div>
   )

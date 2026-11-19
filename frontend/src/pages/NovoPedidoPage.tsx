@@ -14,9 +14,9 @@ function NovoPedidoPage() {
     <div className="pagina">
       <BackLink to="/pedidos">Pedidos</BackLink>
       <PageHeader
-        eyebrow="PEDIDOS"
+        eyebrow="Pedidos"
         titulo="Cadastrar pedido"
-        subtitulo="Use para pedidos avulsos. Para vários de uma vez, importe um CSV."
+        subtitulo="Use para pedidos avulsos. Para vários de uma vez, importe um CSV"
       />
       <PedidoForm
         onSalvar={async (dados) => {

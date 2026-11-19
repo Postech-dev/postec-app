@@ -29,7 +29,7 @@
   border: 1px solid var(--action);
   border-radius: calc(var(--radius-ctrl) - 2px);
   font-size: 12px;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--action);
   background: transparent;
   white-space: nowrap;

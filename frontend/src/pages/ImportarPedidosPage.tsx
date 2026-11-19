@@ -62,9 +62,9 @@ function ImportarPedidosPage() {
     <div className="pagina">
       <BackLink to="/pedidos">Pedidos</BackLink>
       <PageHeader
-        eyebrow="PEDIDOS"
+        eyebrow="Pedidos"
         titulo="Importar pedidos por CSV"
-        subtitulo="Envie a planilha da sua loja. Você confere tudo antes de importar."
+        subtitulo="Envie a planilha da sua loja. Você confere tudo antes de importar"
       />
 
       {!resultado ? (

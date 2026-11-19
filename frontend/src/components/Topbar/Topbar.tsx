@@ -1,4 +1,5 @@
 import { useLocation } from 'react-router-dom'
+import { Menu, X } from 'lucide-react'
 import type { Usuario } from '../../types'
 import { HOJE, formatarDiaCompleto, iniciais } from '../../utils/format'
 import './Topbar.css'
@@ -41,7 +42,7 @@ function Topbar({ usuario, menuAberto, onMenu }: TopbarProps) {
         aria-expanded={menuAberto}
         aria-controls="menu-principal"
       >
-        ☰
+        {menuAberto ? <X size={20} aria-hidden="true" /> : <Menu size={20} aria-hidden="true" />}
       </button>
       <span className="topbar-caminho">
         {crumb ? (

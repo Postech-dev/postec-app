@@ -55,9 +55,9 @@ function EquipePage() {
   return (
     <div className="pagina">
       <PageHeader
-        eyebrow="ADMINISTRAÇÃO"
-        titulo="Quem cuida do seu pós-venda."
-        subtitulo="Administradores gerenciam a loja; atendentes acompanham e resolvem ocorrências."
+        eyebrow="Administração"
+        titulo="Equipe"
+        subtitulo="Administradores gerenciam a loja; atendentes acompanham e resolvem ocorrências"
       />
 
       <div className="pagina-grid">

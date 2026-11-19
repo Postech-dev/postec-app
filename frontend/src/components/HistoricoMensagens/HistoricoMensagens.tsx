@@ -1,4 +1,5 @@
 import { useEffect, useImperativeHandle, useRef, useState, forwardRef } from 'react'
+import { ArrowDown } from 'lucide-react'
 import type { Mensagem } from '../../types'
 import { diaDe, formatarSeparadorDia } from '../../utils/format'
 import MensagemItem from '../MensagemItem/MensagemItem'
@@ -63,7 +64,7 @@ const HistoricoMensagens = forwardRef<HistoricoHandle, HistoricoMensagensProps>(
             onClick={() => rolarParaFim(true)}
             aria-label="Ir para a última mensagem"
           >
-            ↓ Última mensagem
+            <ArrowDown size={13} strokeWidth={1.8} aria-hidden="true" /> Última mensagem
           </button>
         )}
       </div>

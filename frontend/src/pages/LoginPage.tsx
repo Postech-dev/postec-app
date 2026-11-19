@@ -37,12 +37,12 @@ function LoginPage() {
   }
 
   return (
-    <AuthLayout titulo="Bem-vindo!" subtitulo="Acesse sua conta">
+    <AuthLayout titulo="Acesse sua conta" subtitulo="Pedidos e ocorrências em um só lugar">
       <form className="form-coluna" onSubmit={enviar} noValidate style={{ gap: 12 }}>
         <Input
-          label="Email"
+          label="E-mail"
           type="email"
-          placeholder="Insira seu email"
+          placeholder="nome@loja.com.br"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           erro={erros.email}
@@ -51,7 +51,7 @@ function LoginPage() {
         <Input
           label="Senha"
           type="password"
-          placeholder="Insira sua senha"
+          placeholder="Sua senha"
           value={senha}
           onChange={(e) => setSenha(e.target.value)}
           erro={erros.senha}

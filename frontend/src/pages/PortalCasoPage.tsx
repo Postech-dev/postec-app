@@ -18,7 +18,7 @@ function PortalCasoPage() {
   if (erro) {
     return (
       <>
-        <PageHeader titulo="Não foi possível abrir este link." />
+        <PageHeader titulo="Não foi possível abrir este link" />
         <div role="alert">
           <Alert>{erro}</Alert>
         </div>

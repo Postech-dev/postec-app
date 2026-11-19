@@ -23,8 +23,8 @@ function PortalRecebidaPage() {
   return (
     <>
       <PageHeader
-        eyebrow="ESTAMOS COM VOCÊ"
-        titulo={`Tudo certo, ${ocorrencia.pedido.cliente.nome.split(' ')[0]}.`}
+        eyebrow="Estamos com você"
+        titulo="Solicitação recebida"
         subtitulo={`A equipe da ${loja.nome} vai analisar a sua solicitação.`}
       />
       <Card titulo="Seu protocolo">

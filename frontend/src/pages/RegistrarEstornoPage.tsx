@@ -65,7 +65,7 @@ function RegistrarEstornoPage() {
       <ResolucaoLayout
         ocorrencia={ocorrencia}
         titulo="Registrar estorno"
-        subtitulo="Registre o estorno realizado e compartilhe o comprovante."
+        subtitulo="Registre o estorno realizado e compartilhe o comprovante"
         rotuloConfirmar="Confirmar estorno e concluir"
         etapa={etapa}
         carregando={enviando}

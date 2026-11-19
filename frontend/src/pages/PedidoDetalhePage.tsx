@@ -41,7 +41,7 @@ function PedidoDetalhePage() {
     <div className="pagina">
       <BackLink to="/pedidos">Pedidos</BackLink>
       <PageHeader
-        eyebrow="PEDIDO"
+        eyebrow="Pedido"
         titulo={p.numero}
         subtitulo={`${p.produto} • ${p.detalhe}`}
         acoes={

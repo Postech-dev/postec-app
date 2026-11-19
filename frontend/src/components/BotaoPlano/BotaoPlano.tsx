@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import type { ReactNode } from 'react'
+import { Lock } from 'lucide-react'
 import { usePlano } from '../../hooks/usePlano'
 import type { Recurso } from '../../types'
 import { NOMES } from '../../utils/planos'
@@ -30,7 +31,7 @@ function BotaoPlano({ recurso, to, variante = 'primario', children }: BotaoPlano
   return (
     <>
       <Button variante={variante} onClick={() => setPlanos(true)}>
-        <span aria-hidden="true">🔒 </span>
+        <Lock size={15} strokeWidth={1.8} aria-hidden="true" />
         {children}
         <span className="so-leitor"> (disponível no plano {NOMES[planoMinimo(recurso)]})</span>
       </Button>

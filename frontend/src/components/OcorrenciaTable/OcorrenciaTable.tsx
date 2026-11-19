@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { ArrowDown, ArrowUp, ArrowUpDown } from 'lucide-react'
 import type { Ocorrencia } from '../../types'
 import { diasDesde, formatarAbertura, pluralOcorrencias, tempoRelativo } from '../../utils/format'
 import CanalBadge from '../CanalBadge/CanalBadge'
@@ -60,8 +61,12 @@ function OcorrenciaTable({ itens, pagina, porPagina, onPagina }: OcorrenciaTable
   const visiveis = ordenados.slice((pagina - 1) * porPagina, pagina * porPagina)
 
   function icone(c: Coluna) {
-    if (coluna !== c) return <span className="otabela-sort" aria-hidden="true">↕</span>
-    return <span className="otabela-sort otabela-sort-ativo" aria-hidden="true">{direcao === 'asc' ? '↑' : '↓'}</span>
+    if (coluna !== c) return <span className="otabela-sort" aria-hidden="true"><ArrowUpDown size={12} strokeWidth={1.8} /></span>
+    return (
+      <span className="otabela-sort otabela-sort-ativo" aria-hidden="true">
+        {direcao === 'asc' ? <ArrowUp size={12} strokeWidth={2} /> : <ArrowDown size={12} strokeWidth={2} />}
+      </span>
+    )
   }
 
   function cabecalho(col: Coluna, label: string) {
@@ -78,14 +83,14 @@ function OcorrenciaTable({ itens, pagina, porPagina, onPagina }: OcorrenciaTable
         <table>
           <thead>
             <tr>
-              {cabecalho('protocolo', 'PROTOCOLO')}
-              {cabecalho('cliente', 'CLIENTE')}
-              {cabecalho('pedido', 'PEDIDO')}
-              {cabecalho('motivo', 'MOTIVO')}
-              {cabecalho('canal', 'CANAL')}
-              {cabecalho('status', 'STATUS')}
-              {cabecalho('responsavel', 'RESPONSÁVEL')}
-              {cabecalho('abertura', 'ABERTURA')}
+              {cabecalho('protocolo', 'Protocolo')}
+              {cabecalho('cliente', 'Cliente')}
+              {cabecalho('pedido', 'Pedido')}
+              {cabecalho('motivo', 'Motivo')}
+              {cabecalho('canal', 'Canal')}
+              {cabecalho('status', 'Status')}
+              {cabecalho('responsavel', 'Responsável')}
+              {cabecalho('abertura', 'Abertura')}
             </tr>
           </thead>
           <tbody>

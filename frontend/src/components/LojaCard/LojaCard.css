@@ -1,6 +1,6 @@
 .loja-ativa {
   display: inline-block;
-  padding: 3px 10px;
+  padding: 3px 12px;
   border-radius: 999px;
   background: var(--green-soft);
   color: var(--green);
@@ -10,7 +10,7 @@
 
 .loja-nome {
   font-size: 18px;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .loja-plano {
@@ -21,7 +21,7 @@
 .loja-portal {
   display: flex;
   flex-direction: column;
-  padding: 10px 12px;
+  padding: 12px 12px;
   border-radius: 10px;
   background: var(--bg);
   font-size: 12px;

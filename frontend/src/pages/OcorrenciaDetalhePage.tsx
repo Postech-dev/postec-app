@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import type { FormEvent, KeyboardEvent } from 'react'
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
+import { ChevronLeft } from 'lucide-react'
 import Button from '../components/Button/Button'
 import CanalBadge from '../components/CanalBadge/CanalBadge'
 import Card from '../components/Card/Card'
@@ -162,7 +163,7 @@ function OcorrenciaDetalhePage() {
       <header className="detalhe-header">
         <div className="detalhe-breadcrumb">
           <Link to={`/ocorrencias${lista}`} className="detalhe-back">
-            ← Ocorrências
+            <ChevronLeft size={14} strokeWidth={1.8} aria-hidden="true" /> Ocorrências
           </Link>
           <span aria-hidden="true">/</span>
           <span>{o.protocolo}</span>
@@ -246,7 +247,7 @@ function OcorrenciaDetalhePage() {
 
             <div className={`detalhe-envio ${nota ? 'detalhe-envio-nota' : ''}`}>
               <span className="detalhe-dica">
-                {nota ? '🔒 Só a equipe da loja vê esta nota.' : '📧 O cliente recebe por e-mail e vê no portal.'}
+                {nota ? 'Só a equipe da loja vê esta nota.' : 'O cliente recebe por e-mail e vê no portal.'}
               </span>
               <Button
                 type="submit"

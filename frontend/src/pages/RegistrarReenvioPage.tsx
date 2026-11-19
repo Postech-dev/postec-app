@@ -56,7 +56,7 @@ function RegistrarReenvioPage() {
       <ResolucaoLayout
         ocorrencia={ocorrencia}
         titulo="Registrar reenvio"
-        subtitulo="Informe os itens e o rastreio do novo envio."
+        subtitulo="Informe os itens e o rastreio do novo envio"
         rotuloConfirmar="Confirmar reenvio e concluir"
         etapa={etapa}
         carregando={enviando}

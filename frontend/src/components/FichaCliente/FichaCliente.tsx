@@ -31,7 +31,7 @@ function FichaCliente({ clienteId }: { clienteId: number }) {
     <>
       <BackLink to="/pedidos">Pedidos</BackLink>
       <PageHeader
-        eyebrow="CLIENTE"
+        eyebrow="Cliente"
         titulo={cliente.nome}
         subtitulo={`${cliente.email || 'E-mail não informado'} • ${cliente.cpf ? `CPF ${mascararCpf(cliente.cpf)}` : 'CPF não informado'}`}
         acoes={

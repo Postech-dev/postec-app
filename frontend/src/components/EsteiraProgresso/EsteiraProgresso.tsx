@@ -1,3 +1,4 @@
+import { Check } from 'lucide-react'
 import type { StatusOcorrencia } from '../../types'
 import './EsteiraProgresso.css'
 
@@ -38,7 +39,7 @@ function EsteiraProgresso({ status }: { status: StatusOcorrencia }) {
               aria-current={ativa ? 'step' : undefined}
             >
               <span className="esteira-bolinha" aria-hidden="true">
-                {feita ? '✓' : i + 1}
+                {feita ? <Check size={13} strokeWidth={2.4} /> : i + 1}
               </span>
               <span className="esteira-rotulo">{etapa.rotulo}</span>
               {i < ETAPAS.length - 1 && <span className="esteira-linha" aria-hidden="true" />}

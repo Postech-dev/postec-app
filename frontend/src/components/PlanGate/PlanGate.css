@@ -8,12 +8,12 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 8px 14px;
-  padding: 14px 16px;
-  border: 2px solid var(--action);
+  gap: 8px 16px;
+  padding: 16px 16px;
+  border: 1px solid var(--line);
   border-radius: var(--radius);
-  background: var(--brand-soft);
-  color: var(--action);
+  background: var(--white);
+  color: var(--ink);
 }
 
 .gate-conteudo {

@@ -69,9 +69,9 @@ function OcorrenciasPage() {
   return (
     <div className="pagina">
       <PageHeader
-        eyebrow="PAINEL DO LOJISTA"
-        titulo="Seu pós-venda, sob controle."
-        subtitulo="Acompanhe os casos da sua loja e saiba o que precisa de atenção."
+        eyebrow="Painel do lojista"
+        titulo="Ocorrências"
+        subtitulo="Acompanhe os casos da sua loja e saiba o que precisa de atenção"
         acoes={
           <BotaoPlano recurso="crm" to="/ocorrencias/nova">
             + Nova ocorrência

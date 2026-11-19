@@ -23,14 +23,14 @@
 
 .modal-titulo {
   font-size: 22px;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .modal-acoes {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-end;
-  gap: 10px;
+  gap: 12px;
   margin-top: 8px;
 }
 

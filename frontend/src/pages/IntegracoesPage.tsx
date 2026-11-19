@@ -7,9 +7,9 @@ function IntegracoesPage() {
   return (
     <div className="pagina">
       <PageHeader
-        eyebrow="CONFIGURAÇÃO"
+        eyebrow="Configuração"
         titulo="Integrações"
-        subtitulo="Conecte a plataforma da sua loja para os pedidos chegarem sozinhos."
+        subtitulo="Conecte a plataforma da sua loja para os pedidos chegarem sozinhos"
       />
       <PlanGate recurso="integracao">
         <IntegracaoNuvemshop />

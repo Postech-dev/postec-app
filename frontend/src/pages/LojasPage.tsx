@@ -44,9 +44,9 @@ function LojasPage() {
   return (
     <div className="pagina">
       <PageHeader
-        eyebrow="ADMINISTRAÇÃO"
+        eyebrow="Administração"
         titulo="Minhas lojas"
-        subtitulo="Gerencie os dados e o portal de atendimento de cada loja."
+        subtitulo="Gerencie os dados e o portal de atendimento de cada loja"
         acoes={<Button>+ Cadastrar loja</Button>}
       />
 

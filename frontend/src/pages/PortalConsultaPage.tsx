@@ -22,7 +22,7 @@ function PortalConsultaPage() {
         </h1>
         <p className="consulta-subtitulo">
           Se recebeu algo errado, com defeito ou quer devolver, você está no lugar certo.
-          Resolvemos para você de forma rápida.
+          Abra uma solicitação e acompanhe cada etapa por aqui.
         </p>
 
         <ol className="consulta-passos" aria-label="Como funciona">

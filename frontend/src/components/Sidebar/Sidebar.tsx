@@ -1,5 +1,17 @@
 import { useState } from 'react'
+import type { ComponentType } from 'react'
 import { NavLink } from 'react-router-dom'
+import {
+  ChartColumn,
+  Globe,
+  Inbox,
+  Lock,
+  LogOut,
+  Package,
+  Plug,
+  Store,
+  Users,
+} from 'lucide-react'
 import { usePlano } from '../../hooks/usePlano'
 import type { ContagensPainel, Recurso, Usuario } from '../../types'
 import { iniciais } from '../../utils/format'
@@ -20,17 +32,18 @@ interface SidebarProps {
 interface Item {
   to: string
   texto: string
+  icone: ComponentType<{ size?: number | string; strokeWidth?: number | string; 'aria-hidden'?: boolean }>
   // recurso pago: o item fica visível, com cadeado, quando o plano não inclui
   recurso?: Recurso
 }
 
 const links: Item[] = [
-  { to: '/ocorrencias', texto: 'Ocorrências' },
-  { to: '/pedidos', texto: 'Pedidos' },
-  { to: '/metricas', texto: 'Métricas', recurso: 'metricas' },
-  { to: '/integracoes', texto: 'Integrações', recurso: 'integracao' },
-  { to: '/lojas', texto: 'Minhas lojas' },
-  { to: '/equipe', texto: 'Equipe' },
+  { to: '/ocorrencias', texto: 'Ocorrências', icone: Inbox },
+  { to: '/pedidos', texto: 'Pedidos', icone: Package },
+  { to: '/metricas', texto: 'Métricas', icone: ChartColumn, recurso: 'metricas' },
+  { to: '/integracoes', texto: 'Integrações', icone: Plug, recurso: 'integracao' },
+  { to: '/lojas', texto: 'Minhas lojas', icone: Store },
+  { to: '/equipe', texto: 'Equipe', icone: Users },
 ]
 
 function Sidebar({ usuario, contagens, aberta, onNavegar, onSair }: SidebarProps) {
@@ -41,7 +54,7 @@ function Sidebar({ usuario, contagens, aberta, onNavegar, onSair }: SidebarProps
     <aside id="menu-principal" className={`sidebar ${aberta ? 'sidebar-aberta' : ''}`} aria-label="Menu principal">
       <div className="sidebar-topo">
         <Logo />
-        <span className="sidebar-lema">PÓS-VENDA EM ORDEM</span>
+        <span className="sidebar-lema">Pós-venda em ordem</span>
       </div>
 
       <button type="button" className="sidebar-loja" onClick={() => setPlanos(true)}>
@@ -51,7 +64,7 @@ function Sidebar({ usuario, contagens, aberta, onNavegar, onSair }: SidebarProps
       <PlanosModal aberto={planos} onFechar={() => setPlanos(false)} />
 
       <nav className="sidebar-nav">
-        <span className="sidebar-grupo">PRINCIPAL</span>
+        <span className="sidebar-grupo">Operação</span>
         {links.map((l) => {
           const bloqueado = l.recurso ? !inclui(l.recurso) : false
           return (
@@ -61,10 +74,13 @@ function Sidebar({ usuario, contagens, aberta, onNavegar, onSair }: SidebarProps
               onClick={onNavegar}
               className={({ isActive }) => `sidebar-link ${isActive ? 'sidebar-link-ativo' : ''}`}
             >
+              <span className="sidebar-link-icone" aria-hidden="true">
+                <l.icone size={17} strokeWidth={1.8} />
+              </span>
               {l.texto}
               {bloqueado && (
                 <span className="sidebar-cadeado" aria-hidden="true">
-                  🔒
+                  <Lock size={15} strokeWidth={1.8} />
                 </span>
               )}
               {bloqueado && <span className="so-leitor"> (bloqueado no seu plano)</span>}
@@ -78,6 +94,9 @@ function Sidebar({ usuario, contagens, aberta, onNavegar, onSair }: SidebarProps
           )
         })}
         {usuario.lojaSlug && <a className="sidebar-link" href={`/portal/${encodeURIComponent(usuario.lojaSlug)}`} target="_blank" rel="noreferrer">
+          <span className="sidebar-link-icone" aria-hidden="true">
+            <Globe size={17} strokeWidth={1.8} />
+          </span>
           Portal do cliente<span className="so-leitor"> (abre em nova aba)</span>
         </a>}
       </nav>
@@ -85,8 +104,8 @@ function Sidebar({ usuario, contagens, aberta, onNavegar, onSair }: SidebarProps
       <div className="sidebar-rodape">
         <PlanoSwitcher />
         <div className="sidebar-dica">
-          <strong>Tudo em um só lugar.</strong>
-          <span>Cada ocorrência, do início à resolução.</span>
+          <strong>Do pedido à resolução</strong>
+          <span>Acompanhe cada etapa do pós-venda</span>
         </div>
         <div className="sidebar-usuario">
           <span className="avatar" aria-hidden="true">
@@ -97,6 +116,7 @@ function Sidebar({ usuario, contagens, aberta, onNavegar, onSair }: SidebarProps
             <span>{usuario.papel}</span>
           </div>
           <button type="button" className="sidebar-sair" onClick={onSair}>
+            <LogOut size={14} strokeWidth={1.8} aria-hidden="true" />
             Sair
           </button>
         </div>

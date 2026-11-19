@@ -10,3 +10,4 @@ node_modules/
 .env*
 
 supabase/.temp/
+.DS_Store

@@ -1,0 +1,405 @@
+{
+  "sintetico": true,
+  "lojaId": 2,
+  "criadoEm": "2026-11-05T00:18:35.433Z",
+  "pedidos": [
+    {
+      "id": 4,
+      "numero": "DEMO-NOV26-001",
+      "cliente": "Mariana Alves",
+      "cpf": "91000013928",
+      "produto": "Camiseta Básica Algodão Branca",
+      "quantidade": 2,
+      "valor": 119.8
+    },
+    {
+      "id": 5,
+      "numero": "DEMO-NOV26-002",
+      "cliente": "Camila Ribeiro",
+      "cpf": "91000027805",
+      "produto": "Calça Jeans Reta Azul",
+      "quantidade": 1,
+      "valor": 159.9
+    },
+    {
+      "id": 6,
+      "numero": "DEMO-NOV26-003",
+      "cliente": "Juliana Costa",
+      "cpf": "91000041700",
+      "produto": "Vestido Midi Floral",
+      "quantidade": 2,
+      "valor": 379.8
+    },
+    {
+      "id": 7,
+      "numero": "DEMO-NOV26-004",
+      "cliente": "Beatriz Martins",
+      "cpf": "91000055680",
+      "produto": "Bolsa Transversal Caramelo",
+      "quantidade": 1,
+      "valor": 129.9
+    },
+    {
+      "id": 8,
+      "numero": "DEMO-NOV26-005",
+      "cliente": "Fernanda Lima",
+      "cpf": "91000069559",
+      "produto": "Tênis Casual Branco",
+      "quantidade": 1,
+      "valor": 219.9
+    },
+    {
+      "id": 9,
+      "numero": "DEMO-NOV26-006",
+      "cliente": "Larissa Rocha",
+      "cpf": "91000083462",
+      "produto": "Camiseta Básica Algodão Branca",
+      "quantidade": 1,
+      "valor": 59.9
+    },
+    {
+      "id": 10,
+      "numero": "DEMO-NOV26-007",
+      "cliente": "Rafael Souza",
+      "cpf": "91000097331",
+      "produto": "Calça Jeans Reta Azul",
+      "quantidade": 2,
+      "valor": 319.8
+    },
+    {
+      "id": 11,
+      "numero": "DEMO-NOV26-008",
+      "cliente": "Gabriel Oliveira",
+      "cpf": "91000111261",
+      "produto": "Vestido Midi Floral",
+      "quantidade": 1,
+      "valor": 189.9
+    },
+    {
+      "id": 12,
+      "numero": "DEMO-NOV26-009",
+      "cliente": "Lucas Ferreira",
+      "cpf": "91000125130",
+      "produto": "Bolsa Transversal Caramelo",
+      "quantidade": 1,
+      "valor": 129.9
+    },
+    {
+      "id": 13,
+      "numero": "DEMO-NOV26-010",
+      "cliente": "Amanda Santos",
+      "cpf": "91000139000",
+      "produto": "Tênis Casual Branco",
+      "quantidade": 1,
+      "valor": 219.9
+    },
+    {
+      "id": 14,
+      "numero": "DEMO-NOV26-011",
+      "cliente": "Bruna Carvalho",
+      "cpf": "91000152960",
+      "produto": "Camiseta Básica Algodão Branca",
+      "quantidade": 2,
+      "valor": 119.8
+    },
+    {
+      "id": 15,
+      "numero": "DEMO-NOV26-012",
+      "cliente": "Carolina Mendes",
+      "cpf": "91000166830",
+      "produto": "Calça Jeans Reta Azul",
+      "quantidade": 1,
+      "valor": 159.9
+    },
+    {
+      "id": 16,
+      "numero": "DEMO-NOV26-013",
+      "cliente": "Daniela Moreira",
+      "cpf": "91000180743",
+      "produto": "Vestido Midi Floral",
+      "quantidade": 2,
+      "valor": 379.8
+    },
+    {
+      "id": 17,
+      "numero": "DEMO-NOV26-014",
+      "cliente": "Eduardo Almeida",
+      "cpf": "91000194612",
+      "produto": "Bolsa Transversal Caramelo",
+      "quantidade": 2,
+      "valor": 259.8
+    },
+    {
+      "id": 18,
+      "numero": "DEMO-NOV26-015",
+      "cliente": "Isabela Teixeira",
+      "cpf": "91000208508",
+      "produto": "Tênis Casual Branco",
+      "quantidade": 1,
+      "valor": 219.9
+    },
+    {
+      "id": 19,
+      "numero": "DEMO-NOV26-016",
+      "cliente": "Mariana Alves",
+      "cpf": "91000013928",
+      "produto": "Camiseta Básica Algodão Branca",
+      "quantidade": 1,
+      "valor": 59.9
+    },
+    {
+      "id": 20,
+      "numero": "DEMO-NOV26-017",
+      "cliente": "Camila Ribeiro",
+      "cpf": "91000027805",
+      "produto": "Calça Jeans Reta Azul",
+      "quantidade": 1,
+      "valor": 159.9
+    },
+    {
+      "id": 21,
+      "numero": "DEMO-NOV26-018",
+      "cliente": "Juliana Costa",
+      "cpf": "91000041700",
+      "produto": "Vestido Midi Floral",
+      "quantidade": 1,
+      "valor": 189.9
+    },
+    {
+      "id": 22,
+      "numero": "DEMO-NOV26-019",
+      "cliente": "Beatriz Martins",
+      "cpf": "91000055680",
+      "produto": "Bolsa Transversal Caramelo",
+      "quantidade": 2,
+      "valor": 259.8
+    },
+    {
+      "id": 23,
+      "numero": "DEMO-NOV26-020",
+      "cliente": "Fernanda Lima",
+      "cpf": "91000069559",
+      "produto": "Tênis Casual Branco",
+      "quantidade": 1,
+      "valor": 219.9
+    },
+    {
+      "id": 24,
+      "numero": "DEMO-NOV26-021",
+      "cliente": "Larissa Rocha",
+      "cpf": "91000083462",
+      "produto": "Camiseta Básica Algodão Branca",
+      "quantidade": 1,
+      "valor": 59.9
+    },
+    {
+      "id": 25,
+      "numero": "DEMO-NOV26-022",
+      "cliente": "Rafael Souza",
+      "cpf": "91000097331",
+      "produto": "Calça Jeans Reta Azul",
+      "quantidade": 1,
+      "valor": 159.9
+    },
+    {
+      "id": 26,
+      "numero": "DEMO-NOV26-023",
+      "cliente": "Gabriel Oliveira",
+      "cpf": "91000111261",
+      "produto": "Vestido Midi Floral",
+      "quantidade": 1,
+      "valor": 189.9
+    },
+    {
+      "id": 27,
+      "numero": "DEMO-NOV26-024",
+      "cliente": "Lucas Ferreira",
+      "cpf": "91000125130",
+      "produto": "Bolsa Transversal Caramelo",
+      "quantidade": 1,
+      "valor": 129.9
+    },
+    {
+      "id": 28,
+      "numero": "DEMO-NOV26-025",
+      "cliente": "Amanda Santos",
+      "cpf": "91000139000",
+      "produto": "Tênis Casual Branco",
+      "quantidade": 2,
+      "valor": 439.8
+    },
+    {
+      "id": 29,
+      "numero": "DEMO-NOV26-026",
+      "cliente": "Bruna Carvalho",
+      "cpf": "91000152960",
+      "produto": "Camiseta Básica Algodão Branca",
+      "quantidade": 1,
+      "valor": 59.9
+    },
+    {
+      "id": 30,
+      "numero": "DEMO-NOV26-027",
+      "cliente": "Carolina Mendes",
+      "cpf": "91000166830",
+      "produto": "Calça Jeans Reta Azul",
+      "quantidade": 1,
+      "valor": 159.9
+    },
+    {
+      "id": 31,
+      "numero": "DEMO-NOV26-028",
+      "cliente": "Daniela Moreira",
+      "cpf": "91000180743",
+      "produto": "Vestido Midi Floral",
+      "quantidade": 1,
+      "valor": 189.9
+    },
+    {
+      "id": 32,
+      "numero": "DEMO-NOV26-029",
+      "cliente": "Eduardo Almeida",
+      "cpf": "91000194612",
+      "produto": "Bolsa Transversal Caramelo",
+      "quantidade": 1,
+      "valor": 129.9
+    },
+    {
+      "id": 33,
+      "numero": "DEMO-NOV26-030",
+      "cliente": "Isabela Teixeira",
+      "cpf": "91000208508",
+      "produto": "Tênis Casual Branco",
+      "quantidade": 1,
+      "valor": 219.9
+    }
+  ],
+  "casos": [
+    {
+      "id": 1,
+      "protocolo": "POS-1001",
+      "status": "Novo",
+      "motivo": "Tamanho Errado",
+      "canal": "portal",
+      "pedido": "DEMO-NOV26-001",
+      "resolucao": null
+    },
+    {
+      "id": 2,
+      "protocolo": "POS-1002",
+      "status": "Novo",
+      "motivo": "Produto com Defeito",
+      "canal": "email",
+      "pedido": "DEMO-NOV26-002",
+      "resolucao": null
+    },
+    {
+      "id": 3,
+      "protocolo": "POS-1003",
+      "status": "Novo",
+      "motivo": "Item Faltante",
+      "canal": "instagram",
+      "pedido": "DEMO-NOV26-003",
+      "resolucao": null
+    },
+    {
+      "id": 4,
+      "protocolo": "POS-1004",
+      "status": "Em Triagem",
+      "motivo": "Produto Diferente",
+      "canal": "telefone",
+      "pedido": "DEMO-NOV26-004",
+      "resolucao": null
+    },
+    {
+      "id": 5,
+      "protocolo": "POS-1005",
+      "status": "Em Triagem",
+      "motivo": "Atraso na Entrega",
+      "canal": "reclame_aqui",
+      "pedido": "DEMO-NOV26-005",
+      "resolucao": null
+    },
+    {
+      "id": 6,
+      "protocolo": "POS-1006",
+      "status": "Aguardando Devolução",
+      "motivo": "Tamanho Errado",
+      "canal": "loja_fisica",
+      "pedido": "DEMO-NOV26-006",
+      "resolucao": null
+    },
+    {
+      "id": 7,
+      "protocolo": "POS-1007",
+      "status": "Aguardando Devolução",
+      "motivo": "Arrependimento",
+      "canal": "portal",
+      "pedido": "DEMO-NOV26-007",
+      "resolucao": null
+    },
+    {
+      "id": 8,
+      "protocolo": "POS-1008",
+      "status": "Reenvio Solicitado",
+      "motivo": "Produto com Defeito",
+      "canal": "email",
+      "pedido": "DEMO-NOV26-008",
+      "resolucao": null
+    },
+    {
+      "id": 9,
+      "protocolo": "POS-1009",
+      "status": "Reenvio Solicitado",
+      "motivo": "Produto Diferente",
+      "canal": "outro",
+      "pedido": "DEMO-NOV26-009",
+      "resolucao": null
+    },
+    {
+      "id": 10,
+      "protocolo": "POS-1010",
+      "status": "Estorno Solicitado",
+      "motivo": "Arrependimento",
+      "canal": "portal",
+      "pedido": "DEMO-NOV26-010",
+      "resolucao": null
+    },
+    {
+      "id": 11,
+      "protocolo": "POS-1011",
+      "status": "Estorno Solicitado",
+      "motivo": "Item Faltante",
+      "canal": "telefone",
+      "pedido": "DEMO-NOV26-011",
+      "resolucao": null
+    },
+    {
+      "id": 12,
+      "protocolo": "POS-1012",
+      "status": "Concluído",
+      "motivo": "Tamanho Errado",
+      "canal": "portal",
+      "pedido": "DEMO-NOV26-012",
+      "resolucao": "Reenvio"
+    },
+    {
+      "id": 13,
+      "protocolo": "POS-1013",
+      "status": "Concluído",
+      "motivo": "Produto com Defeito",
+      "canal": "email",
+      "pedido": "DEMO-NOV26-013",
+      "resolucao": "Estorno"
+    },
+    {
+      "id": 14,
+      "protocolo": "POS-1014",
+      "status": "Concluído",
+      "motivo": "Item Faltante",
+      "canal": "instagram",
+      "pedido": "DEMO-NOV26-014",
+      "resolucao": "Estorno"
+    }
+  ]
+}

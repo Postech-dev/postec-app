@@ -8,7 +8,7 @@
 
 .page-header-titulo {
   font-size: 28px;
-  font-weight: 800;
+  font-weight: 500;
   line-height: 1.2;
 }
 
@@ -21,7 +21,7 @@
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 
 @media (max-width: 860px) {
@@ -34,7 +34,7 @@
   .page-header {
     flex-direction: column;
     align-items: flex-start;
-    gap: 10px;
+    gap: 12px;
   }
 
   .page-header-titulo {

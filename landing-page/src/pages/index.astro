@@ -13,6 +13,7 @@ const steps = [
 ];
 ---
 <Layout>
+  <div class="scroll-progress" aria-hidden="true"></div>
   <div id="inicio" class="dark-top">
     <header class="site-header container">
       <Brand />
@@ -26,19 +27,20 @@ const steps = [
     <div class="dark-top">
       <section class="hero container" aria-labelledby="hero-title">
         <div class="hero-copy">
-          <div class="eyebrow hero-eyebrow"><span class="live-dot"></span> O PRÓXIMO PASSO DO SEU E-COMMERCE</div>
-          <h1 id="hero-title">A venda termina.<br />O cuidado<br /><em>continua.</em><span class="heading-period">↗</span></h1>
-          <p>Devoluções, avarias, reenvios e estornos.<br class="desktop-break" /> Seu pós-venda merece um lugar só.</p>
-          <p class="hero-description">A PosTec está sendo criada para conectar pedidos, atendimento e resolução — e dar à sua equipe clareza para cuidar de cada cliente.</p>
-          <div class="hero-actions"><a class="button" href="#demonstracao">Veja como funciona <Icon name="arrow" size={18} /></a><a class="text-link" href="#solucao">Conheça a proposta <Icon name="diagonal" size={15} /></a></div>
-          <div class="hero-note"><Icon name="layers" size={15} /><span>Feita para pequenos e-commerces. Pensada para crescer.</span></div>
+          <div class="eyebrow hero-eyebrow"><span class="live-dot"></span> PÓS-VENDA PARA E-COMMERCES EM CRESCIMENTO</div>
+          <h1 id="hero-title">Venda mais.<br />Apague menos<br /><em>incêndios.</em><span class="heading-period">↗</span></h1>
+          <p>Seu cliente quer uma solução.<br class="desktop-break" /> Sua equipe precisa de um lugar para resolver.</p>
+          <p class="hero-description">Reúna devoluções, avarias, reenvios e estornos em um só fluxo. A PosTec está sendo criada para tirar seu pós-venda do improviso.</p>
+          <div class="hero-actions"><a class="button" href="#demonstracao">Testar a demonstração <Icon name="arrow" size={18} /></a><a class="text-link" href={site.contactUrl}>Quero conhecer a PosTec <Icon name="diagonal" size={15} /></a></div>
+          <div class="hero-note"><Icon name="layers" size={15} /><span>Explore sem cadastro · Dados fictícios · Produto em desenvolvimento</span></div>
         </div>
-        <div class="hero-product">
+        <div class="hero-product"><div class="orbit-label" aria-hidden="true"><span>↗</span> DO PROBLEMA<br /><strong>À SOLUÇÃO.</strong></div>
           <div class="product-overline"><span class="live-dot"></span> MENOS ABAS. MAIS VISIBILIDADE.</div>
-          <ProductDemo />
+          <ProductDemo /><div class="demo-invitation"><span>↖</span><p><strong>Não é só uma imagem.</strong> Escolha um caso e simule a resolução.</p></div>
           <div class="product-under"><span><Icon name="shield" size={14} /> Cada ocorrência tem um próximo passo.</span><span>PROTÓTIPO INTERATIVO</span></div>
         </div>
       </section>
+      <div class="hero-outcomes container"><span><Icon name="layers" size={19} /> Contexto em um só lugar</span><span><Icon name="chat" size={19} /> Atendimento com histórico</span><span><Icon name="check" size={19} /> Clareza até a resolução</span></div>
       <div class="ecosystem-strip container"><p>Uma proposta que conversa<br /><strong>com o seu ecossistema.</strong></p><div class="platform-wordmarks" aria-label="Integrações planejadas"><span class="wordmark-yampi">yampi<span>✦</span></span><span class="wordmark-shopify">shopify</span><span class="wordmark-bling">bling<span>!</span></span><span class="wordmark-nuvem">nuvemshop</span><span class="wordmark-reportana">reportana</span></div><span class="integration-caption">Integrações previstas</span></div>
   </div>
 
@@ -51,6 +53,19 @@ const steps = [
         <article><span class="pain-number">03</span><Icon name="chat" size={28} /><h3>Cliente sem contexto</h3><p>Sem um histórico centralizado, fica difícil saber quem está cuidando do caso e qual é o próximo passo.</p></article>
       </div>
       <div class="transition-line"><span class="mini-brand-mark">↻</span><p>A PosTec nasce para <strong>conectar essas pontas.</strong></p><a href="#como-funciona" aria-label="Conheça o fluxo da PosTec"><Icon name="arrow" /></a></div>
+    </div>
+  </section>
+
+  <section class="change-section section-space" aria-labelledby="change-title">
+    <div class="container change-layout">
+      <div class="change-copy"><p class="eyebrow">MENOS IMPROVISO. MAIS CONTROLE.</p><h2 id="change-title">O pedido é um só.<br />O contexto<br /><em>também deveria ser.</em></h2><p>Quando a informação está espalhada, cada resposta começa com uma busca. A proposta da PosTec é transformar essa busca em um próximo passo claro.</p><a href="#demonstracao" class="text-link">Experimente com um caso fictício <Icon name="arrow" size={18} /></a></div>
+      <div class="comparison-board">
+        <div class="scene-instruction" aria-hidden="true"><span>ROLE PARA CONECTAR AS PONTAS</span><span>↓</span></div>
+        <div class="scene-meter" aria-hidden="true"><span></span></div>
+        <div class="before-flow"><span class="comparison-label">A ROTINA FRAGMENTADA</span><div class="scattered-tools"><span>“Cadê o pedido?”</span><span>Planilha de estornos</span><span>WhatsApp · 12 mensagens</span><span>“Quem está cuidando?”</span></div><p>Muitas buscas. Pouco contexto.</p></div>
+        <div class="comparison-arrow" aria-hidden="true">↓</div>
+        <div class="after-flow"><span class="comparison-label"><span class="live-dot"></span> O FLUXO PROPOSTO COM A POSTEC</span><h3>Um caso. Toda a história.</h3><div class="unified-case"><span>#1042 <small>Produto avariado</small></span><span class="status-pill green">Próximo passo definido</span></div><div class="context-tags"><span>Pedido</span><span>Responsável</span><span>Histórico</span><span>Solução</span></div></div>
+      </div>
     </div>
   </section>
 
@@ -82,16 +97,17 @@ const steps = [
   </section>
 
   <section id="planos" class="pricing-section light-section section-space">
-    <div class="container"><div class="section-intro centered"><p class="eyebrow dark-eyebrow">05 / UM PLANO PARA O PRÓXIMO PASSO</p><h2>Seu pós-venda evolui.<br /><span>A PosTec acompanha.</span></h2><p>Conheça os planos previstos para o lançamento.</p></div><div class="pricing-grid">{site.plans.map((plan, index) => <article class:list={['pricing-card', { featured: index === 1 }]}><div class="plan-top"><span>{plan.name}</span><span class="plan-tag">{plan.tag}</span></div><p>{plan.audience}</p><div class="plan-price"><span>R$</span><strong>{plan.price}</strong><span>/mês</span></div><div class="plan-divider"></div><span class="plan-info"><Icon name="layers" size={18} /> Assinatura mensal SaaS</span><span class="plan-info"><Icon name="grid" size={18} /> Foco no pós-venda do e-commerce</span><p class="plan-note">Recursos e limites do plano serão definidos na validação do produto.</p><a class:list={['button', { 'button-outline': index !== 1 }]} href={site.contactUrl ?? '#demonstracao'}>{site.contactUrl ? 'Quero conhecer' : 'Explorar a proposta'}<Icon name="arrow" size={16} /></a></article>)}</div><p class="pricing-note"><Icon name="clock" size={15} /> Valores de planejamento, sujeitos à validação. Contratação ainda não disponível.</p></div>
+    <div class="container"><div class="section-intro centered"><p class="eyebrow dark-eyebrow">05 / UM PLANO PARA O PRÓXIMO PASSO</p><h2>Seu pós-venda evolui.<br /><span>A PosTec acompanha.</span></h2><p>Comece pelo tamanho da sua operação. Valores previstos para o lançamento.</p></div><div class="pricing-grid">{site.plans.map((plan, index) => <article class:list={['pricing-card', { featured: index === 1 }]}><div class="plan-top"><span>{plan.name}</span><span class="plan-tag">{plan.tag}</span></div><p>{plan.audience}</p><div class="plan-price"><span>R$</span><strong>{plan.price}</strong><span>/mês</span></div><div class="plan-divider"></div><span class="plan-info"><Icon name="layers" size={18} /> Assinatura mensal SaaS</span><span class="plan-info"><Icon name="grid" size={18} /> Foco no pós-venda do e-commerce</span><p class="plan-note">Recursos e limites do plano serão definidos na validação do produto.</p><a class:list={['button', { 'button-outline': index !== 1 }]} href={site.contactUrl ?? '#demonstracao'}>{site.contactUrl ? 'Quero conhecer' : 'Explorar a proposta'}<Icon name="arrow" size={16} /></a></article>)}</div><p class="pricing-note"><Icon name="clock" size={15} /> Valores de planejamento, sujeitos à validação. Contratação ainda não disponível.</p></div>
   </section>
 
   <section id="duvidas" class="faq-section light-section section-space"><div class="container faq-layout"><div><p class="eyebrow dark-eyebrow">SEM PONTAS SOLTAS</p><h2>Antes de <br />dar o próximo <br /><span>passo.</span></h2><p>O que você precisa saber<br />sobre a proposta da PosTec.</p></div><div class="faq-list">{site.faq.map((item, index) => <details><summary><span class="faq-number">0{index + 1}</span><span>{item.question}</span><Icon name="plus" size={18} /></summary><p>{item.answer}</p></details>)}</div></div></section>
 
-  <section class="final-cta"><div class="container final-cta-inner"><div><p class="eyebrow">O PRÓXIMO CAPÍTULO DA SUA LOJA</p><h2>Venda é só o começo.<br />Cuide do que vem depois.</h2><p>Conheça uma nova forma de pensar o pós-venda do seu e-commerce.</p><a class="button button-dark" href={site.contactUrl ?? '#demonstracao'}>{site.contactUrl ? 'Fale com a PosTec' : 'Explore a demonstração'}<Icon name="diagonal" size={18} /></a></div><span class="cta-symbol" aria-hidden="true">↻</span></div></section>
+  <section class="final-cta"><div class="container final-cta-inner"><div><p class="eyebrow">O PRÓXIMO CAPÍTULO DA SUA LOJA</p><h2>Sua próxima venda merece<br />um pós-venda melhor.</h2><p>Conte como sua loja lida com devoluções hoje. Vamos conversar sobre o próximo passo.</p><a class="button button-dark" href={site.contactUrl ?? '#demonstracao'}>{site.contactUrl ? 'Conversar sobre minha operação' : 'Explore a demonstração'}<Icon name="diagonal" size={18} /></a></div><span class="cta-symbol" aria-hidden="true">↻</span></div></section>
   </main>
   <footer class="site-footer container"><div class="footer-main"><div><Brand /><p>Do pedido à solução.<br />O cuidado continua.</p></div><nav aria-label="Navegação do rodapé"><a href="#solucao">A solução</a><a href="#integracoes">Integrações</a><a href="#planos">Planos</a><a href="#duvidas">Dúvidas frequentes</a></nav><div class="footer-status"><span class="live-dot"></span> Em desenvolvimento<span>Um novo olhar para o pós-venda.</span><a class="footer-email" href="mailto:suporte@postec.com">suporte@postec.com</a></div></div><div class="footer-bottom"><span>© {new Date().getFullYear()} PosTec.</span><span>Feita para quem cuida de cada pedido.</span><a href="#inicio">Voltar ao topo ↑</a></div></footer>
 </Layout>
 <script>
+  import '../scripts/motion';
   const menuButton = document.querySelector<HTMLButtonElement>('.menu-toggle')!;
   const menu = document.querySelector<HTMLElement>('#mobile-nav')!;
   const closeMenu = () => { menu.hidden = true; menuButton.setAttribute('aria-expanded', 'false'); menuButton.setAttribute('aria-label', 'Abrir menu'); };

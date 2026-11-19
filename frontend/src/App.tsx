@@ -1,3 +1,4 @@
+import { Suspense, lazy } from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import AppShell from './components/AppShell/AppShell'
 import PortalShell from './components/PortalShell/PortalShell'
@@ -5,7 +6,6 @@ import CadastroPage from './pages/CadastroPage'
 import ClientePage from './pages/ClientePage'
 import ImportarPedidosPage from './pages/ImportarPedidosPage'
 import IntegracoesPage from './pages/IntegracoesPage'
-import MetricasPage from './pages/MetricasPage'
 import NovaOcorrenciaPage from './pages/NovaOcorrenciaPage'
 import NovoPedidoPage from './pages/NovoPedidoPage'
 import PedidoDetalhePage from './pages/PedidoDetalhePage'
@@ -28,6 +28,9 @@ import PortalRecebidaPage from './pages/PortalRecebidaPage'
 import RegistrarEstornoPage from './pages/RegistrarEstornoPage'
 import RegistrarReenvioPage from './pages/RegistrarReenvioPage'
 
+// métricas carrega sob demanda: a página puxa o Recharts, pesado demais para o bundle inicial
+const MetricasPage = lazy(() => import('./pages/MetricasPage'))
+
 function App() {
   return (
     <Routes>
@@ -46,7 +49,7 @@ function App() {
         <Route path="/pedidos/novo" element={<NovoPedidoPage />} />
         <Route path="/pedidos/:id" element={<PedidoDetalhePage />} />
         <Route path="/clientes/:id" element={<ClientePage />} />
-        <Route path="/metricas" element={<MetricasPage />} />
+        <Route path="/metricas" element={<Suspense fallback={null}><MetricasPage /></Suspense>} />
         <Route path="/integracoes" element={<IntegracoesPage />} />
         <Route path="/lojas" element={<LojasPage />} />
         <Route path="/lojas/:id/editar" element={<EditarLojaPage />} />

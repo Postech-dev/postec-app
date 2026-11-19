@@ -32,3 +32,7 @@
     max-width: none;
   }
 }
+
+@media (min-width: 769px) {
+  .ocorrencias-filtros > select { width: auto; max-width: 240px; flex: 0 1 auto; }
+}

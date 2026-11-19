@@ -27,6 +27,6 @@
 }
 
 .view-toggle .view-ativo {
-  background: var(--action);
-  color: var(--white);
+  background: var(--bg);
+  color: var(--ink);
 }

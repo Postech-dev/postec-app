@@ -1,3 +1,4 @@
+import { Check, Circle, CircleDot } from 'lucide-react'
 import './Timeline.css'
 
 export interface PassoTimeline {
@@ -7,7 +8,11 @@ export interface PassoTimeline {
   detalhe?: string
 }
 
-const marcas = { feito: '✓', atual: '●', futuro: '○' }
+const marcas = {
+  feito: <Check size={12} strokeWidth={2.4} />,
+  atual: <CircleDot size={12} strokeWidth={2} />,
+  futuro: <Circle size={12} strokeWidth={2} />,
+}
 const falas = { feito: 'concluído', atual: 'etapa atual', futuro: 'próxima etapa' }
 
 function Timeline({ passos }: { passos: PassoTimeline[] }) {

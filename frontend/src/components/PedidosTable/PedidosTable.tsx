@@ -26,13 +26,13 @@ function PedidosTable({ pedidos, pagina, porPagina, onPagina, destino }: Pedidos
         <table className="pedidos-tabela">
           <thead>
             <tr>
-              <th scope="col">PEDIDO</th>
-              <th scope="col">CLIENTE</th>
+              <th scope="col">Pedido</th>
+              <th scope="col">Cliente</th>
               <th scope="col">CPF</th>
-              <th scope="col">PRODUTO</th>
-              <th scope="col">VALOR</th>
-              <th scope="col">DATA</th>
-              <th scope="col">OCORRÊNCIAS</th>
+              <th scope="col">Produto</th>
+              <th scope="col">Valor</th>
+              <th scope="col">Data</th>
+              <th scope="col">Ocorrências</th>
               <th scope="col">
                 <span className="so-leitor">Ações</span>
               </th>

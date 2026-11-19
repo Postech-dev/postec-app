@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { Check, Copy } from 'lucide-react'
 import './CopyButton.css'
 
 interface CopyButtonProps {
@@ -31,7 +32,7 @@ function CopyButton({ texto, rotulo }: CopyButtonProps) {
 
   return (
     <button type="button" className="copiar" onClick={copiar} aria-label={`${rotulo}: ${texto}`}>
-      <span aria-hidden="true">{copiado ? '✓' : '⧉'}</span>
+      <span aria-hidden="true">{copiado ? <Check size={14} strokeWidth={2} /> : <Copy size={14} strokeWidth={1.8} />}</span>
       <span aria-live="polite">{copiado ? 'Copiado!' : rotulo}</span>
     </button>
   )

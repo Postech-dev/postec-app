@@ -32,7 +32,7 @@
 
 .dropzone-botao {
   min-height: 44px;
-  padding: 8px 18px;
+  padding: 8px 20px;
   border: 1px solid var(--action);
   border-radius: 10px;
   background: var(--white);

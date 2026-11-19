@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 14px 32px;
+  padding: 16px 32px;
   background: var(--white);
   border-bottom: 1px solid var(--line);
   font-size: 13px;
@@ -18,7 +18,7 @@
 }
 
 .topbar-iniciais {
-  font-weight: 700;
+  font-weight: 600;
   color: var(--action);
 }
 

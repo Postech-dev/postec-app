@@ -59,7 +59,7 @@ function PortalAbrirPage() {
       <BackLink to={`/portal/${slug}/pedido`} state={{ pedido }}>
         Meu pedido
       </BackLink>
-      <PageHeader titulo="Conte o que aconteceu." subtitulo="Sua mensagem será enviada à equipe da loja." />
+      <PageHeader titulo="Conte o que aconteceu" subtitulo="Sua mensagem será enviada à equipe da loja" />
       <Card>
         <form className="portal-bloco" onSubmit={enviar} noValidate>
           <div className="portal-bloco" style={{ gap: 8 }}>
